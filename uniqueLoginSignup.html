@@ -3,128 +3,330 @@
 <head>
   <meta charset="UTF-8">
   <title>Login & Signup App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
 
   <script
   src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
   type="module"
 ></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  
+  
   <style>
-    /* Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f5f7fa;
+        overflow-x: hidden;
+        transition: background 0.3s ease, color 0.3s ease;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .fade-up { animation: fadeInUp 1s ease forwards; }
-    .fade { animation: fadeIn 1.5s ease forwards; }
-  </style>
-</head>
-<body class="bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-700 text-white font-sans">
 
-  <!-- Hero Section -->
-  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
-    <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-lg fade-up">📱 Login & Signup App</h1>
-    <p class="mt-6 text-lg md:text-xl max-w-2xl fade-up" style="animation-delay:0.3s">
-      Secure and modern login/signup solution for Android. Easy to integrate and designed for best user experience.
-    </p>
-    <div class="mt-8 flex space-x-4 fade-up" style="animation-delay:0.6s">
-      <a href="#features" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:scale-110 transition">Explore Features</a>
-      <a href="#download" class="bg-white/20 px-6 py-3 rounded-lg font-semibold hover:scale-110 transition">Try Now</a>
+    /* Glassmorphism Navbar */
+    .navbar {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        padding: 15px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+    }
+    .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+    }
+    body.dark-mode .navbar.scrolled {
+        background: rgba(18, 18, 18, 0.95) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .navbar-brand {
+        font-weight: 800;
+        font-size: 28px;
+        letter-spacing: 2px;
+        background: linear-gradient(45deg, #be52df, #1d4a98);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: transform 0.3s;
+    }
+    .navbar-brand:hover { transform: scale(1.05); }
+    body.dark-mode .navbar-brand { background: linear-gradient(45deg, #e540dd, #6633ca); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .navbar-toggler { border: none; }
+    .navbar-toggler:focus { box-shadow: none; }
+    body.dark-mode .navbar-toggler-icon { filter: invert(1); }
+
+    .nav-link {
+        color: #333 !important; font-weight: 500; position: relative; margin: 0 10px; transition: 0.3s; font-size: 16px;
+    }
+    body.dark-mode .nav-link { color: #f5f5f5 !important; }
+    .nav-link::after {
+        content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%;
+        background: linear-gradient(45deg, #be52df, #1d4a98); transition: all 0.3s ease; transform: translateX(-50%);
+    }
+    body.dark-mode .nav-link::after { background: linear-gradient(45deg, #e540dd, #6633ca); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: #be52df !important; }
+    body.dark-mode .nav-link:hover { color: #e540dd !important; }
+    
+    #themeToggleBtn { border-radius: 20px; padding: 5px 15px; font-weight: 500; transition: all 0.3s; }
+    #themeToggleBtn:hover { transform: scale(1.05); }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, #be52df, #1d4a98);
+        color: white;
+        padding: 150px 20px 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    body.dark-mode .hero-section { background: linear-gradient(135deg, #2a2a4a, #4a2a6a); }
+
+    .shape {
+        position: absolute; filter: blur(60px); z-index: 0; animation: float 10s infinite alternate; border-radius: 50%; opacity: 0.6;
+    }
+    .shape-1 { width: 300px; height: 300px; background: rgba(255, 255, 255, 0.2); top: -10%; left: -5%; }
+    .shape-2 { width: 400px; height: 400px; background: rgba(0, 0, 0, 0.2); bottom: -10%; right: -5%; animation-duration: 15s; }
+    @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-50px) scale(1.1); } }
+
+    .hero-content { position: relative; z-index: 1; }
+    .hero-title { font-weight: 800; font-size: 3.5rem; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .hero-subtitle { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; max-width: 600px; margin-left: auto; margin-right: auto;}
+
+    .btn-custom {
+        background: white; color: #1d4a98; font-weight: 700; padding: 12px 30px; border-radius: 30px; border: none; transition: all 0.4s; text-decoration: none; display: inline-block; margin: 5px;
+    }
+    .btn-custom:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: #fce408; color: #111; }
+    .btn-outline-custom {
+        background: transparent; border: 2px solid white; color: white; font-weight: 700; padding: 10px 28px; border-radius: 30px; transition: all 0.4s; text-decoration: none; display: inline-block; margin: 5px;
+    }
+    .btn-outline-custom:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: white; color: #1d4a98; }
+
+    /* Sections */
+    .section-title { text-align: center; font-weight: 800; margin-bottom: 40px; font-size: 36px; }
+    .gradient-text {
+        background: linear-gradient(45deg, #1d4a98, #be52df); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
+    }
+    body.dark-mode .gradient-text { background: linear-gradient(45deg, #8c52ff, #e540dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .feature-card {
+        background: #ffffff; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px;
+        transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    body.dark-mode .feature-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15); }
+    .feature-card h3 { font-weight: 700; font-size: 22px; margin-bottom: 15px; color: #333; margin-top: 20px;}
+    body.dark-mode .feature-card h3 { color: #fff; }
+    .feature-card p { color: #666; font-size: 15px; margin: 0; }
+    body.dark-mode .feature-card p { color: #aaa; }
+
+    /* Slider Styling */
+    .image-slider { overflow: hidden; position: relative; width: 100%; padding: 20px 0; }
+    .slider-track { display: flex; animation: scroll-left 15s linear infinite; }
+    .slider-track img { width: 220px; height: 450px; object-fit: cover; margin: 0 15px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: transform 0.3s; opacity: 0.6;}
+    .slider-track img:hover { transform: scale(1.05); opacity: 1;}
+    @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Steps */
+    .step-list { list-style: none; padding: 0; }
+    .step-list li { font-size: 1.2rem; margin-bottom: 20px; padding: 15px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; border-left: 5px solid #be52df;}
+    body.dark-mode .step-list li { background: #1e1e1e; color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .step-list li:hover { transform: translateX(10px); }
+
+    /* Footer */
+    .footer { background: #111; color: white; text-align: center; padding: 50px 0 30px; position: relative; overflow: hidden; margin-top: 50px;}
+    .footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, #be52df, #1d4a98, #fce408); }
+    .footer p { margin-bottom: 10px; color: #aaa; }
+    .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 50%; margin: 0 10px; color: white; transition: all 0.4s; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; }
+    .social-icons a:hover { background: linear-gradient(45deg, #be52df, #1d4a98); transform: translateY(-10px) rotate(360deg); color: white; border-color: transparent; box-shadow: 0 10px 20px rgba(190, 82, 223, 0.4); }
+    
+    body.dark-mode { background-color: #121212; color: #ffffff; }
+  </style>
+
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">UNIQUE LS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item ms-lg-3">
+                    <button id="themeToggleBtn" class="btn btn-sm btn-light">
+                        <i class="fas fa-moon"></i> Theme
+                    </button>
+                </li>
+            </ul>
+        </div>
     </div>
-    <dotlottie-wc
-  src="https://lottie.host/581246e4-4695-4405-acb5-469de37be714/14MA0pctpt.lottie"
-  style="width: 300px;height: 300px"
-  speed="1"
-  autoplay
-  loop
-></dotlottie-wc>
+</nav>
+
+
+    <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
+        <dotlottie-wc src="https://lottie.host/581246e4-4695-4405-acb5-469de37be714/14MA0pctpt.lottie" style="width: 250px; height: 250px; margin: 0 auto;" speed="1" autoplay loop></dotlottie-wc>
+        <h1 class="hero-title mt-3">📱 Login & Signup App</h1>
+        <p class="hero-subtitle">Secure and modern login/signup solution for Android. Easy to integrate and designed for best user experience.</p>
+        <div class="mt-4">
+            <a href="#features" class="btn-custom">Explore Features</a>
+            <a href="#download" class="btn-outline-custom">Try Now</a>
+        </div>
+    </div>
   </section>
 
   <!-- Features Section -->
-  <section id="features" class="py-20 bg-black/20 backdrop-blur-lg">
-    <h2 class="text-4xl font-bold text-center mb-12 fade-up">🔥 Key Features</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
-      <div class="bg-white/10 p-6 rounded-2xl shadow-xl hover:scale-110 hover:shadow-yellow-400/40 transition text-center fade-up" style="animation-delay:0.2s">
-        <h3 class="text-2xl font-semibold mb-4">🔒 Secure Authentication</h3>
-        <p>Encrypted login and signup for full user privacy and security.</p>
-      </div>
-      <div class="bg-white/10 p-6 rounded-2xl shadow-xl hover:scale-110 hover:shadow-yellow-400/40 transition text-center fade-up" style="animation-delay:0.4s">
-        <h3 class="text-2xl font-semibold mb-4">⚡ Smooth UI/UX</h3>
-        <p>Modern, responsive, and user-friendly interface for Android users.</p>
-      </div>
-      <div class="bg-white/10 p-6 rounded-2xl shadow-xl hover:scale-110 hover:shadow-yellow-400/40 transition text-center fade-up" style="animation-delay:0.6s">
-        <h3 class="text-2xl font-semibold mb-4">📱 Easy Integration</h3>
-        <p>Ready-to-use login/signup system that can be integrated in any app.</p>
-      </div>
+  <section id="features" class="container my-5 py-5">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">🔥 Key Features</span></h2>
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-card">
+                <h3>🔒 Secure Auth</h3>
+                <p>Encrypted login and signup for full user privacy and security.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-card">
+                <h3>⚡ Smooth UI/UX</h3>
+                <p>Modern, responsive, and user-friendly interface for Android users.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-card">
+                <h3>📱 Integration</h3>
+                <p>Ready-to-use login/signup system that can be integrated in any app.</p>
+            </div>
+        </div>
     </div>
   </section>
 
   <!-- How it Works -->
-  <section class="py-20 px-6">
-    <h2 class="text-4xl font-bold text-center mb-12 fade-up">⚙️ How It Works</h2>
-    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-      <img src="images/uniqueLoginSignup/homeLS.jpg" alt="Step Demo" class="rounded-lg shadow-xl fade-up">
-      <ol class="space-y-6 text-lg fade-up" style="animation-delay:0.4s">
-        <li>1️⃣ User installs the Android app from Play Store or APK.</li>
-        <li>2️⃣ Opens the app and sees a modern login/signup screen.</li>
-        <li>3️⃣ Enters credentials or signs up for a new account securely.</li>
-        <li>4️⃣ Access the app features after authentication ✅.</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Screenshots Carousel -->
-  <section class="py-20 bg-black/20 backdrop-blur-lg">
-    <h2 class="text-4xl font-bold text-center mb-12 fade-up">📸 App Screenshots</h2>
-    <div class="max-w-5xl mx-auto overflow-hidden relative">
-      <div id="carousel" class="flex transition-transform duration-700">
-        <img src="images/uniqueLoginSignup/image1.png" class="w-full md:w-1/3 p-2 rounded-2xl" alt="Screenshot 1">
-        <img src="images/uniqueLoginSignup/image2.png" class="w-full md:w-1/3 p-2 rounded-2xl" alt="Screenshot 2">
-        <img src="images/uniqueLoginSignup/image1.png" class="w-full md:w-1/3 p-2 rounded-2xl" alt="Screenshot 3">
+  <section class="container my-5 py-5">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">⚙️ How It Works</span></h2>
+    <div class="row align-items-center mt-5">
+      <div class="col-md-6 text-center" data-aos="fade-right">
+        <img src="images/uniqueLoginSignup/homeLS.jpg" alt="Step Demo" class="img-fluid rounded-4 shadow-lg" style="max-height: 500px;">
+      </div>
+      <div class="col-md-6 mt-4 mt-md-0" data-aos="fade-left">
+        <ul class="step-list">
+            <li><strong>1️⃣ Install</strong> the Android app from Play Store or APK.</li>
+            <li><strong>2️⃣ Open</strong> the app and see a modern login screen.</li>
+            <li><strong>3️⃣ Enter</strong> credentials or securely sign up.</li>
+            <li><strong>4️⃣ Access</strong> the app features after authentication ✅.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Call To Action -->
-  <section id="download" class="py-16 text-center bg-white/10 backdrop-blur-md">
-    <h2 class="text-4xl font-bold mb-4 fade-up">🚀 Get The App Now!</h2>
-    <p class="mb-6 fade-up" style="animation-delay:0.3s">Download the Android app and enjoy a secure and smooth login/signup experience.</p>
-    <a href="#" class="bg-yellow-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:scale-125 hover:shadow-lg transition fade-up" style="animation-delay:0.6s">Download APK</a>
+  <!-- Screenshots Section -->
+  <section id="screenshots" class="container-fluid my-5 py-5" style="background: rgba(0,0,0,0.02); overflow: hidden;">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">📸 App Screenshots</span></h2>
+    <div class="image-slider mt-4" data-aos="fade-in" data-aos-delay="200">
+      <div class="slider-track">
+        <img src="images/uniqueLoginSignup/image1.png" alt="Screenshot 1">
+        <img src="images/uniqueLoginSignup/image2.png" alt="Screenshot 2">
+        <img src="images/uniqueLoginSignup/image1.png" alt="Screenshot 3">
+        <img src="images/uniqueLoginSignup/image2.png" alt="Screenshot 4">
+        <img src="images/uniqueLoginSignup/image1.png" alt="Screenshot 5">
+        <img src="images/uniqueLoginSignup/image2.png" alt="Screenshot 6">
+      </div>
+    </div>
   </section>
 
   <!-- About Section -->
-  <section class="py-20 text-center px-6">
-    <h2 class="text-4xl font-bold mb-6 fade-up">ℹ️ About This Project</h2>
-    <p class="max-w-3xl mx-auto text-lg text-white/90 fade-up" style="animation-delay:0.3s">
+  <section class="container my-5 py-5 text-center" data-aos="fade-up">
+    <h2 class="section-title"><span class="gradient-text">ℹ️ About This Project</span></h2>
+    <p class="text-lg" style="color: #666; max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
       This Android login/signup app is built to provide secure authentication with a modern UI. 
-      It is easy to integrate into any Android project and ensures smooth user experience along with full data privacy.
+      It is easy to integrate into any Android project and ensures a smooth user experience along with full data privacy.
     </p>
   </section>
 
+  <!-- CTA -->
+  <section id="download" class="hero-section" style="padding: 100px 20px;">
+    <div class="container" data-aos="fade-up">
+        <h2 class="hero-title mb-4" style="font-size: 2.5rem;">🚀 Get The App Now!</h2>
+        <p class="hero-subtitle">Download the Android app and enjoy a secure and smooth login/signup experience.</p>
+        <button class="btn-custom mt-4">Download APK</button>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer class="bg-black/30 py-6 text-center text-white text-sm">
-    © 2025 Login & Signup App | Made with ❤️ using Android + Tailwind
+  <footer class="footer">
+      <div class="container">
+          <p>&copy; 2025 Unique Login & Signup App | All Rights Reserved</p>
+          <p>Follow me on:</p>
+          <div class="social-icons mt-3">
+              <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+      </div>
   </footer>
 
-  <!-- Slider Script -->
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    const carousel = document.getElementById("carousel");
-    let scrollAmount = 0;
-    function autoSlide() {
-      if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
-        scrollAmount = 0;
-      } else {
-        scrollAmount += carousel.clientWidth;
-      }
-      carousel.scrollTo({ left: scrollAmount, behavior: "smooth" });
-    }
-    setInterval(autoSlide, 3000);
-  </script>
+    AOS.init({ once: true, offset: 50, duration: 800 });
 
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (navbar && window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else if (navbar) {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const themeToggleBtn = document.getElementById("themeToggleBtn");
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            if(themeToggleBtn) {
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+                themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+            }
+        }
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+                const isDark = document.body.classList.contains("dark-mode");
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+                if (isDark) {
+                    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+                    themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+                } else {
+                    themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Theme';
+                    themeToggleBtn.classList.replace('btn-dark', 'btn-light');
+                }
+            });
+        }
+    });
+  </script>
 </body>
 </html>

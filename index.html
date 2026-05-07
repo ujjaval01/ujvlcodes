@@ -3,209 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ujjaval Saini - Portfolio</title>
+        <title>Ujjaval Saini - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
-    <style>
-        .smooth-bounce {
-            animation-timing-function: ease-in-out;
-            animation-duration: 2s;
-        }
-
+        <style>
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Poppins', sans-serif;
             background: #f5f7fa;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
+        /* Glassmorphism Navbar */
         .navbar {
-            background: linear-gradient(45deg, #be52df, #1d4a98);
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            padding: 15px 0;
         }
-
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+        }
+        body.dark-mode .navbar.scrolled {
+            background: rgba(18, 18, 18, 0.95) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
         .navbar-brand {
-            font-weight: bold;
-            font-size: 24px;
-            align-items: center;
-            color: white !important;
+            font-weight: 800;
+            font-size: 28px;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #be52df, #1d4a98);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s;
+        }
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+        body.dark-mode .navbar-brand {
+            background: linear-gradient(45deg, #e540dd, #6633ca);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .navbar-brand:hover {
-            color: #000000 !important;
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        body.dark-mode .navbar-toggler-icon {
+            filter: invert(1);
         }
 
         .nav-link {
-            color: white !important;
+            color: #333 !important;
+            font-weight: 500;
+            position: relative;
+            margin: 0 10px;
             transition: 0.3s;
+            font-size: 16px;
         }
-
+        body.dark-mode .nav-link {
+            color: #f5f5f5 !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(45deg, #be52df, #1d4a98);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        body.dark-mode .nav-link::after {
+            background: linear-gradient(45deg, #e540dd, #6633ca);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
         .nav-link:hover {
-            color: #fce408 !important;
-            font-size: 18px;
+            color: #be52df !important;
+        }
+        body.dark-mode .nav-link:hover {
+            color: #e540dd !important;
         }
 
+        /* Hero Animation */
         .hero {
-            background: linear-gradient(to right, #e540dd, #6633ca);
-            color: rgb(0, 0, 0);
-            padding: 80px 20px 20px 20px;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding-top: 80px;
+        }
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, #121212 0%, #1e1e24 100%);
+        }
+        
+        .shape {
+            position: absolute;
+            filter: blur(60px);
+            z-index: 0;
+            animation: float 10s infinite alternate;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        .shape-1 {
+            width: 400px; height: 400px;
+            background: rgba(190, 82, 223, 0.4);
+            top: 10%; left: -10%;
+        }
+        .shape-2 {
+            width: 500px; height: 500px;
+            background: rgba(29, 74, 152, 0.4);
+            bottom: -10%; right: -10%;
+            animation-duration: 15s;
+            animation-delay: -5s;
+        }
+        .shape-3 {
+            width: 300px; height: 300px;
+            background: rgba(252, 228, 8, 0.3);
+            top: 40%; left: 50%;
+            animation-duration: 12s;
+            animation-delay: -2s;
+        }
+        body.dark-mode .shape-1 { background: rgba(229, 64, 221, 0.2); }
+        body.dark-mode .shape-2 { background: rgba(102, 51, 202, 0.2); }
+        body.dark-mode .shape-3 { background: rgba(255, 215, 0, 0.1); }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1) translateX(0); }
+            50% { transform: translateY(-30px) scale(1.05) translateX(20px); }
+            100% { transform: translateY(30px) scale(0.95) translateX(-20px); }
+        }
+
+        .hero-content {
+            z-index: 1;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 50px;
-            font-weight: bold;
+            font-size: 70px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #be52df, #1d4a98);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0px 10px 30px rgba(190, 82, 223, 0.2);
+        }
+        body.dark-mode .hero h1 {
+            background: linear-gradient(45deg, #e540dd, #8c52ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 10px 30px rgba(229, 64, 221, 0.3);
         }
 
         .typing-text {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 600;
+            color: #555;
+            min-height: 40px;
         }
-
+        body.dark-mode .typing-text { color: #ddd; }
+        
         .typing-text::after {
             content: "|";
             display: inline-block;
             animation: blink 0.7s infinite;
+            color: #be52df;
         }
+        body.dark-mode .typing-text::after { color: #e540dd; }
 
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
+        @keyframes blink { 50% { opacity: 0; } }
 
+        /* Skills Section */
         .skills {
-            padding: 20px 0;
+            padding: 100px 0;
+            background: #fff;
+            position: relative;
+        }
+        body.dark-mode .skills { background: #121212; }
+
+        .skills h2 {
+            font-size: 40px;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #1d4a98, #be52df);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.dark-mode .skills h2 {
+            background: linear-gradient(45deg, #8c52ff, #e540dd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .skill-box {
             text-align: center;
-            padding: 20px;
-            margin-bottom: 15px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: 0.3s;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            height: calc(100% - 30px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        body.dark-mode .skill-box {
+            background: #1e1e1e;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-box::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 0;
+            background: linear-gradient(135deg, rgba(190, 82, 223, 0.05), rgba(29, 74, 152, 0.05));
+            transition: 0.5s;
+            z-index: -1;
+            border-radius: 20px;
+        }
+        body.dark-mode .skill-box::before {
+            background: linear-gradient(135deg, rgba(229, 64, 221, 0.05), rgba(102, 51, 202, 0.05));
+        }
+
+        .skill-box:hover::before {
+            height: 100%;
         }
 
         .skill-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15);
+        }
+        body.dark-mode .skill-box:hover {
+            box-shadow: 0 20px 40px rgba(229, 64, 221, 0.15);
         }
 
         .skill-box img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 15px;
+            width: 70px;
+            height: 70px;
+            margin-bottom: 20px;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.1));
         }
+        .skill-box:hover img {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .skill-box h5 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        body.dark-mode .skill-box h5 { color: #fff; }
+        
+        .skill-box p {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+        }
+        body.dark-mode .skill-box p { color: #aaa; }
 
+        /* Footer */
         .footer {
-            background: linear-gradient(45deg, #be52df, #1d4a98);
+            background: #111;
             color: white;
             text-align: center;
-            padding: 20px 0;
+            padding: 50px 0 30px;
+            position: relative;
+            overflow: hidden;
         }
-
-        .footer a {
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, #be52df, #1d4a98, #fce408);
+        }
+        
+        .footer p { margin-bottom: 10px; color: #aaa; }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px; height: 45px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            margin: 0 10px;
             color: white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
             text-decoration: none;
-            transition: 0.3s;
+        }
+        .social-icons a:hover {
+            background: linear-gradient(45deg, #be52df, #1d4a98);
+            transform: translateY(-10px) rotate(360deg);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(190, 82, 223, 0.4);
         }
 
-        .footer a:hover {
-            color: #ffeb3b;
-        }
-
-        .fab,
-        .fas {
-            font-size: 18px;
-            transition: 0.3s;
-        }
-
-        .fab:hover,
-        .fas:hover {
-            color: #000000 !important;
-            font-size: 30px;
-        }
-
+        /* Cookie Consent */
         .cookie-consent {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            max-width: 400px;
-            background: #fff;
-            border-radius: 10px;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(150%);
+            max-width: 450px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             z-index: 9999;
-            display: none;
-            animation: slideUp 0.5s ease;
+            display: flex;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.05);
         }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .cookie-consent.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
-
-
-      /*theme*/
-      /* Dark Mode Styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-body.dark-mode .navbar {
-    background: linear-gradient(45deg, #333333, #000000);
-}
-
-body.dark-mode .navbar-brand,
-body.dark-mode .nav-link {
-    color: #ffffff !important;
-}
-
-body.dark-mode .nav-link:hover {
-    color: #ffd700 !important;
-}
-
-body.dark-mode .hero {
-    background: linear-gradient(to right, #222222, #111111);
-    color: #ffffff;
-}
-
-body.dark-mode .skill-box {
-    background: #1e1e1e;
-    color: white;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
-}
-
-body.dark-mode .footer {
-    background: linear-gradient(45deg, #333333, #000000);
-    color: #ffffff;
-}
-
-body.dark-mode .footer a {
-    color: #ffffff;
-}
-
-body.dark-mode .footer a:hover {
-    color: #ffd700;
-}
-
-body.dark-mode .cookie-consent {
-    background-color: #1e1e1e;
-    color: white;
-}
-
-
-
-
-
+        body.dark-mode .cookie-consent {
+            background: rgba(30, 30, 30, 0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .cookie-content {
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        #themeToggleBtn {
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        #themeToggleBtn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 45px; }
+            .typing-text { font-size: 20px; }
+            .skills h2 { font-size: 30px; }
+            .shape-1 { width: 250px; height: 250px; }
+            .shape-2 { width: 300px; height: 300px; }
+        }
     </style>
 </head>
 <body>
@@ -214,7 +391,7 @@ body.dark-mode .cookie-consent {
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container">
     <!-- Brand -->
-    <a class="navbar-brand animate__animated animate__bounce animate__infinite smooth-bounce" href="#">
+    <a class="navbar-brand" href="#">
       SAINI
     </a>
 
@@ -263,8 +440,11 @@ body.dark-mode .cookie-consent {
 
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
+    <section class="hero" id="home">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
             <h1>Hi, I'm Ujjaval Saini</h1>
             <p class="typing-text"></p>
         </div>
@@ -273,58 +453,58 @@ body.dark-mode .cookie-consent {
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="text-center mb-4">My Skills</h2>
+            <h2 class="text-center mb-5 fw-bold" data-aos="fade-up">My Skills</h2>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="50">
                     <div class="skill-box">
                         <img src="https://cdn-icons-png.flaticon.com/512/919/919841.png" alt="C++">
                         <h5>C++</h5>
                         <p>Efficient programming with OOP & DSA.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="skill-box">
                         <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java">
                         <h5>Java</h5>
                         <p>Backend systems & Android development.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
                     <div class="skill-box">
                         <img src="images/kotlin-img.png" alt="Kotlin">
                         <h5>Kotlin</h5>
                         <p>Modern Android development with Jetpack Compose.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="skill-box">
                         <img src="https://cdn-icons-png.flaticon.com/512/919/919830.png" alt="PHP">
                         <h5>PHP</h5>
                         <p>Dynamic web applications & backend development.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="250">
                     <div class="skill-box">
                         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python">
                         <h5>Python</h5>
                         <p>Scripting and backend development.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="skill-box">
                         <img src="https://firebase.google.com/static/images/brand-guidelines/logo-vertical.png" alt="Firebase">
                         <h5>Firebase</h5>
                         <p>Realtime database & authentication.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="50">
                     <div class="skill-box">
                         <img src="https://cdn-icons-png.flaticon.com/512/2772/2772128.png" alt="SQL">
                         <h5>SQL</h5>
                         <p>Database management & queries.</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="skill-box">
                         <img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png" alt="HTML CSS JS">
                         <h5>HTML, CSS, JS</h5>
@@ -349,17 +529,38 @@ body.dark-mode .cookie-consent {
         <div class="container">
             <p>&copy; 2025 Ujjaval Saini | All Rights Reserved</p>
             <p>Follow me on:</p>
-            <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
-            <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="https://github.com/ujjaval01" target="_blank" class="text-white me-3"><i class="fab fa-github fa-lg"></i></a>
-            <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
-            <a href="mailto:sainiujvl@gmail.com" class="text-white"><i class="fas fa-envelope fa-lg"></i></a>
+            <div class="social-icons mt-3">
+                <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
     </footer>
 
     <!-- External Scripts -->
     <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ujjaval" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting, Now you can buy me a coffee🤩." data-color="#FF5F5F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize Animate On Scroll
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
 
     <!-- Typing Text Script -->
     <script>
@@ -401,17 +602,17 @@ body.dark-mode .cookie-consent {
 
         if (!cookieAccepted) {
             setTimeout(() => {
-                cookiePopup.style.display = "block";
+                cookiePopup.classList.add("show");
             }, 2000); // 2 seconds delay
         }
 
         acceptBtn.addEventListener("click", () => {
             localStorage.setItem("cookieAccepted", "true");
-            cookiePopup.style.display = "none";
+            cookiePopup.classList.remove("show");
         });
 
         declineBtn.addEventListener("click", () => {
-            cookiePopup.style.display = "none";
+            cookiePopup.classList.remove("show");
         });
     });
 

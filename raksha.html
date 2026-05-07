@@ -4,112 +4,242 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Women Safety & Security System</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
   <style>
-    .hover-scale:hover { transform: scale(1.05); transition: 0.3s; }
-    .box-shadow { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
-    .fade-in { animation: fadeIn 1s ease-in-out; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f5f7fa;
+        overflow-x: hidden;
+        transition: background 0.3s ease, color 0.3s ease;
     }
+
+    /* Glassmorphism Navbar */
+    .navbar {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        padding: 15px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+    }
+    .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+    }
+    body.dark-mode .navbar.scrolled {
+        background: rgba(18, 18, 18, 0.95) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .navbar-brand {
+        font-weight: 800;
+        font-size: 28px;
+        letter-spacing: 2px;
+        background: linear-gradient(45deg, #be52df, #1d4a98);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: transform 0.3s;
+    }
+    .navbar-brand:hover { transform: scale(1.05); }
+    body.dark-mode .navbar-brand { background: linear-gradient(45deg, #e540dd, #6633ca); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .navbar-toggler { border: none; }
+    .navbar-toggler:focus { box-shadow: none; }
+    body.dark-mode .navbar-toggler-icon { filter: invert(1); }
+
+    .nav-link {
+        color: #333 !important; font-weight: 500; position: relative; margin: 0 10px; transition: 0.3s; font-size: 16px;
+    }
+    body.dark-mode .nav-link { color: #f5f5f5 !important; }
+    .nav-link::after {
+        content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%;
+        background: linear-gradient(45deg, #be52df, #1d4a98); transition: all 0.3s ease; transform: translateX(-50%);
+    }
+    body.dark-mode .nav-link::after { background: linear-gradient(45deg, #e540dd, #6633ca); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: #be52df !important; }
+    body.dark-mode .nav-link:hover { color: #e540dd !important; }
+    
+    #themeToggleBtn { border-radius: 20px; padding: 5px 15px; font-weight: 500; transition: all 0.3s; }
+    #themeToggleBtn:hover { transform: scale(1.05); }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, #be52df, #1d4a98);
+        color: white;
+        padding: 150px 20px 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    body.dark-mode .hero-section { background: linear-gradient(135deg, #2a2a4a, #4a2a6a); }
+
+    .shape {
+        position: absolute; filter: blur(60px); z-index: 0; animation: float 10s infinite alternate; border-radius: 50%; opacity: 0.6;
+    }
+    .shape-1 { width: 300px; height: 300px; background: rgba(255, 255, 255, 0.2); top: -10%; left: -5%; }
+    .shape-2 { width: 400px; height: 400px; background: rgba(0, 0, 0, 0.2); bottom: -10%; right: -5%; animation-duration: 15s; }
+    @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-50px) scale(1.1); } }
+
+    .hero-content { position: relative; z-index: 1; }
+    .hero-title { font-weight: 800; font-size: 3rem; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .hero-subtitle { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; }
+
+    .btn-custom {
+        background: white; color: #1d4a98; font-weight: 700; padding: 12px 30px; border-radius: 30px; border: none; transition: all 0.4s;
+    }
+    .btn-custom:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: #fce408; color: #111; }
+
+    /* Features Section */
+    .section-title { text-align: center; font-weight: 800; margin-bottom: 40px; font-size: 36px; }
+    .gradient-text {
+        background: linear-gradient(45deg, #1d4a98, #be52df); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
+    }
+    body.dark-mode .gradient-text { background: linear-gradient(45deg, #8c52ff, #e540dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .feature-card {
+        background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px;
+        transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; justify-content: center;
+    }
+    body.dark-mode .feature-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15); }
+    .feature-card h3 { font-weight: 700; font-size: 20px; margin-bottom: 15px; color: #333; }
+    body.dark-mode .feature-card h3 { color: #fff; }
+    .feature-card p { color: #666; font-size: 15px; margin: 0; }
+    body.dark-mode .feature-card p { color: #aaa; }
 
     /* Slider Styling */
-    .image-slider {
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-    }
+    .image-slider { overflow: hidden; position: relative; width: 100%; padding: 20px 0; }
+    .slider-track { display: flex; animation: scroll-left 15s linear infinite; }
+    .slider-track img { width: 220px; height: 450px; object-fit: cover; margin: 0 15px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: transform 0.3s; }
+    .slider-track img:hover { transform: scale(1.05); }
+    @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    .slider-track {
-      display: flex;
-      animation: scroll-left 15s linear infinite;
-    }
+    /* Testimonials */
+    .testimonial-section { background: #111; color: white; padding: 80px 20px; text-align: center; }
+    #review-slider { min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    #review-text { font-size: 1.2rem; font-style: italic; font-weight: 300; transition: opacity 0.5s; }
+    #review-author { font-weight: 700; color: #be52df; transition: opacity 0.5s; margin-top: 15px; }
 
-    .slider-track img {
-      width: 200px;
-      height: 400px;
-      object-fit: cover;
-      margin: 0 10px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
+    /* Footer */
+    .footer { background: #111; color: white; text-align: center; padding: 50px 0 30px; position: relative; overflow: hidden; }
+    .footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, #be52df, #1d4a98, #fce408); }
+    .footer p { margin-bottom: 10px; color: #aaa; }
+    .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 50%; margin: 0 10px; color: white; transition: all 0.4s; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; }
+    .social-icons a:hover { background: linear-gradient(45deg, #be52df, #1d4a98); transform: translateY(-10px) rotate(360deg); color: white; border-color: transparent; box-shadow: 0 10px 20px rgba(190, 82, 223, 0.4); }
+    
+    body.dark-mode { background-color: #121212; color: #ffffff; }
+    .fade-in { opacity: 1; }
+    .fade-out { opacity: 0; }
   </style>
 </head>
-<body class="bg-gray-50">
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">RAKSHA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item ms-lg-3">
+                    <button id="themeToggleBtn" class="btn btn-sm btn-light">
+                        <i class="fas fa-moon"></i> Theme
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-  <!-- Hero Section -->
-  <section class="text-center bg-gradient-to-r from-purple-700 to-pink-600 text-white py-10 fade-in">
-    <h1 class="text-3xl md:text-4xl font-bold" data-aos="fade-down">Women Safety & Security System</h1>
-    <p class="text-md md:text-lg mt-2" data-aos="fade-up">An advanced safety app with real-time tracking, emergency alerts, and security features.</p>
-    <button class="mt-4 bg-white text-purple-700 px-5 py-2 text-md md:text-lg rounded-lg font-bold hover:bg-gray-200 hover-scale">Download Now</button>
+
+    <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
+        <h1 class="hero-title">Women Safety & Security System</h1>
+        <p class="hero-subtitle">An advanced safety app with real-time tracking, emergency alerts, and security features.</p>
+        <button class="btn-custom">Download Now</button>
+    </div>
   </section>
 
   <!-- Features Section -->
-  <section class="container my-5">
-    <h2 class="text-center text-2xl md:text-3xl font-bold mb-4" data-aos="zoom-in">Key Features</h2>
-    <div class="row text-center">
-        <div class="col-md-4 p-2" data-aos="fade-right">
-            <div class="p-3 bg-white box-shadow rounded-lg hover-scale">
-                <h3 class="text-lg font-bold">🚨 SOS Alert</h3>
+  <section class="container my-5 py-5">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">Key Features</span></h2>
+    <div class="row text-center mt-5">
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-card">
+                <h3>🚨 SOS Alert</h3>
                 <p>One-tap SOS sends alerts with location to guardians & police.</p>
             </div>
         </div>
-        <div class="col-md-4 p-2" data-aos="fade-up">
-            <div class="p-3 bg-white box-shadow rounded-lg hover-scale">
-                <h3 class="text-lg font-bold">📍 Live Tracking</h3>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-card">
+                <h3>📍 Live Tracking</h3>
                 <p>Real-time location sharing ensures safety in emergencies.</p>
             </div>
         </div>
-        <div class="col-md-4 p-2" data-aos="fade-left">
-            <div class="p-3 bg-white box-shadow rounded-lg hover-scale">
-                <h3 class="text-lg font-bold">🔒 Fake Call Feature</h3>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-card">
+                <h3>🔒 Fake Call Feature</h3>
                 <p>Generate fake calls to escape uncomfortable situations.</p>
             </div>
         </div>
-        <div class="col-md-4 p-2" data-aos="fade-right">
-            <div class="p-3 bg-white box-shadow rounded-lg hover-scale">
-                <h3 class="text-lg font-bold">📸 Quick Video Recording</h3>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-card">
+                <h3>📸 Quick Video Recording</h3>
                 <p>Record and send emergency videos instantly to contacts.</p>
             </div>
         </div>
-        <div class="col-md-4 p-2" data-aos="fade-up">
-            <div class="p-3 bg-white box-shadow rounded-lg hover-scale">
-                <h3 class="text-lg font-bold">🔊 Loud Siren</h3>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-card">
+                <h3>🔊 Loud Siren</h3>
                 <p>Trigger a loud siren to attract attention in danger.</p>
             </div>
         </div>
-        <div class="col-md-4 p-2" data-aos="fade-left">
-            <div class="p-3 bg-white box-shadow rounded-lg hover-scale">
-                <h3 class="text-lg font-bold">💡 Flashlight Blinker</h3>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-card">
+                <h3>💡 Flashlight Blinker</h3>
                 <p>Turn your flashlight into a distress signal.</p>
             </div>
         </div>
     </div>
-</section>
+  </section>
 
   <!-- App Demo Video -->
-  <section class="container text-center my-5" data-aos="fade-up">
-    <h2 class="text-3xl font-bold mb-4">📽️ App Demo</h2>
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="rounded-lg shadow-lg" width="80%" height="400" src="./images/rakshaKawatchImages/appDemo.mp4" frameborder="0" allowfullscreen></iframe>
+  <section class="container text-center my-5 py-5" data-aos="fade-up">
+    <h2 class="section-title"><span class="gradient-text">📽️ App Demo</span></h2>
+    <div class="ratio ratio-16x9 shadow-lg rounded-4 overflow-hidden mt-4" style="max-width: 800px; margin: 0 auto;">
+      <iframe src="./images/rakshaKawatchImages/appDemo.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
   </section>
 
   <!-- Image Gallery Slider -->
-  <section class="container my-5">
-    <h2 class="text-center text-2xl md:text-3xl font-bold mb-4" data-aos="fade-up">📸 App Screenshots</h2>
-    <div class="image-slider">
+  <section class="container-fluid my-5 py-5" style="overflow: hidden;">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">📸 App Screenshots</span></h2>
+    <div class="image-slider mt-4" data-aos="fade-in" data-aos-delay="200">
       <div class="slider-track">
         <img src="./images/rakshaKawatchImages/splash.jpg" alt="Screenshot 1" />
         <img src="./images/rakshaKawatchImages/mainPage.jpg" alt="Screenshot 2" />
@@ -118,117 +248,119 @@
         <img src="./images/rakshaKawatchImages/chatbot.jpg" alt="Screenshot 5" />
         <img src="./images/rakshaKawatchImages/setting.jpg" alt="Screenshot 6" />
         <img src="./images/rakshaKawatchImages/profile.jpg" alt="Screenshot 7" />
-        <!-- Repeat images to ensure continuous scrolling -->
         <img src="./images/rakshaKawatchImages/splash.jpg" alt="Screenshot 1" />
         <img src="./images/rakshaKawatchImages/mainPage.jpg" alt="Screenshot 2" />
+        <img src="./images/rakshaKawatchImages/tools.jpg" alt="Screenshot 3" />
+        <img src="./images/rakshaKawatchImages/map.jpg" alt="Screenshot 4" />
       </div>
     </div>
   </section>
 
- <!-- Testimonials Section -->
-<section class="bg-gray-900 text-white text-center py-10">
-    <h2 class="text-2xl md:text-3xl font-bold mb-6" data-aos="fade-up">💬 User Reviews</h2>
-    
-    <!-- Review Container -->
-    <div id="review-slider" class="container mt-4 fade-in">
-      <p class="text-lg italic" id="review-text">"This app is a game changer for women's safety!"</p>
-      <h5 class="mt-2 font-bold" id="review-author">- Neha Sharma</h5>
+  <!-- Testimonials Section -->
+  <section class="testimonial-section">
+    <div class="container">
+        <h2 class="section-title text-white mb-5" data-aos="fade-up">💬 User Reviews</h2>
+        <div id="review-slider" class="mt-4" data-aos="zoom-in">
+          <p id="review-text">"This app is a game changer for women's safety!"</p>
+          <h5 id="review-author">- Neha Sharma</h5>
+        </div>
     </div>
   </section>
   
-
   <!-- Contact & Download Section -->
-  <section class="text-center bg-gradient-to-r from-purple-700 to-pink-600 text-white py-8">
-    <h2 class="text-2xl md:text-3xl font-bold" data-aos="fade-up">🔗 Get the App</h2>
-    <p class="text-md my-2" data-aos="fade-up">Stay safe with just one tap. Download now!</p>
-    <button class="bg-white text-purple-700 px-5 py-2 text-md md:text-lg rounded-lg font-bold hover:bg-gray-200 hover-scale" data-aos="zoom-in">Download Now</button>
+  <section class="hero-section" style="padding: 100px 20px;">
+    <div class="container" data-aos="fade-up">
+        <h2 class="hero-title mb-4" style="font-size: 2.5rem;">🔗 Get the App</h2>
+        <p class="hero-subtitle">Stay safe with just one tap. Download now!</p>
+        <button class="btn-custom mt-4">Download Now</button>
+    </div>
   </section>
 
-  <!-- Footer Section -->
-  <footer class="bg-gray-900 text-white py-6 mt-10">
-    <div class="container mx-auto text-center">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div data-aos="fade-up">
-          <h4 class="text-lg font-bold">About The App</h4>
-          <p class="text-sm mt-2">1. Ensuring women's safety with real-time tracking, SOS alerts, and security features.</p>
-          <p class="text-sm mt-2">2. The app allows guardians or nearby authorities to track the user's live location continuously after the SOS button is pressed, ensuring faster response and help.</p>    
-          <p class="text-sm mt-2">3. Equipped with instant tools like a loud siren, fake call generator, quick video recorder, and flashlight blinker to attract attention and buy critical time in distress situations.</p>
-          </p>
-        </div>
-        
-        <div data-aos="fade-up">
-          <h4 class="text-lg font-bold">Quick Links</h4>
-          <ul class="mt-2 space-y-2">
-            <li><a href="#" class="hover:text-purple-400">Home</a></li>
-            <li><a href="#" class="hover:text-purple-400">Features</a></li>
-            <li><a href="#" class="hover:text-purple-400">Gallery</a></li>
-            <li><a href="#" class="hover:text-purple-400">Contact</a></li>
-          </ul>
-        </div>
-        <div data-aos="fade-up">
-          <h4 class="text-lg font-bold">Follow Us</h4>
-          <div class="flex justify-center space-x-4 mt-2">
-            <a href="https://www.facebook.com/ujjaval.saini.96" class="text-xl hover:text-purple-400"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="text-xl hover:text-purple-400"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-xl hover:text-purple-400"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-xl hover:text-purple-400"><i class="fab fa-linkedin"></i></a>
+  <!-- Footer -->
+  <footer class="footer">
+      <div class="container">
+          <p>&copy; 2025 Women Safety App | All Rights Reserved</p>
+          <p>Follow us on:</p>
+          <div class="social-icons mt-3">
+              <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
           </div>
-        </div>
       </div>
-      <div class="mt-6 text-sm">
-        <p>&copy; 2025 Women Safety App. All rights reserved.</p>
-      </div>
-    </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
+    AOS.init({ once: true, offset: 50, duration: 800 });
+
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (navbar && window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else if (navbar) {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const themeToggleBtn = document.getElementById("themeToggleBtn");
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            if(themeToggleBtn) {
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+                themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+            }
+        }
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+                const isDark = document.body.classList.contains("dark-mode");
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+                if (isDark) {
+                    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+                    themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+                } else {
+                    themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Theme';
+                    themeToggleBtn.classList.replace('btn-dark', 'btn-light');
+                }
+            });
+        }
+    });
+
+    const reviews = [
+      { text: '"This app is a game changer for women\'s safety!"', author: '- Neha Sharma' },
+      { text: '"A must-have app for every woman. Feels safer already."', author: '- Priya Verma' },
+      { text: '"Very helpful in emergencies. The SOS feature works great."', author: '- Riya Kapoor' },
+      { text: '"Finally, an app that puts safety first. Highly recommend."', author: '- Anjali Mehta' },
+      { text: '"Simple UI, powerful features. Love the loud siren."', author: '- Komal Yadav' },
+      { text: '"The fake call feature helped me get out of a tough spot."', author: '- Shruti Mishra' },
+      { text: '"Sharing my location with my family gives peace of mind."', author: '- Swati Singh' },
+      { text: '"Every woman should have this installed."', author: '- Tanya Desai' },
+      { text: '"I feel much more secure when walking alone now."', author: '- Aarti Joshi' },
+      { text: '"It’s intuitive and effective. Great job by the developers!"', author: '- Meenal Rathore' },
+    ];
+    let currentReview = 0;
+    function showNextReview() {
+      const reviewText = document.getElementById("review-text");
+      const reviewAuthor = document.getElementById("review-author");
+      if(reviewText && reviewAuthor) {
+          reviewText.classList.add("fade-out");
+          reviewAuthor.classList.add("fade-out");
+          setTimeout(() => {
+              reviewText.textContent = reviews[currentReview].text;
+              reviewAuthor.textContent = reviews[currentReview].author;
+              reviewText.classList.remove("fade-out");
+              reviewAuthor.classList.remove("fade-out");
+              currentReview = (currentReview + 1) % reviews.length;
+          }, 500);
+      }
+    }
+    setInterval(showNextReview, 4000);
   </script>
-  <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
-  data-id="ujjaval" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting, Now you can buy me a coffee🤩."
-  data-color="#FF5F5F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
-
-<script>
-  const reviews = [
-    { text: '"This app is a game changer for women\'s safety!"', author: '- Neha Sharma' },
-    { text: '"A must-have app for every woman. Feels safer already."', author: '- Priya Verma' },
-    { text: '"Very helpful in emergencies. The SOS feature works great."', author: '- Riya Kapoor' },
-    { text: '"Finally, an app that puts safety first. Highly recommend."', author: '- Anjali Mehta' },
-    { text: '"Simple UI, powerful features. Love the loud siren."', author: '- Komal Yadav' },
-    { text: '"The fake call feature helped me get out of a tough spot."', author: '- Shruti Mishra' },
-    { text: '"Sharing my location with my family gives peace of mind."', author: '- Swati Singh' },
-    { text: '"Every woman should have this installed."', author: '- Tanya Desai' },
-    { text: '"I feel much more secure when walking alone now."', author: '- Aarti Joshi' },
-    { text: '"It’s intuitive and effective. Great job by the developers!"', author: '- Meenal Rathore' },
-  ];
-
-  let currentReview = 0;
-
-  function showNextReview() {
-    const reviewText = document.getElementById("review-text");
-    const reviewAuthor = document.getElementById("review-author");
-
-    reviewText.classList.remove("fade-in");
-    reviewAuthor.classList.remove("fade-in");
-
-    setTimeout(() => {
-      reviewText.textContent = reviews[currentReview].text;
-      reviewAuthor.textContent = reviews[currentReview].author;
-
-      reviewText.classList.add("fade-in");
-      reviewAuthor.classList.add("fade-in");
-
-      currentReview = (currentReview + 1) % reviews.length;
-    }, 200); // small delay for fade-out effect
-  }
-
-  // Start changing reviews every 4 seconds
-  setInterval(showNextReview, 4000);
-</script>
-
 </body>
 </html>

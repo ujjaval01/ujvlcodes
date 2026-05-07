@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuoteVerse - Daily Quotes App</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fa;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+      background: rgba(255,255,255,0.1) !important;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.4s ease;
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255,255,255,0.95) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 10px 0;
+    }
+
+    body.dark-mode .navbar.scrolled {
+      background: rgba(18,18,18,0.95) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: 2px;
+      background: linear-gradient(45deg, #be52df, #1d4a98);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform 0.3s;
+    }
+
+    .navbar-brand:hover {
+      transform: scale(1.05);
+    }
+
+    .navbar-toggler {
+      border: none;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    body.dark-mode .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    .nav-link {
+      color: #333 !important;
+      font-weight: 500;
+      position: relative;
+      margin: 0 10px;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    body.dark-mode .nav-link {
+      color: #f5f5f5 !important;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: linear-gradient(45deg, #be52df, #1d4a98);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #1d4a98 !important;
+    }
+
+    #themeToggleBtn {
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    #themeToggleBtn:hover {
+      transform: scale(1.05);
+    }
+
+    /* HERO */
+
+    .hero-section {
+      background: linear-gradient(135deg, #be52df, #1d4a98);
+      color: white;
+      padding: 150px 20px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark-mode .hero-section {
+      background: linear-gradient(135deg, #2a2a4a, #4a2a6a);
+    }
+
+    .shape {
+      position: absolute;
+      filter: blur(60px);
+      z-index: 0;
+      animation: float 10s infinite alternate;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.2);
+      top: -10%;
+      left: -5%;
+    }
+
+    .shape-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(0,0,0,0.2);
+      bottom: -10%;
+      right: -5%;
+      animation-duration: 15s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      100% {
+        transform: translateY(-50px) scale(1.1);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-weight: 800;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+
+    .btn-custom {
+      background: white;
+      color: #1d4a98;
+      font-weight: 700;
+      padding: 12px 30px;
+      border-radius: 30px;
+      border: none;
+      transition: all 0.4s;
+    }
+
+    .btn-custom:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      background: #fce408;
+      color: #111;
+    }
+
+    /* SECTION */
+
+    .section-title {
+      text-align: center;
+      font-weight: 800;
+      margin-bottom: 40px;
+      font-size: 36px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #be52df, #1d4a98);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      transition: all 0.4s;
+      border: 1px solid rgba(0,0,0,0.05);
+      height: 100%;
+    }
+
+    body.dark-mode .feature-card {
+      background: #1e1e1e;
+      border: 1px solid rgba(255,255,255,0.05);
+      color: #fff;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15);
+    }
+
+    .feature-card h3 {
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .feature-card p {
+      color: #666;
+    }
+
+    body.dark-mode .feature-card p {
+      color: #aaa;
+    }
+
+    /* IMAGE SLIDER */
+
+    .image-slider {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding: 20px 0;
+    }
+
+    .slider-track {
+      display: flex;
+      animation: scroll-left 15s linear infinite;
+    }
+
+    .slider-track img {
+      width: 220px;
+      height: 450px;
+      object-fit: cover;
+      margin: 0 15px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+
+    .slider-track img:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* TESTIMONIAL */
+
+    .testimonial-section {
+      background: #111;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    #review-slider {
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #review-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      font-weight: 300;
+      transition: opacity 0.5s;
+    }
+
+    #review-author {
+      font-weight: 700;
+      color: #be52df;
+      transition: opacity 0.5s;
+      margin-top: 15px;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 50px 0 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #be52df, #1d4a98, #fce408);
+    }
+
+    .footer p {
+      margin-bottom: 10px;
+      color: #aaa;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      margin: 0 10px;
+      color: white;
+      transition: all 0.4s;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background: linear-gradient(45deg, #be52df, #1d4a98);
+      transform: translateY(-10px) rotate(360deg);
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+
+    <a class="navbar-brand" href="#">QuoteVerse</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item ms-lg-3">
+          <button id="themeToggleBtn" class="btn btn-sm btn-light">
+            <i class="fas fa-moon"></i> Theme
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero-section">
+
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+    <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
+    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">Daily Motivation In Your Pocket</h1>
+    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Discover powerful quotes, daily inspiration, and motivational thoughts anytime.</p>
+    <a href="https://play.google.com/store/apps/details?id=com.uv.quotecomposeapp" class="btn-custom" data-aos="fade-up" data-aos-delay="300" style="text-decoration:none;">Download App</a>
+  </div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="container my-5 py-5">
+
+  <h2 class="section-title" data-aos="fade-up">
+    <span class="gradient-text">Amazing Features</span>
+  </h2>
+
+    <div class="row text-center mt-5">
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="feature-card">
+        <h3>💡 Daily Quotes</h3>
+        <p>Fresh motivational quotes every single day.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="feature-card">
+        <h3>❤️ Favorite Collection</h3>
+        <p>Save your favorite quotes and access anytime.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+      <div class="feature-card">
+        <h3>📤 Easy Sharing</h3>
+        <p>Share beautiful quote cards directly to social media.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+      <div class="feature-card">
+        <h3>🎨 Beautiful UI</h3>
+        <p>Smooth animations and premium modern design.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+      <div class="feature-card">
+        <h3>🌙 Dark Mode</h3>
+        <p>Enjoy quotes comfortably day and night.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+      <div class="feature-card">
+        <h3>🤖 AI Quotes</h3>
+        <p>Generate unique AI-powered motivational quotes.</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- APP PREVIEW -->
+
+<section class="container text-center my-5 py-5" data-aos="fade-up">
+
+  <h2 class="section-title">
+    <span class="gradient-text">📱 App Preview</span>
+  </h2>
+
+  <div class="ratio ratio-16x9 shadow-lg rounded-4 overflow-hidden mt-4"
+       style="max-width: 800px; margin: 0 auto;">
+
+    <iframe
+      src="./images/quoteApp/recording.mp4"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+</section>
+
+<!-- SCREENSHOTS -->
+
+<section class="container-fluid my-5 py-5" style="overflow: hidden;">
+
+  <h2 class="section-title">
+    <span class="gradient-text">📸 App Screenshots</span>
+  </h2>
+
+  <div class="image-slider mt-4">
+
+    <div class="slider-track">
+
+      <img src="./images/quoteApp/Home.png">
+      <img src="./images/quoteApp/Favt.png">
+      <img src="./images/quoteApp/allQuotesRe.png">
+      <img src="./images/quoteApp/notification.png">
+      <img src="./images/quoteApp/settingDark.png">
+      <img src="./images/quoteApp/details.png">
+      <img src="./images/quoteApp/banner.png">
+
+      <img src="./images/quoteApp/Home.png">
+      <img src="./images/quoteApp/Favt.png">
+      <img src="./images/quoteApp/allQuotesRe.png">
+      <img src="./images/quoteApp/notification.png">
+      <img src="./images/quoteApp/settingDark.png">
+      <img src="./images/quoteApp/details.png">
+      <img src="./images/quoteApp/banner.png">
+    </div>
+
+  </div>
+
+</section>
+
+<!-- REVIEWS -->
+
+<section class="testimonial-section">
+
+  <div class="container">
+
+    <h2 class="section-title text-white mb-5">
+      💬 User Reviews
+    </h2>
+
+    <div id="review-slider">
+
+      <p id="review-text">
+        "This app motivates me every morning!"
+      </p>
+
+      <h5 id="review-author">
+        - Aman Verma
+      </h5>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- DOWNLOAD -->
+
+<section class="hero-section" style="padding: 100px 20px;">
+
+    <div class="container" data-aos="fade-up">
+    <h2 class="hero-title mb-4" style="font-size: 2.5rem;">🚀 Download Now</h2>
+    <p class="hero-subtitle">Start your daily inspiration journey today.</p>
+    <a href="https://play.google.com/store/apps/details?id=com.uv.quotecomposeapp" class="btn-custom mt-4" style="text-decoration:none;">Get App</a>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <div class="container">
+
+    <p>
+      © 2026 QuoteVerse | All Rights Reserved
+    </p>
+
+    <p>
+      Follow us on:
+    </p>
+
+        <div class="social-icons mt-3">
+      <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- SCRIPTS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+
+  AOS.init({
+    once: true,
+    offset: 50,
+    duration: 800
+  });
+
+  window.addEventListener('scroll', function () {
+
+    const navbar = document.querySelector('.navbar');
+
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+
+  });
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const savedTheme = localStorage.getItem("theme");
+    
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+      if(themeToggleBtn) {
+          themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+          themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+      }
+    }
+    
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          const isDark = document.body.classList.contains("dark-mode");
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+          
+          if (isDark) {
+              themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+              themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+          } else {
+              themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Theme';
+              themeToggleBtn.classList.replace('btn-dark', 'btn-light');
+          }
+        });
+    }
+  });
+
+  const reviews = [
+
+    {
+      text: '"Best quote app on Play Store!"',
+      author: '- Rahul'
+    },
+
+    {
+      text: '"Beautiful design and amazing daily motivation."',
+      author: '- Priya'
+    },
+
+    {
+      text: '"AI quotes feature is mind blowing!"',
+      author: '- Neha'
+    },
+
+    {
+      text: '"Simple UI and powerful content."',
+      author: '- Arjun'
+    },
+
+    {
+      text: '"My daily positivity booster ❤️"',
+      author: '- Sneha'
+    }
+
+  ];
+
+  let currentReview = 0;
+
+  function showNextReview() {
+
+    const reviewText = document.getElementById("review-text");
+
+    const reviewAuthor = document.getElementById("review-author");
+
+    reviewText.classList.add("fade-out");
+    reviewAuthor.classList.add("fade-out");
+
+    setTimeout(() => {
+
+      reviewText.textContent = reviews[currentReview].text;
+
+      reviewAuthor.textContent = reviews[currentReview].author;
+
+      reviewText.classList.remove("fade-out");
+      reviewAuthor.classList.remove("fade-out");
+
+      currentReview = (currentReview + 1) % reviews.length;
+
+    }, 500);
+
+  }
+
+  setInterval(showNextReview, 4000);
+
+</script>
+
+</body>
+</html>

@@ -4,176 +4,385 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact Us</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link rel="website icon" type="jpg" href="images/myIcon.jpg"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fa;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
 
-  <style>
-    .smooth-bounce {
-      animation-timing-function: ease-in-out;
-      animation-duration: 2s;
-    }
+        /* Glassmorphism Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+        }
+        body.dark-mode .navbar.scrolled {
+            background: rgba(18, 18, 18, 0.95) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 28px;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #be52df, #1d4a98);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s;
+        }
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+        body.dark-mode .navbar-brand {
+            background: linear-gradient(45deg, #e540dd, #6633ca);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f7f7f7;
-    }
+        .navbar-toggler { border: none; }
+        .navbar-toggler:focus { box-shadow: none; }
+        body.dark-mode .navbar-toggler-icon { filter: invert(1); }
 
-    /* Navbar */
-    .navbar {
-      background: linear-gradient(45deg, #be52df, #1d4a98);
-    }
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            position: relative;
+            margin: 0 10px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        body.dark-mode .nav-link { color: #f5f5f5 !important; }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(45deg, #be52df, #1d4a98);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        body.dark-mode .nav-link::after { background: linear-gradient(45deg, #e540dd, #6633ca); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: #be52df !important; }
+        body.dark-mode .nav-link:hover { color: #e540dd !important; }
 
-    .navbar-brand {
-      font-weight: bold;
-      font-size: 24px;
-      color: white !important;
-      transition: color 0.3s ease-in-out;
-    }
+        /* Body Dark Mode Background */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
 
-    .navbar-brand:hover {
-      color: #000000 !important;
-    }
+        /* Footer */
+        .footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 50px 0 30px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 50px;
+        }
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, #be52df, #1d4a98, #fce408);
+        }
+        .footer p { margin-bottom: 10px; color: #aaa; }
+        .social-icons a {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 45px; height: 45px; background: rgba(255,255,255,0.05);
+            border-radius: 50%; margin: 0 10px; color: white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 20px; border: 1px solid rgba(255,255,255,0.1);
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            background: linear-gradient(45deg, #be52df, #1d4a98);
+            transform: translateY(-10px) rotate(360deg);
+            color: white; border-color: transparent;
+            box-shadow: 0 10px 20px rgba(190, 82, 223, 0.4);
+        }
+        
+        #themeToggleBtn {
+            border-radius: 20px; padding: 5px 15px; font-weight: 500; transition: all 0.3s;
+        }
+        #themeToggleBtn:hover { transform: scale(1.05); }
+        
+        .main-container { padding-top: 120px; padding-bottom: 50px; }
 
-    .nav-link {
-      color: white !important;
-      transition: 0.3s;
-    }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #be52df, #1d4a98);
+            color: white;
+            padding: 150px 20px 150px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: -100px;
+        }
+        body.dark-mode .hero-section { background: linear-gradient(135deg, #2a2a4a, #4a2a6a); }
 
-    .nav-link:hover {
-      color: #fce408 !important;
-      font-size: 18px;
-    }
+        .shape {
+            position: absolute; filter: blur(60px); z-index: 0; animation: float 10s infinite alternate; border-radius: 50%; opacity: 0.6;
+        }
+        .shape-1 { width: 300px; height: 300px; background: rgba(255, 255, 255, 0.2); top: -10%; left: -5%; }
+        .shape-2 { width: 400px; height: 400px; background: rgba(0, 0, 0, 0.2); bottom: -10%; right: -5%; animation-duration: 15s; }
+        @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-50px) scale(1.1); } }
 
-    /* Contact Us Section */
-    .contact-section {
-      background: linear-gradient(135deg, #6a5acd, #836fff);
-      color: white;
-      padding: 80px 20px;
-      text-align: center;
-      border-radius: 10px;
-    }
+        .hero-title { font-weight: 800; font-size: 3.5rem; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,0.2); position: relative; z-index: 1;}
+        .hero-subtitle { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; position: relative; z-index: 1;}
+        
+        .contact-info-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px 30px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .contact-info-card i {
+            font-size: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .contact-info-card span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            vertical-align: middle;
+        }
 
-    .contact-btn {
-      background: white;
-      color: #6a5acd;
-      font-weight: bold;
-      padding: 10px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 20px;
-      transition: 0.3s;
-    }
+        /* Form Overlap */
+        .form-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Updated Form styling */
+        .contact-form {
+            background: #ffffff;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        body.dark-mode .contact-form {
+            background: #1e1e1e;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        
+        .form-control {
+            border-radius: 15px;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            background: #fff;
+            border-color: #be52df;
+            box-shadow: 0 0 15px rgba(190, 82, 223, 0.2);
+            transform: scale(1.02);
+        }
+        
+        body.dark-mode .form-control {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark-mode .form-control:focus {
+            background: #333;
+        }
 
-    .contact-btn:hover {
-      background: #f0f0f0;
-    }
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #1d4a98, #be52df);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(190, 82, 223, 0.2);
+        }
+        body.dark-mode .contact-section {
+            background: linear-gradient(135deg, #2a2a4a, #4a2a6a);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
 
-    /* Contact Form */
-    .contact-form {
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
+        .contact-btn {
+            background: white;
+            color: #1d4a98;
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .contact-btn:hover {
+            background: #fce408;
+            color: #111;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
 
-    .contact-form label {
-      font-weight: bold;
-    }
+        /* Contact Form */
+        .contact-form {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        body.dark-mode .contact-form {
+            background: #1e1e1e;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            color: #ddd;
+        }
+        body.dark-mode .form-label { color: #ccc; }
+        body.dark-mode .form-control {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #fff;
+        }
+        body.dark-mode .form-control:focus {
+            background: #333;
+            color: #fff;
+            border-color: #be52df;
+            box-shadow: 0 0 0 0.25rem rgba(190, 82, 223, 0.25);
+        }
 
-    .contact-form button {
-      background: #6a5acd;
-      color: white;
-      border: none;
-    }
+        .contact-form label { font-weight: 600; margin-bottom: 10px; }
+        .contact-form h3 { font-weight: 800; margin-bottom: 30px; }
+        
+        .contact-form .text-primary {
+            background: linear-gradient(45deg, #1d4a98, #be52df);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.dark-mode .contact-form .text-primary {
+            background: linear-gradient(45deg, #8c52ff, #e540dd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .contact-form button:hover {
-      background: #5a4ebf;
-    }
-
-    /* Footer */
-    .footer {
-      background: linear-gradient(45deg, #be52df, #1d4a98);
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 50px;
-    }
-
-    .footer a {
-      color: white;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .footer a:hover {
-      color: #ffeb3b;
-    }
-
-    .fab, .fas {
-      font-size: 18px;
-      transition: 0.3s;
-    }
-
-    .fab:hover, .fas:hover {
-      color: #000000 !important;
-      font-size: 30px;
-    }
-  </style>
+        .contact-form input.btn-primary {
+            background: linear-gradient(45deg, #1d4a98, #be52df);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            padding: 12px 40px;
+            transition: all 0.3s;
+        }
+        .contact-form input.btn-primary:hover {
+            background: linear-gradient(45deg, #be52df, #1d4a98);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(190, 82, 223, 0.4);
+        }
+    </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-  <div class="container">
-    <h2 class="navbar-brand animate__animated animate__bounce animate__infinite smooth-bounce">CONTACT</h2>
-    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
-        <li class="nav-item"><a class="nav-link active" href="#">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">CONTACT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contactUs.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="themeToggleBtn" class="btn btn-sm btn-light">
+                            <i class="fas fa-moon"></i> Theme
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<!-- Contact Us Info -->
-<div class="container mt-5">
-  <div class="contact-section">
-    <h2>Contact Us</h2>
-    <p>If you have any feedback, questions, or business inquiries, please feel free to get in touch with us.</p>
-    <p><strong>Email:</strong> sainiujvl@gmail.com</p>
-    <a href="#form" class="contact-btn">GO TO CONTACT US FORM</a>
-  </div>
-</div>
+<!-- Hero Section -->
+  <section class="hero-section">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
+        <h1 class="hero-title">Get In Touch</h1>
+        <p class="hero-subtitle">If you have any feedback, questions, or business inquiries, I'd love to hear from you.</p>
+        
+        <div class="contact-info-card" data-aos="fade-up" data-aos-delay="200">
+            <i class="fas fa-envelope"></i>
+            <span>sainiujvl@gmail.com</span>
+        </div>
+    </div>
+  </section>
 
 <!-- Contact Form -->
-<div class="container mt-5">
+<div class="container form-container mb-5" data-aos="fade-up" data-aos-delay="400">
   <div class="row justify-content-center">
-    <div class="col-lg-6">
+    <div class="col-lg-8">
       <div class="contact-form">
-        <h3 class="text-center mb-4 text-primary">Send us a Message</h3>
+        <h3 class="text-center mb-5 text-primary" style="font-size: 2rem;">Send a Message</h3>
         <form id="form">
-          <div class="mb-3">
-            <label for="from_name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="from_name" name="from_name" placeholder="Your Name" required>
+          <div class="row">
+              <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-delay="500">
+                <label for="from_name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="from_name" name="from_name" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6 mb-4" data-aos="fade-left" data-aos-delay="600">
+                <label for="to_name" class="form-label">Email</label>
+                <input type="email" class="form-control" id="to_name" name="to_name" placeholder="Your Email" required>
+              </div>
           </div>
-          <div class="mb-3">
-            <label for="to_name" class="form-label">Email</label>
-            <input type="email" class="form-control" id="to_name" name="to_name" placeholder="Your Email" required>
-          </div>
-          <div class="mb-3">
+          <div class="mb-4" data-aos="fade-up" data-aos-delay="700">
             <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
           </div>
-          <div class="text-center">
-            <input type="submit" id="button" value="Send Email" class="btn btn-primary px-4 py-2">
+          <div class="text-center mt-5" data-aos="zoom-in" data-aos-delay="800">
+            <input type="submit" id="button" value="Send Message" class="btn btn-primary px-5 py-3" style="font-size: 1.1rem; border-radius: 30px;">
           </div>
         </form>
       </div>
@@ -181,21 +390,72 @@
   </div>
 </div>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <p>&copy; 2025 Ujjaval Saini | All Rights Reserved</p>
-    <p>Follow me on:</p>
-    <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook me-3"></i></a>
-    <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram me-3"></i></a>
-    <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github me-3"></i></a>
-    <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin me-3"></i></a>
-    <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
-  </div>
-</footer>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ujjaval Saini | All Rights Reserved</p>
+            <p>Follow me on:</p>
+            <div class="social-icons mt-3">
+                <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
 
 <!-- External Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize Animate On Scroll
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Theme Toggle Logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const themeToggleBtn = document.getElementById("themeToggleBtn");
+            const savedTheme = localStorage.getItem("theme");
+
+            if (savedTheme === "dark") {
+                document.body.classList.add("dark-mode");
+                if (themeToggleBtn) {
+                    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+                    themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+                }
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener("click", () => {
+                    document.body.classList.toggle("dark-mode");
+                    const isDark = document.body.classList.contains("dark-mode");
+                    localStorage.setItem("theme", isDark ? "dark" : "light");
+
+                    if (isDark) {
+                        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+                        themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+                    } else {
+                        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Theme';
+                        themeToggleBtn.classList.replace('btn-dark', 'btn-light');
+                    }
+                });
+            }
+        });
+    </script>
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
   emailjs.init('YOUR_EMAILJS_USER_ID'); // Replace with your actual EmailJS user ID

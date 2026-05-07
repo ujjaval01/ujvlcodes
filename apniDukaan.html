@@ -3,202 +3,405 @@
 <head>
   <meta charset="UTF-8">
   <title>Apni Dukaan</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
 
 
+  
   <style>
-#carousel img {
-  opacity: 0.3;
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-#carousel img.active {
-  opacity: 1;
-  transform: scale(1.05);
-}
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f5f7fa;
+        overflow-x: hidden;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* Glassmorphism Navbar */
+    .navbar {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.4s ease;
+        padding: 15px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+    }
+    .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+    }
+    body.dark-mode .navbar.scrolled {
+        background: rgba(18, 18, 18, 0.95) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .navbar-brand {
+        font-weight: 800;
+        font-size: 28px;
+        letter-spacing: 2px;
+        background: linear-gradient(45deg, #be52df, #1d4a98);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: transform 0.3s;
+    }
+    .navbar-brand:hover { transform: scale(1.05); }
+    body.dark-mode .navbar-brand { background: linear-gradient(45deg, #e540dd, #6633ca); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .navbar-toggler { border: none; }
+    .navbar-toggler:focus { box-shadow: none; }
+    body.dark-mode .navbar-toggler-icon { filter: invert(1); }
+
+    .nav-link {
+        color: #333 !important; font-weight: 500; position: relative; margin: 0 10px; transition: 0.3s; font-size: 16px;
+    }
+    body.dark-mode .nav-link { color: #f5f5f5 !important; }
+    .nav-link::after {
+        content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%;
+        background: linear-gradient(45deg, #be52df, #1d4a98); transition: all 0.3s ease; transform: translateX(-50%);
+    }
+    body.dark-mode .nav-link::after { background: linear-gradient(45deg, #e540dd, #6633ca); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: #be52df !important; }
+    body.dark-mode .nav-link:hover { color: #e540dd !important; }
+    
+    #themeToggleBtn { border-radius: 20px; padding: 5px 15px; font-weight: 500; transition: all 0.3s; }
+    #themeToggleBtn:hover { transform: scale(1.05); }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, #be52df, #1d4a98);
+        color: white;
+        padding: 150px 20px 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    body.dark-mode .hero-section { background: linear-gradient(135deg, #2a2a4a, #4a2a6a); }
+
+    .shape {
+        position: absolute; filter: blur(60px); z-index: 0; animation: float 10s infinite alternate; border-radius: 50%; opacity: 0.6;
+    }
+    .shape-1 { width: 300px; height: 300px; background: rgba(255, 255, 255, 0.2); top: -10%; left: -5%; }
+    .shape-2 { width: 400px; height: 400px; background: rgba(0, 0, 0, 0.2); bottom: -10%; right: -5%; animation-duration: 15s; }
+    @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-50px) scale(1.1); } }
+
+    .hero-content { position: relative; z-index: 1; }
+    .hero-title { font-weight: 800; font-size: 3.5rem; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .hero-subtitle { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; max-width: 600px; margin-left: auto; margin-right: auto;}
+
+    .btn-custom {
+        background: white; color: #1d4a98; font-weight: 700; padding: 12px 30px; border-radius: 30px; border: none; transition: all 0.4s; text-decoration: none; display: inline-block; margin: 5px;
+    }
+    .btn-custom:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: #fce408; color: #111; }
+    .btn-outline-custom {
+        background: transparent; border: 2px solid white; color: white; font-weight: 700; padding: 10px 28px; border-radius: 30px; transition: all 0.4s; text-decoration: none; display: inline-block; margin: 5px;
+    }
+    .btn-outline-custom:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: white; color: #1d4a98; }
+
+    /* Sections */
+    .section-title { text-align: center; font-weight: 800; margin-bottom: 40px; font-size: 36px; }
+    .gradient-text {
+        background: linear-gradient(45deg, #1d4a98, #be52df); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
+    }
+    body.dark-mode .gradient-text { background: linear-gradient(45deg, #8c52ff, #e540dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .feature-card {
+        background: #ffffff; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px;
+        transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    body.dark-mode .feature-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15); }
+    .feature-card h3 { font-weight: 700; font-size: 22px; margin-bottom: 15px; color: #333; margin-top: 20px;}
+    body.dark-mode .feature-card h3 { color: #fff; }
+    .feature-card p { color: #666; font-size: 15px; margin: 0; }
+    body.dark-mode .feature-card p { color: #aaa; }
+
+    /* Slider Styling */
+    .image-slider { overflow: hidden; position: relative; width: 100%; padding: 20px 0; }
+    .slider-track { display: flex; animation: scroll-left 15s linear infinite; }
+    .slider-track img { width: 220px; height: 450px; object-fit: cover; margin: 0 15px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: transform 0.3s; opacity: 0.6;}
+    .slider-track img:hover { transform: scale(1.05); opacity: 1;}
+    @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Steps */
+    .step-list { list-style: none; padding: 0; }
+    .step-list li { font-size: 1.2rem; margin-bottom: 20px; padding: 15px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; border-left: 5px solid #be52df;}
+    body.dark-mode .step-list li { background: #1e1e1e; color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .step-list li:hover { transform: translateX(10px); }
+
+    /* Testimonials */
+    .testimonial-card {
+        background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); text-align: left;
+    }
+    body.dark-mode .testimonial-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
+    .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(190, 82, 223, 0.15); }
+
+    /* Footer */
+    .footer { background: #111; color: white; text-align: center; padding: 50px 0 30px; position: relative; overflow: hidden; margin-top: 50px;}
+    .footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, #be52df, #1d4a98, #fce408); }
+    .footer p { margin-bottom: 10px; color: #aaa; }
+    .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 50%; margin: 0 10px; color: white; transition: all 0.4s; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; }
+    .social-icons a:hover { background: linear-gradient(45deg, #be52df, #1d4a98); transform: translateY(-10px) rotate(360deg); color: white; border-color: transparent; box-shadow: 0 10px 20px rgba(190, 82, 223, 0.4); }
+    
+    body.dark-mode { background-color: #121212; color: #ffffff; }
   </style>
+
 
   <!-- Lottie Player -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 
-<body class="bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-700 text-white font-sans">
-  <!-- Hero Section -->
-  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
-    <lottie-player 
-      src="https://assets9.lottiefiles.com/packages/lf20_jcikwtux.json"  
-      background="transparent" speed="1" style="width: 220px; height: 220px;" loop autoplay>
-    </lottie-player>
-    <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-lg">🛒 Apni Dukaan</h1>
-    <p class="mt-6 text-lg md:text-xl max-w-2xl">
-      Simple and smart stock & transaction management app for shop owners.  
-      Manage purchases, sales, and profit — all in one place.
-    </p>
-    <div class="mt-8 flex space-x-4">
-      <a href="#features" class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:scale-105 transition">Explore Features</a>
-      <a href="#screenshots" class="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:scale-105 transition">Sample Screenshots</a>
-      <a href="#download" class="bg-white/20 px-6 py-3 rounded-lg font-semibold hover:scale-105 transition">Get App</a>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">APNI DUKAAN</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item ms-lg-3">
+                    <button id="themeToggleBtn" class="btn btn-sm btn-light">
+                        <i class="fas fa-moon"></i> Theme
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
+        <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_jcikwtux.json" background="transparent" speed="1" style="width: 220px; height: 220px; margin: 0 auto;" loop autoplay></lottie-player>
+        <h1 class="hero-title">🛒 Apni Dukaan</h1>
+        <p class="hero-subtitle">Simple and smart stock & transaction management app for shop owners. Manage purchases, sales, and profit — all in one place.</p>
+        <div class="mt-4">
+            <a href="#features" class="btn-custom">Explore Features</a>
+            <a href="#screenshots" class="btn-outline-custom">Screenshots</a>
+            <a href="#download" class="btn-outline-custom">Get App</a>
+        </div>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section id="features" class="py-20 bg-black/20 backdrop-blur-lg">
-    <h2 class="text-4xl font-bold text-center mb-12">🔥 Key Features</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
-
-      <div class="bg-white/10 p-6 rounded-2xl shadow-xl hover:scale-105 transition text-center">
-        <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 100px; height: 100px; margin: auto;" loop autoplay></lottie-player>
-        <h3 class="text-2xl font-semibold mb-4">📦 Stock Management</h3>
-        <p>Add, update, and track all your shop products in one place.</p>
-      </div>
-
-      <div class="bg-white/10 p-6 rounded-2xl shadow-xl hover:scale-105 transition text-center">
-        <lottie-player src="https://lottie.host/e9f34422-e657-40ba-9bc4-293d0d1e1d54/mptYP16SXG.json" background="transparent" speed="1" style="width: 100px; height: 100px; margin: auto;" loop autoplay></lottie-player>
-        <h3 class="text-2xl font-semibold mb-4">💰 Transactions</h3>
-        <p>Record purchases & sales, track profit/loss, and filter history.</p>
-      </div>
-
-      <div class="bg-white/10 p-6 rounded-2xl shadow-xl hover:scale-105 transition text-center">
-        <lottie-player src="https://lottie.host/1228e14a-aecf-46c8-9f20-c68e796f79bb/lK3VGKVVOi.json" background="transparent" speed="1" style="width: 100px; height: 100px; margin: auto;" loop autoplay></lottie-player>
-        <h3 class="text-2xl font-semibold mb-4">⚙️ Easy to Use</h3>
-        <p>Clean design and smooth interface made for shopkeepers.</p>
-      </div>
-
+  <section id="features" class="container my-5 py-5">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">🔥 Key Features</span></h2>
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-card">
+                <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_w51pcehl.json" background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                <h3>📦 Stock Management</h3>
+                <p>Add, update, and track all your shop products in one place.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-card">
+                <lottie-player src="https://lottie.host/e9f34422-e657-40ba-9bc4-293d0d1e1d54/mptYP16SXG.json" background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                <h3>💰 Transactions</h3>
+                <p>Record purchases & sales, track profit/loss, and filter history.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-card">
+                <lottie-player src="https://lottie.host/1228e14a-aecf-46c8-9f20-c68e796f79bb/lK3VGKVVOi.json" background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                <h3>⚙️ Easy to Use</h3>
+                <p>Clean design and smooth interface made for shopkeepers.</p>
+            </div>
+        </div>
     </div>
   </section>
 
   <!-- How it Works -->
-  <section class="py-20 px-6">
-    <h2 class="text-4xl font-bold text-center mb-12">⚙️ How It Works</h2>
-    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-      <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_h4th9ofg.json" background="transparent" speed="1" style="width: 300px; height: 300px; margin: auto;" loop autoplay></lottie-player>
-      <ol class="space-y-6 text-lg">
-        <li>1️⃣ Download and install Apni Dukaan app.</li>
-        <li>2️⃣ Add products, rates, and stock details.</li>
-        <li>3️⃣ Record purchases and sales easily.</li>
-        <li>4️⃣ Track profit & grow your business 🚀.</li>
-      </ol>
+  <section class="container my-5 py-5">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">⚙️ How It Works</span></h2>
+    <div class="row align-items-center mt-5">
+      <div class="col-md-6 text-center" data-aos="fade-right">
+        <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_h4th9ofg.json" background="transparent" speed="1" style="width: 100%; max-width: 400px; margin: auto;" loop autoplay></lottie-player>
+      </div>
+      <div class="col-md-6" data-aos="fade-left">
+        <ul class="step-list">
+            <li><strong>1️⃣ Download</strong> and install Apni Dukaan app.</li>
+            <li><strong>2️⃣ Add products</strong>, rates, and stock details.</li>
+            <li><strong>3️⃣ Record</strong> purchases and sales easily.</li>
+            <li><strong>4️⃣ Track profit</strong> & grow your business 🚀.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section class="py-20 px-6 bg-white/10 backdrop-blur-md">
-    <h2 class="text-4xl font-bold text-center mb-12">💬 What Users Say</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-      <div class="bg-white/10 p-6 rounded-xl shadow-xl">
-        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_q7uarxsb.json" background="transparent" speed="1" style="width: 80px; height: 80px;" loop autoplay></lottie-player>
-        <p>"Apni Dukaan ne mera business simplify kar diya! Ab stock aur sales easily manage hoti hain."</p>
-        <h4 class="mt-4 font-bold">- Rajesh, Kirana Store Owner</h4>
+  <section class="container my-5 py-5">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">💬 What Users Say</span></h2>
+    <div class="row mt-5">
+      <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
+        <div class="testimonial-card">
+          <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_q7uarxsb.json" background="transparent" speed="1" style="width: 60px; height: 60px;" loop autoplay></lottie-player>
+          <p class="mt-3">"Apni Dukaan ne mera business simplify kar diya! Ab stock aur sales easily manage hoti hain."</p>
+          <h5 class="mt-3" style="font-weight: 700; color: #be52df;">- Rajesh, Kirana Store Owner</h5>
+        </div>
       </div>
-      <div class="bg-white/10 p-6 rounded-xl shadow-xl">
-        <lottie-player src="https://lottie.host/72ecce9e-a164-4c5a-b63b-5b3c926c0662/CAjjxgS3z8.json" background="transparent" speed="1" style="width: 80px; height: 80px;" loop autoplay></lottie-player>
-        <p>"Transactions aur profit tracking feature bohot useful hai. Highly recommend!"</p>
-        <h4 class="mt-4 font-bold">- Anjali, Boutique Owner</h4>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="download" class="py-16 text-center bg-white/10 backdrop-blur-md">
-    <h2 class="text-4xl font-bold mb-4">🚀 Get Apni Dukaan Now!</h2>
-    <p class="mb-6">Download the app and start managing your dukaan smarter.</p>
-    <a href="#" class="bg-yellow-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:scale-110 transition">Download APK</a>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="py-20 px-6">
-    <h2 class="text-4xl font-bold text-center mb-12">❓ Frequently Asked Questions</h2>
-    <div class="max-w-3xl mx-auto space-y-6 text-lg">
-      <div>
-        <h3 class="font-semibold">🔐 Kya mera data safe hai?</h3>
-        <p>Haan, sabhi records sirf aapke phone par store hote hain. Aapka data secure hai.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold">📱 Ye app kin devices par chalegi?</h3>
-        <p>Apni Dukaan sabhi Android phones (Android 6.0+) par smoothly chalti hai.</p>
-      </div>
-      <div>
-        <h3 class="font-semibold">💸 Kya app free hai?</h3>
-        <p>Haan, app bilkul free hai. Aage premium features bhi add kiye jaa sakte hain.</p>
+      <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="testimonial-card">
+          <lottie-player src="https://lottie.host/72ecce9e-a164-4c5a-b63b-5b3c926c0662/CAjjxgS3z8.json" background="transparent" speed="1" style="width: 60px; height: 60px;" loop autoplay></lottie-player>
+          <p class="mt-3">"Transactions aur profit tracking feature bohot useful hai. Highly recommend!"</p>
+          <h5 class="mt-3" style="font-weight: 700; color: #be52df;">- Anjali, Boutique Owner</h5>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Screenshots Section -->
-<section id="screenshots" class="py-20 bg-white/10 backdrop-blur-md text-center">
-  <h2 class="text-4xl font-bold mb-10">📸 App Screenshots</h2>
-  <p class="text-lg mb-12">See how Apni Dukaan looks and works in action.</p>
-
-  <!-- Carousel -->
-  <div class="max-w-4xl mx-auto overflow-hidden relative">
-    <div id="carousel" class="flex transition-transform duration-700">
-      <!-- Replace these with your app screenshots -->
-      <img src="./images/apniDukaan/splash.png" class="w-full md:w-1/3 p-2 rounded-2xl flex-shrink-0" alt="App Screenshot 1">
-      <img src="./images/apniDukaan/home.png" class="w-full md:w-1/3 p-2 rounded-2xl flex-shrink-0" alt="App Screenshot 2">
-      <img src="./images/apniDukaan/graph.png" class="w-full md:w-1/3 p-2 rounded-2xl flex-shrink-0" alt="App Screenshot 3">
-      <img src="./images/apniDukaan/setting.png" class="w-full md:w-1/3 p-2 rounded-2xl flex-shrink-0" alt="App Screenshot 4">
-      <img src="./images/apniDukaan/lang.png" class="w-full md:w-1/3 p-2 rounded-2xl flex-shrink-0" alt="App Screenshot 5">
-      <img src="./images/apniDukaan/theme.png" class="w-full md:w-1/3 p-2 rounded-2xl flex-shrink-0" alt="App Screenshot 6">
-      <img src="./images/apniDukaan/setting2.png" class="w-full md:w-1/3 p-2 rounded-2xl flex-shrink-0" alt="App Screenshot 7">
+  <section id="screenshots" class="container-fluid my-5 py-5" style="background: rgba(0,0,0,0.02); overflow: hidden;">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">📸 App Screenshots</span></h2>
+    <p class="text-center mb-5" data-aos="fade-up" style="font-size: 1.2rem; color: #666;">See how Apni Dukaan looks and works in action.</p>
+    <div class="image-slider mt-4" data-aos="fade-in" data-aos-delay="200">
+      <div class="slider-track">
+        <img src="./images/apniDukaan/splash.png" alt="Screenshot 1">
+        <img src="./images/apniDukaan/home.png" alt="Screenshot 2">
+        <img src="./images/apniDukaan/graph.png" alt="Screenshot 3">
+        <img src="./images/apniDukaan/setting.png" alt="Screenshot 4">
+        <img src="./images/apniDukaan/lang.png" alt="Screenshot 5">
+        <img src="./images/apniDukaan/theme.png" alt="Screenshot 6">
+        <img src="./images/apniDukaan/setting2.png" alt="Screenshot 7">
+        <img src="./images/apniDukaan/splash.png" alt="Screenshot 1">
+        <img src="./images/apniDukaan/home.png" alt="Screenshot 2">
+        <img src="./images/apniDukaan/graph.png" alt="Screenshot 3">
+      </div>
     </div>
-  </div>
-</section>
-
-<script>
-  const carousel = document.getElementById("carousel");
-  let index = 0;
-
-  function autoSlide() {
-  const cardWidth = carousel.children[0].clientWidth;
-
-  // remove active class
-  Array.from(carousel.children).forEach(img => img.classList.remove("active"));
-
-  index++;
-  if (index >= carousel.children.length) {
-    index = 0;
-  }
-
-  // active image highlight
-  carousel.children[index].classList.add("active");
-  carousel.style.transform = `translateX(-${index * cardWidth}px)`;
-}
-
-
-  setInterval(autoSlide, 3000); // har 3 sec slide
-</script>
-
-
-
-  <!-- About Section -->
-  <section class="py-20 text-center px-6">
-    <h2 class="text-4xl font-bold mb-6">ℹ️ About Apni Dukaan</h2>
-    <p class="max-w-3xl mx-auto text-lg text-white/90">
-      Apni Dukaan is a modern Android app built for shopkeepers to manage stock and transactions.  
-      It helps you keep track of purchases, sales, profit, and inventory with ease.
-    </p>
   </section>
 
-  <!-- Contact Section -->
-  <section class="py-20 text-center bg-black/20 backdrop-blur-lg">
-    <h2 class="text-4xl font-bold mb-6">📩 Contact Us</h2>
-    <p class="mb-6">Have questions or feedback? Reach out anytime.</p>
-    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_tpa51dr0.json" background="transparent" speed="1" style="width: 100px; height: 100px; margin:auto;" loop autoplay></lottie-player>
-    <a href="mailto:apnidukaan.support@gmail.com"
-       class="mt-6 inline-block bg-yellow-400 text-black px-8 py-4 rounded-lg font-bold text-lg hover:scale-110 transition">
-      Email Us
-    </a>
+  <!-- FAQ Section -->
+  <section class="container my-5 py-5">
+    <h2 class="section-title" data-aos="fade-up"><span class="gradient-text">❓ Frequently Asked Questions</span></h2>
+    <div class="row justify-content-center mt-5" data-aos="fade-up">
+      <div class="col-lg-8">
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item" style="border-radius: 15px; margin-bottom: 10px; overflow: hidden; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" style="font-weight: 600; font-family: 'Poppins', sans-serif;">
+                🔐 Kya mera data safe hai?
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body" style="font-family: 'Poppins', sans-serif;">
+                Haan, sabhi records sirf aapke phone par store hote hain. Aapka data secure hai.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" style="border-radius: 15px; margin-bottom: 10px; overflow: hidden; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" style="font-weight: 600; font-family: 'Poppins', sans-serif;">
+                📱 Ye app kin devices par chalegi?
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body" style="font-family: 'Poppins', sans-serif;">
+                Apni Dukaan sabhi Android phones (Android 6.0+) par smoothly chalti hai.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" style="border-radius: 15px; margin-bottom: 10px; overflow: hidden; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" style="font-weight: 600; font-family: 'Poppins', sans-serif;">
+                💸 Kya app free hai?
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body" style="font-family: 'Poppins', sans-serif;">
+                Haan, app bilkul free hai. Aage premium features bhi add kiye jaa sakte hain.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="download" class="hero-section" style="padding: 100px 20px;">
+    <div class="container" data-aos="fade-up">
+        <h2 class="hero-title mb-4" style="font-size: 2.5rem;">🚀 Get Apni Dukaan Now!</h2>
+        <p class="hero-subtitle">Download the app and start managing your dukaan smarter.</p>
+        <button class="btn-custom mt-4">Download APK</button>
+    </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-black/30 py-6 text-center text-white text-sm">
-    © 2025 Apni Dukaan | Made with ❤️ in India  
-    <div class="mt-2 flex justify-center space-x-4">
-      <a href="#" class="hover:underline">GitHub</a>
-      <a href="#" class="hover:underline">LinkedIn</a>
-      <a href="#" class="hover:underline">Instagram</a>
-    </div>
+  <footer class="footer">
+      <div class="container">
+          <p>&copy; 2025 Apni Dukaan | All Rights Reserved</p>
+          <p>Follow us on:</p>
+          <div class="social-icons mt-3">
+              <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              <a href="mailto:apnidukaan.support@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+      </div>
   </footer>
 
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, offset: 50, duration: 800 });
+
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (navbar && window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else if (navbar) {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const themeToggleBtn = document.getElementById("themeToggleBtn");
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            if(themeToggleBtn) {
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+                themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+            }
+        }
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener("click", () => {
+                document.body.classList.toggle("dark-mode");
+                const isDark = document.body.classList.contains("dark-mode");
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+                if (isDark) {
+                    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
+                    themeToggleBtn.classList.replace('btn-light', 'btn-dark');
+                } else {
+                    themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Theme';
+                    themeToggleBtn.classList.replace('btn-dark', 'btn-light');
+                }
+            });
+        }
+    });
+  </script>
 </body>
 </html>
