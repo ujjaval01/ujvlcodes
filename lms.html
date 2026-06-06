@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Projects - Android & Web Development</title>
+    <title>LMS - Learning Management System</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
     <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
     
     <!-- Custom CSS -->
-        <style>
+    <style>
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Poppins', sans-serif;
@@ -59,6 +59,7 @@
         }
         .navbar-brand:hover {
             transform: scale(1.05);
+            
         }
         body.dark-mode .navbar-brand {
             background: linear-gradient(45deg, #e540dd, #6633ca);
@@ -112,9 +113,9 @@
             color: #e540dd !important;
         }
 
-        /* Projects Section */
-        .projects-container {
-            padding-top: 120px; /* Offset for fixed navbar */
+        /* Main Content Section */
+        .feature-container {
+            padding-top: 120px;
             padding-bottom: 50px;
         }
 
@@ -137,67 +138,84 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .project-card {
+        .hero-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 50px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        body.dark-mode .hero-section {
+            background: #1e1e1e;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-badge {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.05);
+            color: #333;
+        }
+        body.dark-mode .floating-badge {
+            background: #1e1e1e;
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #fff;
+        }
+
+        .feature-card {
             margin-bottom: 30px;
             background: #ffffff;
             border: 1px solid rgba(0,0,0,0.05);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
+            padding: 30px 20px;
+            text-align: center;
             height: 100%;
-            display: flex;
-            flex-direction: column;
         }
-        body.dark-mode .project-card {
+        body.dark-mode .feature-card {
             background: #1e1e1e;
             border: 1px solid rgba(255,255,255,0.05);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             color: #fff;
         }
 
-        .project-card:hover {
+        .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15);
         }
-        body.dark-mode .project-card:hover {
+        body.dark-mode .feature-card:hover {
             box-shadow: 0 20px 40px rgba(229, 64, 221, 0.15);
         }
 
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: transform 0.5s ease;
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #1d4a98, #be52df);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
-        .project-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .card-body {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+        body.dark-mode .feature-icon {
+            background: linear-gradient(45deg, #8c52ff, #e540dd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .card-title {
+        .feature-title {
             font-weight: 700;
             font-size: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: #333;
         }
-        body.dark-mode .card-title { color: #fff; }
+        body.dark-mode .feature-title { color: #fff; }
 
-        .card-text {
+        .feature-text {
             color: #666;
             font-size: 15px;
-            flex-grow: 1;
-            margin-bottom: 20px;
         }
-        body.dark-mode .card-text { color: #aaa; }
+        body.dark-mode .feature-text { color: #aaa; }
 
         .btn-primary {
             background: linear-gradient(45deg, #1d4a98, #be52df);
@@ -206,7 +224,6 @@
             padding: 10px 25px;
             font-weight: 600;
             transition: all 0.3s ease;
-            align-self: flex-start;
         }
         .btn-primary:hover {
             background: linear-gradient(45deg, #be52df, #1d4a98);
@@ -277,14 +294,14 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">PROJECTS</a>
+            <a class="navbar-brand" href="#">LMS PLATFORM</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item ms-lg-3">
@@ -297,157 +314,128 @@
         </div>
     </nav>
 
-    <!-- Android Projects Section -->
-    <div class="container projects-container">
-        <h2 class="section-title fw-bold" data-aos="fade-up"><span class="gradient-text">Android Development Projects</span></h2>
-        <div class="row">
-            <!-- Project 1 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/quoteApp/banner.png" class="card-img-top" alt="Quote App">
-                    <div class="card-body">
-                        <h5 class="card-title">Quote App</h5>
-                        <p class="card-text">Discover powerful quotes, daily inspiration, and motivational thoughts anytime.</p>
-                        <a href="quote.html" class="btn btn-primary">View Project</a>
+    <!-- Content Section -->
+    <div class="container feature-container">
+        
+        <div class="hero-section" data-aos="fade-up">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+                    <h1 class="fw-bold mb-4"><span class="gradient-text">Learning Management System (LMS)</span></h1>
+                    <p class="lead mb-4">A comprehensive platform for modern education, enabling educators to create and manage courses, and students to learn efficiently from anywhere.</p>
+                    
+                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-2 mb-4">
+                        <a href="project.html" class="btn btn-dark" style="border-radius: 30px; padding: 10px 25px; font-weight: 600; transition: all 0.3s ease;"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                        <a href="https://readify-green.vercel.app" class="btn btn-primary"><i class="fas fa-tachometer-alt"></i> Go to Dashboard</a>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mt-4 gap-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-check-circle text-success fs-5"></i>
+                            <span class="fw-medium">Easy Setup</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-check-circle text-success fs-5"></i>
+                            <span class="fw-medium">Secure Platform</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-check-circle text-success fs-5"></i>
+                            <span class="fw-medium">Detailed Analytics</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Project 1 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/raksha1-img.jpg" class="card-img-top" alt="Raksha Kawatch App">
-                    <div class="card-body">
-                        <h5 class="card-title">Raksha Kawatch App</h5>
-                        <p class="card-text">A real-time safety app using Kotlin, XML & Room Database.</p>
-                        <a href="raksha.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-
-             <!-- Project 2 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="card project-card">
-                    <img src="images/apniDukaan/homeAD.jpg" class="card-img-top" alt="Raksha Kawatch App">
-                    <div class="card-body">
-                        <h5 class="card-title">Apni Dukaan</h5>
-                        <p class="card-text">A simple and smart stock & transaction management app for shop owners.</p>
-                        <a href="apniDukaan.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
-                <div class="card project-card">
-                    <img src="images/weather-img.jpg" class="card-img-top" alt="Weather App">
-                    <div class="card-body">
-                        <h5 class="card-title">Weather App</h5>
-                        <p class="card-text">An interactive weather app with OpenWeatherMap API.</p>
-                        <a href="maintainance.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 4 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/sc-cal-img.jpg" class="card-img-top" alt="Calculator App">
-                    <div class="card-body">
-                        <h5 class="card-title">Scientific Calculator</h5>
-                        <p class="card-text">A powerful calculator for solving complex mathematics calculation.</p>
-                        <a href="maintainance.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 5 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="card project-card">
-                    <img src="images/uniqueLoginSignup/homeLS.jpg" class="card-img-top" alt="Raksha Kawatch App">
-                    <div class="card-body">
-                        <h5 class="card-title">unique Login & Signup application</h5>
-                        <p class="card-text">A firebase connected fully working application using kotlin</p>
-                        <a href="uniqueLoginSignup.html" class="btn btn-primary">View Project</a>
+                
+                <div class="col-lg-6">
+                    <!-- Dashboard Image Preview with Floating Badges -->
+                    <div class="position-relative" data-aos="zoom-in" data-aos-delay="200">
+                        <!-- Glowing Background Effect -->
+                        <div class="position-absolute w-100 h-100 rounded-4" style="background: linear-gradient(45deg, rgba(190, 82, 223, 0.3), rgba(29, 74, 152, 0.3)); filter: blur(25px); transform: scale(0.9); z-index: -1;"></div>
+                        
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="LMS Dashboard Preview" class="img-fluid rounded-4 shadow-lg position-relative" style="width: 100%; object-fit: cover; border: 2px solid rgba(190, 82, 223, 0.2);">
+                        
+                        <!-- Floating Badge 1 -->
+                        <div class="floating-badge position-absolute p-3 rounded-3 shadow-lg animate__animated animate__pulse animate__infinite animate__slower" style="top: 15%; left: -20px;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-primary bg-opacity-10 p-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-user-graduate text-primary fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">10k+</h6>
+                                    <small class="text-muted" style="font-size: 12px;">Active Students</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Badge 2 -->
+                        <div class="floating-badge position-absolute p-3 rounded-3 shadow-lg animate__animated animate__pulse animate__infinite animate__slower animate__delay-1s" style="bottom: 15%; right: -20px;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-warning bg-opacity-10 p-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-star text-warning fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">4.9/5</h6>
+                                    <small class="text-muted" style="font-size: 12px;">User Ratings</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Web Projects Section -->
-    <div class="container mt-4">
-        <h2 class="section-title fw-bold" data-aos="fade-up"><span class="gradient-text">Web Development Projects</span></h2>
+        <h2 class="section-title fw-bold mt-5" data-aos="fade-up"><span class="gradient-text">Core Functionalities</span></h2>
+        
         <div class="row">
-            <!-- Project 1 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
-                <div class="card project-card">
-                    <img src="images/raksha-img.png" class="card-img-top" alt="Raksha Kawatch Website">
-                    <div class="card-body">
-                        <h5 class="card-title">Raksha Kawatch Website</h5>
-                        <p class="card-text">A real-time location tracking web application with Database and APIs.</p>
-                        <a href="maintainance.html" class="btn btn-primary">Visit</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
+            <!-- Feature 1 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/portfolio-img.png" class="card-img-top" alt="E-commerce Website">
-                    <div class="card-body">
-                        <h5 class="card-title">UV InfoHub</h5>
-                        <p class="card-text">Portfolio showcasing Skils, Android and Web projects with a modern and responsive UI.</p>
-                        <a href="https://ujjaval01.github.io/my-website/" class="btn btn-primary">Visit</a>
-                    </div>
+                <div class="feature-card">
+                    <i class="fas fa-book-open feature-icon"></i>
+                    <h5 class="feature-title">Course Creation & Management</h5>
+                    <p class="feature-text">Easily create interactive courses with multimedia support, structured modules, and detailed lesson plans.</p>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
+                <div class="feature-card">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h5 class="feature-title">Student Enrollment</h5>
+                    <p class="feature-text">Seamless onboarding and enrollment processes, allowing students to browse and join courses instantly.</p>
                 </div>
             </div>
 
-            <!-- Project 3 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="card project-card">
-                    <img src="images/port-img.png" class="card-img-top" alt="E-commerce Website">
-                    <div class="card-body">
-                        <h5 class="card-title">My portfolio</h5>
-                        <p class="card-text">Portfolio showcasing my Skils,Educations and about me with a modern and responsive UI.</p>
-                        <a href="https://ujjaval01.github.io/Main-Portfolio/" class="btn btn-primary">Visit</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 4 -->
+            <!-- Feature 3 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
-                <div class="card project-card">
-                    <img src="images/ytDownloader/image.png" class="card-img-top" alt="E-commerce Website">
-                    <div class="card-body">
-                        <h5 class="card-title">Ultimate Video Downloader</h5>
-                        <p class="card-text">YouTube Video Downloader with Flask + Tailwind based web app</p>
-                        <a href="ytDownloader.html" class="btn btn-primary">Visit</a>
-                    </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h5 class="feature-title">Progress Tracking</h5>
+                    <p class="feature-text">Detailed analytics and dashboards for both students and instructors to track learning progress over time.</p>
                 </div>
             </div>
 
-            <!-- Project 5 -->
+            <!-- Feature 4 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/lms/image.png" class="card-img-top" alt="E-commerce Website">
-                    <div class="card-body">
-                        <h5 class="card-title">LMS Platform</h5>
-                        <p class="card-text">A comprehensive Learning Management System with course tracking and certificates.</p>
-                        <a href="lms.html" class="btn btn-primary">Visit</a>
-                    </div>
+                <div class="feature-card">
+                    <i class="fas fa-clipboard-list feature-icon"></i>
+                    <h5 class="feature-title">Assignments & Quizzes</h5>
+                    <p class="feature-text">Evaluate knowledge through interactive quizzes and assignment submissions with automated grading features.</p>
                 </div>
             </div>
 
-            <!-- Project 6 -->
+            <!-- Feature 5 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="card project-card">
-                    <div style="height: 200px; background: linear-gradient(45deg, #1d4a98, #be52df); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                        <i class="fas fa-school" style="font-size: 80px; color: white;"></i>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">SMS Platform</h5>
-                        <p class="card-text">A School Management System for staff, attendance, timetables, and more.</p>
-                        <a href="sms.html" class="btn btn-primary">Visit</a>
-                    </div>
+                <div class="feature-card">
+                    <i class="fas fa-certificate feature-icon"></i>
+                    <h5 class="feature-title">Certifications</h5>
+                    <p class="feature-text">Automatically generate and award customized certificates upon successful completion of a course.</p>
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="feature-card">
+                    <i class="fas fa-credit-card feature-icon"></i>
+                    <h5 class="feature-title">Payment Integration</h5>
+                    <p class="feature-text">Secure gateway integrations to handle course purchases, subscriptions, and financial reporting.</p>
                 </div>
             </div>
         </div>
@@ -467,8 +455,6 @@
             </div>
         </div>
     </footer>
-
-<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ujjaval" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting, Now you can buy me a coffee🤩." data-color="#FF5F5F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
