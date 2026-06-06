@@ -197,6 +197,55 @@
 
         @keyframes blink { 50% { opacity: 0; } }
 
+        /* Stats Section */
+        .stats-section {
+            padding: 60px 0;
+            background: #ffffff;
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        body.dark-mode .stats-section {
+            background: #1a1a1a;
+            border-color: rgba(255,255,255,0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #1d4a98, #be52df);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.dark-mode .stat-icon {
+            background: linear-gradient(45deg, #8c52ff, #e540dd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-number {
+            font-size: 45px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        body.dark-mode .stat-number { color: #fff; }
+
+        .stat-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        body.dark-mode .stat-text { color: #aaa; }
+
         /* Skills Section */
         .skills {
             padding: 100px 0;
@@ -450,6 +499,42 @@
         </div>
     </section>
 
+    <!-- Stats Section -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="50">
+                    <div class="stat-item">
+                        <i class="fas fa-project-diagram stat-icon"></i>
+                        <div class="stat-number" data-target="25">0</div>
+                        <div class="stat-text">Projects Completed</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-item">
+                        <i class="fas fa-smile stat-icon"></i>
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-text">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0" data-aos="fade-up" data-aos-delay="150">
+                    <div class="stat-item">
+                        <i class="fas fa-award stat-icon"></i>
+                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-text">Awards Won</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <i class="fas fa-clock stat-icon"></i>
+                        <div class="stat-number" data-target="2">0</div>
+                        <div class="stat-text">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
@@ -509,6 +594,34 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png" alt="HTML CSS JS">
                         <h5>HTML, CSS, JS</h5>
                         <p>Frontend web development & UI/UX.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="skill-box">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2043/2043259.png" alt="DSA">
+                        <h5>DSA</h5>
+                        <p>Data Structures & Algorithms problem solving.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-box">
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174836.png" alt="Android">
+                        <h5>Android</h5>
+                        <p>Native app development & UI design.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="250">
+                    <div class="skill-box">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" alt="Supabase" style="filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.1));">
+                        <h5>Supabase</h5>
+                        <p>Backend-as-a-service & Postgres database.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-box">
+                        <img src="https://avatars.githubusercontent.com/u/77690634?v=4" alt="Neon Console" style="border-radius: 15px; filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.1));">
+                        <h5>Neon Console</h5>
+                        <p>Serverless Postgres database & management.</p>
                     </div>
                 </div>
             </div>
@@ -592,6 +705,38 @@
         }
 
         typeEffect();
+
+    // Counter Animation
+    const counters = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+
+    window.addEventListener('scroll', () => {
+        const statsSection = document.querySelector('.stats-section');
+        if (!statsSection) return;
+        
+        const sectionPos = statsSection.getBoundingClientRect().top;
+        const screenPos = window.innerHeight / 1.2;
+
+        if (sectionPos < screenPos && !hasAnimated) {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = Math.max(1, Math.ceil(target / 100)); // Increment amount
+
+                    if (count < target) {
+                        counter.innerText = count + inc;
+                        setTimeout(updateCount, 40); // Animation speed
+                    } else {
+                        counter.innerText = target + "+";
+                    }
+                };
+                updateCount();
+            });
+            hasAnimated = true;
+        }
+    });
+
     document.addEventListener("DOMContentLoaded", () => {
         const cookiePopup = document.getElementById("cookieConsent");
         const acceptBtn = document.getElementById("acceptCookie");
