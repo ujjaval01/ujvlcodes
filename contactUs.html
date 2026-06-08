@@ -115,6 +115,20 @@
     @media (max-width: 768px) {
         .nav-center {
             display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: #1a1a1a;
+            border-radius: 20px;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        .nav-center.active {
+            display: flex;
         }
         .custom-pill-nav {
             width: 90%;
@@ -369,6 +383,7 @@
             <button id="themeToggleBtn" class="theme-btn btn btn-sm btn-light">
                 <i class="fas fa-moon"></i> Theme
             </button>
+        <button class="mobile-menu-btn d-md-none" style="background: none; border: none; color: #fff; font-size: 20px; margin-left: 10px;"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
@@ -490,5 +505,16 @@
 
 <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ujjaval" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting, Now you can buy me a coffee🤩." data-color="#FF5F5F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navCenter = document.querySelector('.nav-center');
+        if (mobileMenuBtn && navCenter) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navCenter.classList.toggle('active');
+            });
+        }
+    });
+</script>
 </body>
 </html>

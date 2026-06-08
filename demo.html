@@ -138,5 +138,16 @@
     <script>
         AOS.init({ once: true, offset: 50, duration: 800 });
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navCenter = document.querySelector('.nav-center');
+        if (mobileMenuBtn && navCenter) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navCenter.classList.toggle('active');
+            });
+        }
+    });
+</script>
 </body>
 </html>
