@@ -154,21 +154,23 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <h2 class="navbar-brand animate__animated animate__bounce animate__infinite smooth-bounce">SAINI</h2>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="project.html">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contactUs.html">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                </ul>
+        <!-- Navbar -->
+    <nav class="custom-pill-nav">
+        <div class="nav-left">
+            <div class="nav-icon-circle">
+                <i class="fas fa-globe"></i>
             </div>
+        </div>
+        <div class="nav-center">
+            <a href="index.html" class="pill-nav-link">Home</a>
+            <a href="project.html" class="pill-nav-link">Projects</a>
+            <a href="about.html" class="pill-nav-link">About</a>
+            <a href="contactUs.html" class="pill-nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <button id="themeToggleBtn" class="theme-btn btn btn-sm btn-light">
+                <i class="fas fa-moon"></i> Theme
+            </button>
         </div>
     </nav>
 
