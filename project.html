@@ -16,149 +16,9 @@
     
     <!-- Custom CSS -->
         <style>
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f5f7fa;
-            overflow-x: hidden;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
+        
 
-                    /* Pill Navbar Style */
-    .custom-pill-nav {
-        position: fixed;
-        top: 25px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #1a1a1a !important;
-        border-radius: 50px;
-        padding: 8px 25px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 1000;
-        width: max-content;
-        min-width: 600px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-    }
-    
-    .nav-left .nav-icon-circle {
-        width: 40px;
-        height: 40px;
-        background: #fff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #1a1a1a;
-        font-size: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .nav-center {
-        display: flex;
-        align-items: center;
-        gap: 35px;
-        margin: 0 45px;
-    }
-
-    .pill-nav-link {
-        color: #ddd;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 15px;
-        transition: all 0.3s;
-        position: relative;
-    }
-
-    .pill-nav-link::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -5px;
-        left: 50%;
-        background: linear-gradient(45deg, #be52df, #1d4a98);
-        transition: all 0.3s ease;
-        transform: translateX(-50%);
-        border-radius: 2px;
-    }
-
-    .pill-nav-link:hover::after {
-        width: 100%;
-    }
-
-    .pill-nav-link:hover {
-        color: #fff;
-        transform: translateY(-2px);
-    }
-
-    .nav-right .theme-btn {
-        background: #fff;
-        color: #1a1a1a;
-        border: none;
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
-        transition: transform 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .nav-right .theme-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(255,255,255,0.2);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .nav-center {
-            display: none;
-            position: absolute;
-            top: 65px;
-            right: 0;
-            left: auto;
-            width: 220px;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            flex-direction: column;
-            gap: 5px;
-            padding: 15px 0;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            animation: dropFade 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            transform-origin: top right;
-        }
-        .nav-center.active {
-            display: flex;
-        }
-        .nav-center a.pill-nav-link {
-            padding: 10px 0;
-            width: 100%;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        .nav-center a.pill-nav-link:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .custom-pill-nav {
-            width: 90%;
-            min-width: auto;
-            padding: 8px 15px;
-        }
-    }
-
-    @keyframes dropFade {
-        from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-        to { opacity: 1; transform: scale(1) translateY(0); }
-    }
+                    
 
         /* Projects Section */
         .projects-container {
@@ -179,7 +39,7 @@
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
-        body.dark-mode .gradient-text {
+        .dark-mode .gradient-text {
             background: linear-gradient(45deg, #8c52ff, #e540dd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -197,7 +57,7 @@
             display: flex;
             flex-direction: column;
         }
-        body.dark-mode .project-card {
+        .dark-mode .project-card {
             background: #1e1e1e;
             border: 1px solid rgba(255,255,255,0.05);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -208,7 +68,7 @@
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15);
         }
-        body.dark-mode .project-card:hover {
+        .dark-mode .project-card:hover {
             box-shadow: 0 20px 40px rgba(229, 64, 221, 0.15);
         }
 
@@ -237,7 +97,7 @@
             margin-bottom: 10px;
             color: #333;
         }
-        body.dark-mode .card-title { color: #fff; }
+        .dark-mode .card-title { color: #fff; }
 
         .card-text {
             color: #666;
@@ -245,7 +105,7 @@
             flex-grow: 1;
             margin-bottom: 20px;
         }
-        body.dark-mode .card-text { color: #aaa; }
+        .dark-mode .card-text { color: #aaa; }
 
         .btn-primary {
             background: linear-gradient(45deg, #1d4a98, #be52df);
@@ -263,62 +123,14 @@
         }
         
         /* Body Dark Mode Background */
-        body.dark-mode {
+        .dark-mode {
             background-color: #121212;
             color: #ffffff;
         }
 
-        /* Footer */
-        .footer {
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 50px 0 30px;
-            position: relative;
-            overflow: hidden;
-            margin-top: 50px;
-        }
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 5px;
-            background: linear-gradient(90deg, #be52df, #1d4a98, #fce408);
-        }
-        
-        .footer p { margin-bottom: 10px; color: #aaa; }
-        
-        .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px; height: 45px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            margin: 0 10px;
-            color: white;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-size: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-            text-decoration: none;
-        }
-        .social-icons a:hover {
-            background: linear-gradient(45deg, #be52df, #1d4a98);
-            transform: translateY(-10px) rotate(360deg);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 10px 20px rgba(190, 82, 223, 0.4);
-        }
-        
-        #themeToggleBtn {
-            border-radius: 20px;
-            padding: 5px 15px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        #themeToggleBtn:hover {
-            transform: scale(1.05);
-        }
-    </style>
+        </style>
+    <link rel="stylesheet" href="style.css">
+    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
 </head>
 <body>
 
@@ -350,7 +162,7 @@
             <!-- Project 1 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
                 <div class="card project-card">
-                    <img src="images/quoteApp/banner.png" class="card-img-top" alt="Quote App">
+                    <img src="images/quoteApp/banner.png" class="card-img-top" alt="Quote App" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Quote App</h5>
                         <p class="card-text">Discover powerful quotes, daily inspiration, and motivational thoughts anytime.</p>
@@ -362,7 +174,7 @@
             <!-- Project 1 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
                 <div class="card project-card">
-                    <img src="images/raksha1-img.jpg" class="card-img-top" alt="Raksha Kawatch App">
+                    <img src="images/raksha1-img.jpg" class="card-img-top" alt="Raksha Kawatch App" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Raksha Kawatch App</h5>
                         <p class="card-text">A real-time safety app using Kotlin, XML & Room Database.</p>
@@ -374,7 +186,7 @@
              <!-- Project 2 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
                 <div class="card project-card">
-                    <img src="images/apniDukaan/homeAD.jpg" class="card-img-top" alt="Raksha Kawatch App">
+                    <img src="images/apniDukaan/homeAD.jpg" class="card-img-top" alt="Raksha Kawatch App" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Apni Dukaan</h5>
                         <p class="card-text">A simple and smart stock & transaction management app for shop owners.</p>
@@ -386,7 +198,7 @@
             <!-- Project 3 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
                 <div class="card project-card">
-                    <img src="images/weather-img.jpg" class="card-img-top" alt="Weather App">
+                    <img src="images/weather-img.jpg" class="card-img-top" alt="Weather App" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Weather App</h5>
                         <p class="card-text">An interactive weather app with OpenWeatherMap API.</p>
@@ -398,7 +210,7 @@
             <!-- Project 4 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
                 <div class="card project-card">
-                    <img src="images/sc-cal-img.jpg" class="card-img-top" alt="Calculator App">
+                    <img src="images/sc-cal-img.jpg" class="card-img-top" alt="Calculator App" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Scientific Calculator</h5>
                         <p class="card-text">A powerful calculator for solving complex mathematics calculation.</p>
@@ -409,7 +221,7 @@
             <!-- Project 5 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
                 <div class="card project-card">
-                    <img src="images/uniqueLoginSignup/homeLS.jpg" class="card-img-top" alt="Raksha Kawatch App">
+                    <img src="images/uniqueLoginSignup/homeLS.jpg" class="card-img-top" alt="Raksha Kawatch App" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">unique Login & Signup application</h5>
                         <p class="card-text">A firebase connected fully working application using kotlin</p>
@@ -427,7 +239,7 @@
             <!-- Project 1 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
                 <div class="card project-card">
-                    <img src="images/raksha-img.png" class="card-img-top" alt="Raksha Kawatch Website">
+                    <img src="images/raksha-img.png" class="card-img-top" alt="Raksha Kawatch Website" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Raksha Kawatch Website</h5>
                         <p class="card-text">A real-time location tracking web application with Database and APIs.</p>
@@ -439,7 +251,7 @@
             <!-- Project 2 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
                 <div class="card project-card">
-                    <img src="images/portfolio-img.png" class="card-img-top" alt="E-commerce Website">
+                    <img src="images/portfolio-img.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">UV InfoHub</h5>
                         <p class="card-text">Portfolio showcasing Skils, Android and Web projects with a modern and responsive UI.</p>
@@ -451,7 +263,7 @@
             <!-- Project 3 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
                 <div class="card project-card">
-                    <img src="images/port-img.png" class="card-img-top" alt="E-commerce Website">
+                    <img src="images/port-img.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">My portfolio</h5>
                         <p class="card-text">Portfolio showcasing my Skils,Educations and about me with a modern and responsive UI.</p>
@@ -462,7 +274,7 @@
             <!-- Project 4 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
                 <div class="card project-card">
-                    <img src="images/ytDownloader/image.png" class="card-img-top" alt="E-commerce Website">
+                    <img src="images/ytDownloader/image.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">Ultimate Video Downloader</h5>
                         <p class="card-text">YouTube Video Downloader with Flask + Tailwind based web app</p>
@@ -474,7 +286,7 @@
             <!-- Project 5 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
                 <div class="card project-card">
-                    <img src="images/lms/image.png" class="card-img-top" alt="E-commerce Website">
+                    <img src="images/lms/image.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">LMS Platform</h5>
                         <p class="card-text">A comprehensive Learning Management System with course tracking and certificates.</p>
@@ -486,7 +298,7 @@
             <!-- Project 6 -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
                 <div class="card project-card">
-                    <img src="images/sms/sms.png" class="card-img-top" alt="E-commerce Website">
+                    <img src="images/sms/sms.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
                     <div class="card-body">
                         <h5 class="card-title">SMS Platform</h5>
                         <p class="card-text">A School Management System for staff, attendance, timetables, and more.</p>
@@ -564,16 +376,7 @@
             }
         });
     </script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navCenter = document.querySelector('.nav-center');
-        if (mobileMenuBtn && navCenter) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navCenter.classList.toggle('active');
-            });
-        }
-    });
-</script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>

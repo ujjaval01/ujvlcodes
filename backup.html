@@ -151,6 +151,8 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="style.css">
+    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
 </head>
 <body>
 
@@ -190,56 +192,56 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="skill-box">
-                        <img src="https://cdn-icons-png.flaticon.com/512/919/919841.png" alt="C++">
+                        <img src="https://cdn-icons-png.flaticon.com/512/919/919841.png" alt="C++" loading="lazy">
                         <h5>C++</h5>
                         <p>Efficient programming with OOP & DSA.</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="skill-box">
-                        <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java">
+                        <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java" loading="lazy">
                         <h5>Java</h5>
                         <p>Backend systems & Android development.</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="skill-box">
-                        <img src="images/kotlin-img.png" alt="Kotlin">
+                        <img src="images/kotlin-img.png" alt="Kotlin" loading="lazy">
                         <h5>Kotlin</h5>
                         <p>Modern Android development with Jetpack Compose.</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="skill-box">
-                        <img src="https://cdn-icons-png.flaticon.com/512/919/919830.png" alt="PHP">
+                        <img src="https://cdn-icons-png.flaticon.com/512/919/919830.png" alt="PHP" loading="lazy">
                         <h5>PHP</h5>
                         <p>Dynamic web applications & backend development.</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="skill-box">
-                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python" loading="lazy">
                         <h5>Python</h5>
                         <p>Scripting and backend development.</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="skill-box">
-                        <img src="https://firebase.google.com/static/images/brand-guidelines/logo-vertical.png" alt="Firebase">
+                        <img src="https://firebase.google.com/static/images/brand-guidelines/logo-vertical.png" alt="Firebase" loading="lazy">
                         <h5>Firebase</h5>
                         <p>Realtime database & authentication.</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="skill-box">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2772/2772128.png" alt="SQL">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2772/2772128.png" alt="SQL" loading="lazy">
                         <h5>SQL</h5>
                         <p>Database management & queries.</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="skill-box">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png" alt="HTML CSS JS">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png" alt="HTML CSS JS" loading="lazy">
                         <h5>HTML, CSS, JS</h5>
                         <p>Frontend web development & UI/UX.</p>
                     </div>
@@ -331,16 +333,7 @@
 
 
     </script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navCenter = document.querySelector('.nav-center');
-        if (mobileMenuBtn && navCenter) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navCenter.classList.toggle('active');
-            });
-        }
-    });
-</script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>

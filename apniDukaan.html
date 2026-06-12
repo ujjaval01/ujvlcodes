@@ -16,149 +16,9 @@
 
   
   <style>
-    html { scroll-behavior: smooth; }
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: #f5f7fa;
-        overflow-x: hidden;
-        transition: background 0.3s ease, color 0.3s ease;
-    }
-
-                /* Pill Navbar Style */
-    .custom-pill-nav {
-        position: fixed;
-        top: 25px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #1a1a1a !important;
-        border-radius: 50px;
-        padding: 8px 25px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 1000;
-        width: max-content;
-        min-width: 600px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-    }
     
-    .nav-left .nav-icon-circle {
-        width: 40px;
-        height: 40px;
-        background: #fff;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #1a1a1a;
-        font-size: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
 
-    .nav-center {
-        display: flex;
-        align-items: center;
-        gap: 35px;
-        margin: 0 45px;
-    }
-
-    .pill-nav-link {
-        color: #ddd;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 15px;
-        transition: all 0.3s;
-        position: relative;
-    }
-
-    .pill-nav-link::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -5px;
-        left: 50%;
-        background: linear-gradient(45deg, #be52df, #1d4a98);
-        transition: all 0.3s ease;
-        transform: translateX(-50%);
-        border-radius: 2px;
-    }
-
-    .pill-nav-link:hover::after {
-        width: 100%;
-    }
-
-    .pill-nav-link:hover {
-        color: #fff;
-        transform: translateY(-2px);
-    }
-
-    .nav-right .theme-btn {
-        background: #fff;
-        color: #1a1a1a;
-        border: none;
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
-        transition: transform 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .nav-right .theme-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(255,255,255,0.2);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .nav-center {
-            display: none;
-            position: absolute;
-            top: 65px;
-            right: 0;
-            left: auto;
-            width: 220px;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            flex-direction: column;
-            gap: 5px;
-            padding: 15px 0;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            animation: dropFade 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            transform-origin: top right;
-        }
-        .nav-center.active {
-            display: flex;
-        }
-        .nav-center a.pill-nav-link {
-            padding: 10px 0;
-            width: 100%;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        .nav-center a.pill-nav-link:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .custom-pill-nav {
-            width: 90%;
-            min-width: auto;
-            padding: 8px 15px;
-        }
-    }
-
-    @keyframes dropFade {
-        from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-        to { opacity: 1; transform: scale(1) translateY(0); }
-    }
+                
     
     #themeToggleBtn { border-radius: 20px; padding: 5px 15px; font-weight: 500; transition: all 0.3s; }
     #themeToggleBtn:hover { transform: scale(1.05); }
@@ -172,7 +32,7 @@
         position: relative;
         overflow: hidden;
     }
-    body.dark-mode .hero-section { background: linear-gradient(135deg, #2a2a4a, #4a2a6a); }
+    .dark-mode .hero-section { background: linear-gradient(135deg, #2a2a4a, #4a2a6a); }
 
     .shape {
         position: absolute; filter: blur(60px); z-index: 0; animation: float 10s infinite alternate; border-radius: 50%; opacity: 0.6;
@@ -199,18 +59,18 @@
     .gradient-text {
         background: linear-gradient(45deg, #1d4a98, #be52df); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
     }
-    body.dark-mode .gradient-text { background: linear-gradient(45deg, #8c52ff, #e540dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .dark-mode .gradient-text { background: linear-gradient(45deg, #8c52ff, #e540dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
     .feature-card {
         background: #ffffff; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px;
         transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;
     }
-    body.dark-mode .feature-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
+    .dark-mode .feature-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
     .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15); }
     .feature-card h3 { font-weight: 700; font-size: 22px; margin-bottom: 15px; color: #333; margin-top: 20px;}
-    body.dark-mode .feature-card h3 { color: #fff; }
+    .dark-mode .feature-card h3 { color: #fff; }
     .feature-card p { color: #666; font-size: 15px; margin: 0; }
-    body.dark-mode .feature-card p { color: #aaa; }
+    .dark-mode .feature-card p { color: #aaa; }
 
     /* Slider Styling */
     .image-slider { overflow: hidden; position: relative; width: 100%; padding: 20px 0; }
@@ -222,29 +82,23 @@
     /* Steps */
     .step-list { list-style: none; padding: 0; }
     .step-list li { font-size: 1.2rem; margin-bottom: 20px; padding: 15px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; border-left: 5px solid #be52df;}
-    body.dark-mode .step-list li { background: #1e1e1e; color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    .dark-mode .step-list li { background: #1e1e1e; color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
     .step-list li:hover { transform: translateX(10px); }
 
     /* Testimonials */
     .testimonial-card {
         background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); text-align: left;
     }
-    body.dark-mode .testimonial-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
+    .dark-mode .testimonial-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
     .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(190, 82, 223, 0.15); }
 
-    /* Footer */
-    .footer { background: #111; color: white; text-align: center; padding: 50px 0 30px; position: relative; overflow: hidden; margin-top: 50px;}
-    .footer::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, #be52df, #1d4a98, #fce408); }
-    .footer p { margin-bottom: 10px; color: #aaa; }
-    .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 50%; margin: 0 10px; color: white; transition: all 0.4s; font-size: 20px; border: 1px solid rgba(255,255,255,0.1); text-decoration: none; }
-    .social-icons a:hover { background: linear-gradient(45deg, #be52df, #1d4a98); transform: translateY(-10px) rotate(360deg); color: white; border-color: transparent; box-shadow: 0 10px 20px rgba(190, 82, 223, 0.4); }
-    
-    body.dark-mode { background-color: #121212; color: #ffffff; }
-  </style>
+    </style>
 
 
   <!-- Lottie Player -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
 </head>
 
 <body>
@@ -358,16 +212,16 @@
     <p class="text-center mb-5" data-aos="fade-up" style="font-size: 1.2rem; color: #666;">See how Apni Dukaan looks and works in action.</p>
     <div class="image-slider mt-4" data-aos="fade-in" data-aos-delay="200">
       <div class="slider-track">
-        <img src="./images/apniDukaan/splash.png" alt="Screenshot 1">
-        <img src="./images/apniDukaan/home.png" alt="Screenshot 2">
-        <img src="./images/apniDukaan/graph.png" alt="Screenshot 3">
-        <img src="./images/apniDukaan/setting.png" alt="Screenshot 4">
-        <img src="./images/apniDukaan/lang.png" alt="Screenshot 5">
-        <img src="./images/apniDukaan/theme.png" alt="Screenshot 6">
-        <img src="./images/apniDukaan/setting2.png" alt="Screenshot 7">
-        <img src="./images/apniDukaan/splash.png" alt="Screenshot 1">
-        <img src="./images/apniDukaan/home.png" alt="Screenshot 2">
-        <img src="./images/apniDukaan/graph.png" alt="Screenshot 3">
+        <img src="./images/apniDukaan/splash.png" alt="Screenshot 1" loading="lazy">
+        <img src="./images/apniDukaan/home.png" alt="Screenshot 2" loading="lazy">
+        <img src="./images/apniDukaan/graph.png" alt="Screenshot 3" loading="lazy">
+        <img src="./images/apniDukaan/setting.png" alt="Screenshot 4" loading="lazy">
+        <img src="./images/apniDukaan/lang.png" alt="Screenshot 5" loading="lazy">
+        <img src="./images/apniDukaan/theme.png" alt="Screenshot 6" loading="lazy">
+        <img src="./images/apniDukaan/setting2.png" alt="Screenshot 7" loading="lazy">
+        <img src="./images/apniDukaan/splash.png" alt="Screenshot 1" loading="lazy">
+        <img src="./images/apniDukaan/home.png" alt="Screenshot 2" loading="lazy">
+        <img src="./images/apniDukaan/graph.png" alt="Screenshot 3" loading="lazy">
       </div>
     </div>
   </section>
@@ -484,16 +338,7 @@
         }
     });
   </script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navCenter = document.querySelector('.nav-center');
-        if (mobileMenuBtn && navCenter) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navCenter.classList.toggle('active');
-            });
-        }
-    });
-</script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>

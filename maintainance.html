@@ -115,6 +115,8 @@
             color: #1d4a98;
         }
     </style>
+    <link rel="stylesheet" href="style.css">
+    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
 </head>
 <body>
 
@@ -122,7 +124,7 @@
     <div class="shape shape-2"></div>
 
     <div class="maintenance-container" data-aos="zoom-in" data-aos-duration="1000">
-        <img src="https://cdn-icons-png.flaticon.com/512/8088/8088605.png" alt="Maintenance Image" class="maintenance-img">
+        <img src="https://cdn-icons-png.flaticon.com/512/8088/8088605.png" alt="Maintenance Image" class="maintenance-img" loading="lazy">
         <h2 data-aos="fade-up" data-aos-delay="200">Project Under Maintenance</h2>
         <p data-aos="fade-up" data-aos-delay="300">We are currently working on improvements and updates for this project. Stay tuned for the latest version!</p>
         <p data-aos="fade-up" data-aos-delay="400">Meanwhile, check out my GitHub for more projects.</p>
@@ -138,16 +140,7 @@
     <script>
         AOS.init({ once: true, offset: 50, duration: 800 });
     </script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navCenter = document.querySelector('.nav-center');
-        if (mobileMenuBtn && navCenter) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navCenter.classList.toggle('active');
-            });
-        }
-    });
-</script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
