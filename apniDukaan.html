@@ -103,24 +103,13 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="custom-pill-nav">
-        <div class="nav-left">
-            <div class="nav-icon-circle">
-                <i class="fas fa-globe"></i>
-            </div>
-        </div>
-        <div class="nav-center">
-            <a href="index.html" class="pill-nav-link">Home</a>
-            <a href="project.html" class="pill-nav-link">Projects</a>
-            <a href="about.html" class="pill-nav-link">About</a>
-            <a href="contactUs.html" class="pill-nav-link">Contact</a>
-        </div>
-        <div class="nav-right">
-            <button id="themeToggleBtn" class="theme-btn btn btn-sm btn-light">
-                <i class="fas fa-moon"></i> Theme
-            </button>
-        <button class="mobile-menu-btn d-md-none" style="background: none; border: none; color: #fff; font-size: 20px; margin-left: 10px;"><i class="fas fa-bars"></i></button>
-        </div>
+    <nav>
+      <span class="nav-logo">US</span>
+      <a href="index.html">Home</a>
+      <a href="project.html">Projects</a>
+      <a href="about.html">About</a>
+      <a href="contactUs.html">Contact</a>
+      <button id="themeToggleBtn" class="theme-btn btn-light"><i class="fas fa-moon"></i> Theme</button>
     </nav>
 
     <!-- Hero Section -->
@@ -283,18 +272,17 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-      <div class="container">
-          <p>&copy; 2025 Apni Dukaan | All Rights Reserved</p>
-          <p>Follow us on:</p>
-          <div class="social-icons mt-3">
-              <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
-              <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
-              <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-              <a href="mailto:apnidukaan.support@gmail.com"><i class="fas fa-envelope"></i></a>
-          </div>
-      </div>
+  <footer>
+    <div class="footer-logo">Ujjaval Saini</div>
+    <p style="color:var(--text-muted);font-size:13px;">Building things that actually work.</p>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p class="footer-copy">© 2025 Ujjaval Saini · All Rights Reserved</p>
   </footer>
 
   <!-- Scripts -->
@@ -309,32 +297,6 @@
             navbar.classList.add('scrolled');
         } else if (navbar) {
             navbar.classList.remove('scrolled');
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const themeToggleBtn = document.getElementById("themeToggleBtn");
-        const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "dark") {
-            document.body.classList.add("dark-mode");
-            if(themeToggleBtn) {
-                themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
-                themeToggleBtn.classList.replace('btn-light', 'btn-dark');
-            }
-        }
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener("click", () => {
-                document.body.classList.toggle("dark-mode");
-                const isDark = document.body.classList.contains("dark-mode");
-                localStorage.setItem("theme", isDark ? "dark" : "light");
-                if (isDark) {
-                    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
-                    themeToggleBtn.classList.replace('btn-light', 'btn-dark');
-                } else {
-                    themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Theme';
-                    themeToggleBtn.classList.replace('btn-dark', 'btn-light');
-                }
-            });
         }
     });
   </script>

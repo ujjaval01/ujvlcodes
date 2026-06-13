@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Ujjaval Saini</title>
+<script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -13,6 +14,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <style>
 :root {
+  --bg: #f5f7fa;
+  --surface: rgba(255, 255, 255, 0.45);
+  --surface2: rgba(255, 255, 255, 0.7);
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --accent1: #1d4a98;
+  --accent2: #be52df;
+  --accent3: #f59e0b;
+  --text: #333333;
+  --text-muted: #666666;
+  --border: rgba(29, 74, 152, 0.15);
+  --glow1: rgba(190, 82, 223, 0.2);
+  --glow2: rgba(29, 74, 152, 0.1);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+.dark-mode {
   --bg: #060912;
   --surface: #0c1220;
   --glass: rgba(255,255,255,0.03);
@@ -22,15 +41,17 @@
   --accent3: #f59e0b;
   --text: #f1f5f9;
   --text-muted: #94a3b8;
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Space Grotesk', sans-serif;
+  --border: rgba(124,58,237,0.2);
+  --glow1: rgba(124,58,237,0.4);
+  --glow2: rgba(6,182,212,0.3);
 }
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; cursor: none; min-height: 100vh; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; cursor: none; min-height: 100vh; transition: background 0.3s ease, color 0.3s ease; }
 
 .cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--accent1); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); }
-.cursor-ring { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(124,58,237,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s; }
+.cursor-ring { position: fixed; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s; }
 .cursor-ring.hovering { width: 60px; height: 60px; border-color: var(--accent2); background: rgba(6,182,212,0.05); }
 .page-transition { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg, var(--accent1), var(--accent2)); transform: translateY(0); pointer-events: none; }
 
@@ -42,13 +63,55 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--text);
 nav {
   position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;
   display: flex; align-items: center; gap: 4px;
-  background: rgba(6,9,18,0.65); backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--glass-border); border-radius: 50px; padding: 8px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+.dark-mode nav {
+  background: rgba(6,9,18,0.65);
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 .nav-logo { font-family: var(--font-display); font-size: 14px; font-weight: 800; background: linear-gradient(90deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding-right: 12px; border-right: 1px solid var(--glass-border); margin-right: 6px; }
 nav a { font-size: 12px; font-weight: 600; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 30px; transition: all 0.25s; letter-spacing: 0.5px; text-transform: uppercase; }
-nav a:hover, nav a.active { color: var(--text); background: rgba(124,58,237,0.2); }
+nav a:hover, nav a.active { color: var(--text); background: rgba(29, 74, 152, 0.1); }
+.dark-mode nav a:hover, .dark-mode nav a.active { color: var(--text); background: rgba(124,58,237,0.2); }
+
+/* Theme Toggle Button Styling */
+.theme-btn {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: 30px;
+  transition: all 0.25s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-btn:hover {
+  color: var(--text);
+  background: rgba(29, 74, 152, 0.1);
+}
+
+.dark-mode .theme-btn:hover {
+  color: var(--text);
+  background: rgba(124,58,237,0.2);
+}
+
+@media (max-width: 640px) {
+  .theme-btn {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
 
 /* ── HERO ── */
 .page-hero {
@@ -230,6 +293,7 @@ footer { border-top: 1px solid var(--glass-border); padding: 70px 24px 44px; tex
   <a href="project.html">Projects</a>
   <a href="about.html">About</a>
   <a href="contactUs.html" class="active">Contact</a>
+  <button id="themeToggleBtn" class="theme-btn btn-light"><i class="fas fa-moon"></i> Theme</button>
 </nav>
 
 <!-- HERO -->
@@ -434,5 +498,6 @@ document.querySelectorAll('a[href]:not([href^="#"]):not([href^="mailto"]):not([t
   });
 });
 </script>
+<script src="script.js" defer></script>
 </body>
 </html>

@@ -12,180 +12,201 @@ body {
     color: #e0e0e0;
 }
 
-/* Pill Navbar Style */
-.custom-pill-nav {
-    position: fixed;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1a1a1a !important;
-    border-radius: 50px;
-    padding: 8px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-    width: max-content;
-    min-width: 600px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+/* Navigation Bar matching index.html but adaptive to theme */
+nav {
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  width: max-content;
 }
 
-.nav-left .nav-icon-circle {
-    width: 40px;
-    height: 40px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1a1a1a;
-    font-size: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.dark-mode nav {
+  background: rgba(7, 11, 20, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.nav-center {
-    display: flex;
-    align-items: center;
-    gap: 35px;
-    margin: 0 45px;
+nav a {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 30px;
+  transition: all 0.25s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-.pill-nav-link {
-    color: #ddd;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 15px;
-    transition: all 0.3s;
-    position: relative;
+.dark-mode nav a {
+  color: #94a3b8;
 }
 
-.pill-nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 50%;
-    background: linear-gradient(45deg, #be52df, #1d4a98);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-    border-radius: 2px;
+nav a:hover, nav a.active {
+  color: #111;
+  background: rgba(29, 74, 152, 0.1);
 }
 
-.pill-nav-link:hover::after {
-    width: 100%;
+.dark-mode nav a:hover, .dark-mode nav a.active {
+  color: #fff;
+  background: rgba(124, 58, 237, 0.25);
 }
 
-.pill-nav-link:hover {
-    color: #fff;
-    transform: translateY(-2px);
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #1d4a98, #be52df);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-right: 10px;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  margin-right: 6px;
+  line-height: 1;
 }
 
-.nav-right .theme-btn {
-    background: #fff;
-    color: #1a1a1a;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: transform 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
+.dark-mode .nav-logo {
+  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  -webkit-background-clip: text;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.nav-right .theme-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+@media (max-width: 640px) {
+  nav { padding: 8px 12px; gap: 4px; top: 12px; }
+  nav a { font-size: 11px; padding: 5px 10px; }
+  .nav-logo { font-size: 13px; }
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .nav-center {
-        display: none;
-        position: absolute;
-        top: 65px;
-        right: 0;
-        left: auto;
-        width: 220px;
-        background: rgba(26, 26, 26, 0.95);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 18px;
-        flex-direction: column;
-        gap: 5px;
-        padding: 15px 0;
-        text-align: center;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        animation: dropFade 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        transform-origin: top right;
-    }
-    .nav-center.active {
-        display: flex;
-    }
-    .nav-center a.pill-nav-link {
-        padding: 10px 0;
-        width: 100%;
-        font-size: 16px;
-        transition: background 0.3s;
-    }
-    .nav-center a.pill-nav-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-    }
-    .custom-pill-nav {
-        width: 90%;
-        min-width: auto;
-        padding: 8px 15px;
-    }
+/* Theme Toggle Button Styling */
+.theme-btn {
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  padding: 6px 14px;
+  border-radius: 30px;
+  transition: all 0.25s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
+
+.dark-mode .theme-btn {
+  color: #94a3b8;
+}
+
+.theme-btn:hover {
+  color: #111;
+  background: rgba(29, 74, 152, 0.1);
+}
+
+.dark-mode .theme-btn:hover {
+  color: #fff;
+  background: rgba(124, 58, 237, 0.25);
+}
+
+@media (max-width: 640px) {
+  .theme-btn {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
+
 
 @keyframes dropFade {
     from { opacity: 0; transform: scale(0.95) translateY(-10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* Footer */
-.footer {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 50px 0 30px;
+/* Footer matching index.html but adaptive to theme */
+footer {
+    background: transparent;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 60px 0 40px;
     position: relative;
     overflow: hidden;
+    text-align: center;
 }
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 5px;
-    background: linear-gradient(90deg, #be52df, #1d4a98, #fce408);
+.dark-mode footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.footer p { margin-bottom: 10px; color: #aaa; }
+.footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #1d4a98, #be52df);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+.dark-mode .footer-logo {
+    background: linear-gradient(135deg, #7c3aed, #06b6d4);
+    -webkit-background-clip: text;
+}
 
-.social-icons a {
+footer p { margin-bottom: 10px; color: #666; }
+.dark-mode footer p { color: #94a3b8; }
+
+.footer-copy {
+    font-size: 13px;
+    margin-top: 20px;
+    display: block;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.footer-social a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 45px; height: 45px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 50%;
-    margin: 0 10px;
-    color: white;
+    width: 44px; height: 44px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    margin: 0 5px;
+    color: #666;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    font-size: 20px;
-    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     text-decoration: none;
 }
-.social-icons a:hover {
-    background: linear-gradient(45deg, #be52df, #1d4a98);
-    transform: translateY(-10px) rotate(360deg);
-    color: white;
+.dark-mode .footer-social a {
+    background: rgba(255, 255, 255, 0.03);
+    color: #94a3b8;
+    border-color: rgba(255, 255, 255, 0.07);
+}
+
+.footer-social a:hover {
+    background: linear-gradient(135deg, #1d4a98, #be52df) !important;
+    transform: translateY(-8px) rotate(360deg);
+    color: white !important;
     border-color: transparent;
     box-shadow: 0 10px 20px rgba(190, 82, 223, 0.4);
+}
+.dark-mode .footer-social a:hover {
+    background: linear-gradient(135deg, #7c3aed, #06b6d4) !important;
+    box-shadow: 0 10px 20px rgba(124, 58, 237, 0.4);
 }
 
 /* Cookie Consent */

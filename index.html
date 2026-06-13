@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ujjaval Saini — Portfolio</title>
+  <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
@@ -11,6 +12,22 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface2: #f1f5f9;
+      --accent1: #7c3aed;
+      --accent2: #06b6d4;
+      --accent3: #d97706;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: rgba(124,58,237,0.12);
+      --glow1: rgba(124,58,237,0.15);
+      --glow2: rgba(6,182,212,0.12);
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+    }
+
+    .dark-mode {
       --bg: #070b14;
       --surface: #0d1525;
       --surface2: #111c2e;
@@ -22,8 +39,6 @@
       --border: rgba(124,58,237,0.2);
       --glow1: rgba(124,58,237,0.4);
       --glow2: rgba(6,182,212,0.3);
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'Space Grotesk', sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,6 +50,7 @@
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     /* ── SCROLLBAR ── */
@@ -52,12 +68,17 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(7,11,20,0.7);
+      background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border);
       border-radius: 50px;
       padding: 10px 20px;
       transition: all 0.3s;
+    }
+
+    .dark-mode nav {
+      background: rgba(7, 11, 20, 0.7);
     }
 
     nav a {
@@ -74,7 +95,12 @@
 
     nav a:hover, nav a.active {
       color: var(--text);
-      background: rgba(124,58,237,0.25);
+      background: rgba(29, 74, 152, 0.1);
+    }
+
+    .dark-mode nav a:hover, .dark-mode nav a.active {
+      color: var(--text);
+      background: rgba(124, 58, 237, 0.25);
     }
 
     .nav-logo {
@@ -88,6 +114,42 @@
       border-right: 1px solid var(--border);
       margin-right: 6px;
     }
+
+    /* Theme Toggle Button Styling */
+    .theme-btn {
+      background: transparent;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 30px;
+      transition: all 0.25s ease;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .theme-btn:hover {
+      color: var(--text);
+      background: rgba(29, 74, 152, 0.1);
+    }
+
+    .dark-mode .theme-btn:hover {
+      color: var(--text);
+      background: rgba(124, 58, 237, 0.25);
+    }
+
+    @media (max-width: 640px) {
+      .theme-btn {
+        font-size: 11px;
+        padding: 5px 10px;
+      }
+    }
+
 
     /* ── HERO ── */
     .hero {
@@ -674,6 +736,7 @@
   <a href="project.html" id="projectsLink">Projects</a>
   <a href="about.html">About</a>
   <a href="contactUs.html">Contact</a>
+  <button id="themeToggleBtn" class="theme-btn btn-light"><i class="fas fa-moon"></i> Theme</button>
 </nav>
 
 <!-- Maintenance Modal -->
@@ -1019,6 +1082,13 @@ document.getElementById('projectsLink2').addEventListener('click', showModal);
   function animate() {
     requestAnimationFrame(animate);
     const t = Date.now() * 0.001;
+    const isDark = document.documentElement.classList.contains('dark-mode');
+    staticMat.color.setHex(isDark ? 0xffffff : 0x64748b);
+    plexusMat.color.setHex(isDark ? 0x06b6d4 : 0x1d4a98);
+    linesMat.color.setHex(isDark ? 0x7c3aed : 0xbe52df);
+    ringMat.color.setHex(isDark ? 0x7c3aed : 0x1d4a98);
+    linesMat.opacity = isDark ? 0.16 : 0.28;
+    
     orbs.forEach((o, i) => {
       o.position.x = Math.cos(t * 0.3 + i * 2.09) * 30;
       o.position.y = Math.sin(t * 0.2 + i * 2.09) * 15;
@@ -1230,6 +1300,9 @@ document.getElementById('projectsLink2').addEventListener('click', showModal);
 
   function animate() {
     requestAnimationFrame(animate);
+    const isDark = document.documentElement.classList.contains('dark-mode');
+    sphereMat.color.setHex(isDark ? 0x0d1525 : 0xe2e8f0);
+    sphereMat.emissive.setHex(isDark ? 0x7c3aed : 0x1d4a98);
     
     if (!isDragging) {
       // Slow rotation when idle + deceleration decay
@@ -1317,9 +1390,16 @@ document.getElementById('projectsLink2').addEventListener('click', showModal);
 // ── NAV ACTIVE ──
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('mainNav');
-  nav.style.background = window.scrollY > 40
-    ? 'rgba(7,11,20,0.95)'
-    : 'rgba(7,11,20,0.7)';
+  const isDark = document.documentElement.classList.contains('dark-mode');
+  if (isDark) {
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(7, 11, 20, 0.95)'
+      : 'rgba(7, 11, 20, 0.7)';
+  } else {
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(255, 255, 255, 0.95)'
+      : 'rgba(255, 255, 255, 0.75)';
+  }
 });
 </script>
 <script src="script.js" defer></script>
