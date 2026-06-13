@@ -225,4 +225,75 @@ body {
     font-size: 14px;
     color: #444;
 }
+
+/* ── 3D TILT & PARALLAX EFFECT ── */
+.tilt-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Children that should pop out in 3D */
+.tilt-3d .pop-out-3d {
+    transform: translateZ(35px);
+    transition: transform 0.1s ease;
+}
+
+/* ── CURSOR GLOW ── */
+.cursor-glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: left 0.1s ease-out, top 0.1s ease-out;
+    display: none; /* Hidden on touch devices or until cursor moves */
+}
+@media (hover: hover) {
+    .cursor-glow {
+        display: block;
+    }
+}
+.dark-mode .cursor-glow {
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+}
+
+/* ── GLASSMORPHIC FLOATING BADGES ── */
+.floating-badge {
+    background: rgba(255, 255, 255, 0.82) !important;
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.45) !important;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08) !important;
+    color: #1a1a1a;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+}
+
+.dark-mode .floating-badge {
+    background: rgba(26, 26, 26, 0.82) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Custom premium hover glowing borders for features/project cards */
+.project-card, .feature-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1), 
+                box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1),
+                border-color 0.3s ease !important;
+}
+
+.project-card:hover, .feature-card:hover {
+    border-color: rgba(190, 82, 223, 0.3) !important;
+    box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15) !important;
+}
+
+.dark-mode .project-card:hover, .dark-mode .feature-card:hover {
+    border-color: rgba(229, 64, 221, 0.4) !important;
+    box-shadow: 0 20px 45px rgba(229, 64, 221, 0.2) !important;
+}
 .dark-mode .cookie-content p { color: #ccc; }

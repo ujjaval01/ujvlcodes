@@ -1,382 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Projects - Android & Web Development</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
-    
-    <!-- Custom CSS -->
-        <style>
-        
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Ujjaval Saini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="icon" type="image/jpg" href="images/myIcon.jpg">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+:root {
+  --bg: #060912;
+  --surface: #0c1220;
+  --surface2: #111c2e;
+  --glass: rgba(255,255,255,0.03);
+  --glass-border: rgba(255,255,255,0.07);
+  --accent1: #7c3aed;
+  --accent2: #06b6d4;
+  --accent3: #f59e0b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; cursor: none; }
 
-                    
+/* ── CURSOR ── */
+.cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--accent1); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); }
+.cursor-ring { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(124,58,237,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s, border-color 0.3s; }
+.cursor-ring.hovering { width: 60px; height: 60px; border-color: var(--accent2); background: rgba(6,182,212,0.05); }
 
-        /* Projects Section */
-        .projects-container {
-            padding-top: 120px; /* Offset for fixed navbar */
-            padding-bottom: 50px;
-        }
+/* ── PAGE TRANSITION ── */
+.page-transition { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg, var(--accent1), var(--accent2)); transform: translateY(0); pointer-events: none; }
 
-        .section-title {
-            text-align: center;
-            font-weight: 800;
-            margin-bottom: 40px;
-            font-size: 36px;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(45deg, #1d4a98, #be52df);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-        .dark-mode .gradient-text {
-            background: linear-gradient(45deg, #8c52ff, #e540dd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--accent1), var(--accent2)); border-radius: 4px; }
 
-        .project-card {
-            margin-bottom: 30px;
-            background: #ffffff;
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .dark-mode .project-card {
-            background: #1e1e1e;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            color: #fff;
-        }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;
+  display: flex; align-items: center; gap: 4px;
+  background: rgba(6,9,18,0.65); backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border); border-radius: 50px;
+  padding: 8px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.nav-logo {
+  font-family: var(--font-display); font-size: 14px; font-weight: 800;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  padding-right: 12px; border-right: 1px solid var(--glass-border); margin-right: 6px;
+}
+nav a {
+  font-size: 12px; font-weight: 600; color: var(--text-muted); text-decoration: none;
+  padding: 6px 14px; border-radius: 30px; transition: all 0.25s;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+nav a:hover, nav a.active { color: var(--text); background: rgba(124,58,237,0.2); }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15);
-        }
-        .dark-mode .project-card:hover {
-            box-shadow: 0 20px 40px rgba(229, 64, 221, 0.15);
-        }
+/* ── HERO ── */
+.page-hero {
+  min-height: 42vh; display: flex; align-items: center; justify-content: center;
+  padding: 140px 24px 80px; text-align: center; position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(124,58,237,0.15), transparent);
+  pointer-events: none;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 100%, black, transparent);
+}
+.page-hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--accent2); margin-bottom: 20px;
+  padding: 7px 18px; border: 1px solid rgba(6,182,212,0.25); border-radius: 30px;
+  background: rgba(6,182,212,0.06); backdrop-filter: blur(10px);
+}
+.page-hero h1 {
+  font-family: var(--font-display); font-size: clamp(36px, 7vw, 80px);
+  font-weight: 800; line-height: 1; letter-spacing: -2px;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 60%, var(--accent1) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.page-hero p { color: var(--text-muted); font-size: 16px; max-width: 480px; margin: 0 auto; line-height: 1.7; }
 
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: transform 0.5s ease;
-        }
-        
-        .project-card:hover img {
-            transform: scale(1.05);
-        }
+/* ── FILTER TABS ── */
+.filter-bar {
+  display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+  margin: 0 24px 60px; padding: 0 24px;
+}
+.filter-btn {
+  padding: 9px 22px; background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 30px; color: var(--text-muted); font-family: var(--font-body);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s; backdrop-filter: blur(10px);
+}
+.filter-btn:hover { color: var(--text); border-color: rgba(124,58,237,0.4); background: rgba(124,58,237,0.1); }
+.filter-btn.active {
+  color: #fff; background: linear-gradient(135deg, var(--accent1), #9333ea);
+  border-color: transparent;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+}
 
-        .card-body {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--accent2); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::after { content: ''; height: 1px; width: 40px; background: linear-gradient(to right, var(--accent2), transparent); }
+.section-heading { font-family: var(--font-display); font-size: clamp(26px,4vw,42px); font-weight: 800; margin-bottom: 48px; }
+.section-heading span { background: linear-gradient(135deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .card-title {
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .dark-mode .card-title { color: #fff; }
+/* ── PROJECTS GRID ── */
+.projects-section { padding: 0 24px 80px; max-width: 1200px; margin: 0 auto; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
 
-        .card-text {
-            color: #666;
-            font-size: 15px;
-            flex-grow: 1;
-            margin-bottom: 20px;
-        }
-        .dark-mode .card-text { color: #aaa; }
+/* ── PROJECT CARD ── */
+.project-card {
+  background: var(--surface); border: 1px solid var(--glass-border); border-radius: 24px;
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform 0.4s cubic-bezier(.175,.885,.32,1.275), box-shadow 0.4s, border-color 0.3s;
+  position: relative;
+}
+.project-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: 24px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(6,182,212,0.05));
+  opacity: 0; transition: opacity 0.4s; pointer-events: none; z-index: 1;
+}
+.project-card:hover { transform: translateY(-12px); box-shadow: 0 32px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(124,58,237,0.2); border-color: rgba(124,58,237,0.3); }
+.project-card:hover::before { opacity: 1; }
 
-        .btn-primary {
-            background: linear-gradient(45deg, #1d4a98, #be52df);
-            border: none;
-            border-radius: 30px;
-            padding: 10px 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            align-self: flex-start;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(45deg, #be52df, #1d4a98);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(190, 82, 223, 0.4);
-        }
-        
-        /* Body Dark Mode Background */
-        .dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
+.card-img-wrap { position: relative; height: 210px; overflow: hidden; }
+.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.175,.885,.32,1.275), filter 0.4s; filter: brightness(0.85); }
+.project-card:hover .card-img-wrap img { transform: scale(1.1); filter: brightness(1); }
+.card-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(6,9,18,0.8) 0%, transparent 60%);
+  pointer-events: none;
+}
+.card-tag {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  backdrop-filter: blur(10px); border: 1px solid;
+}
+.tag-android { background: rgba(61,220,130,0.1); color: #3ddc84; border-color: rgba(61,220,130,0.25); }
+.tag-web { background: rgba(6,182,212,0.1); color: var(--accent2); border-color: rgba(6,182,212,0.25); }
 
-        </style>
-    <link rel="stylesheet" href="style.css">
-    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
+.card-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; position: relative; z-index: 2; }
+.card-title { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+.card-text { color: var(--text-muted); font-size: 13px; line-height: 1.7; flex-grow: 1; margin-bottom: 20px; }
+.card-footer-row { display: flex; align-items: center; justify-content: space-between; }
+.card-tech { display: flex; gap: 6px; flex-wrap: wrap; }
+.tech-dot { width: 8px; height: 8px; border-radius: 50%; }
+.card-action {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: 12px; font-size: 11px; font-weight: 700;
+  text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px;
+  background: linear-gradient(135deg, var(--accent1), #9333ea);
+  color: #fff; border: none; cursor: pointer;
+  transition: all 0.25s cubic-bezier(.175,.885,.32,1.275);
+  box-shadow: 0 4px 16px rgba(124,58,237,0.35);
+}
+.card-action:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(124,58,237,0.5); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--glass-border); padding: 70px 24px 44px;
+  text-align: center; position: relative;
+}
+footer::before {
+  content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+  width: 500px; height: 160px; border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.07), transparent);
+}
+.footer-logo { font-family: var(--font-display); font-size: 32px; font-weight: 800; background: linear-gradient(135deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px; }
+.footer-social { display: flex; justify-content: center; gap: 12px; margin: 24px 0; }
+.footer-social a { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-muted); font-size: 15px; text-decoration: none; transition: all 0.3s; }
+.footer-social a:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: var(--text); transform: translateY(-4px); }
+.footer-copy { font-size: 12px; color: rgba(148,163,184,0.4); }
+
+/* ── ANIMATIONS ── */
+.fade-up { opacity: 0; transform: translateY(40px); }
+.scale-in { opacity: 0; transform: scale(0.9); }
+
+@media (max-width: 640px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  nav a { font-size: 11px; padding: 5px 10px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
 </head>
 <body>
 
-        <!-- Navbar -->
-    <nav class="custom-pill-nav">
-        <div class="nav-left">
-            <div class="nav-icon-circle">
-                <i class="fas fa-globe"></i>
-            </div>
-        </div>
-        <div class="nav-center">
-            <a href="index.html" class="pill-nav-link">Home</a>
-            <a href="project.html" class="pill-nav-link">Projects</a>
-            <a href="about.html" class="pill-nav-link">About</a>
-            <a href="contactUs.html" class="pill-nav-link">Contact</a>
-        </div>
-        <div class="nav-right">
-            <button id="themeToggleBtn" class="theme-btn btn btn-sm btn-light">
-                <i class="fas fa-moon"></i> Theme
-            </button>
-        <button class="mobile-menu-btn d-md-none" style="background: none; border: none; color: #fff; font-size: 20px; margin-left: 10px;"><i class="fas fa-bars"></i></button>
-        </div>
-    </nav>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="page-transition" id="pageTransition"></div>
 
-    <!-- Android Projects Section -->
-    <div class="container projects-container">
-        <h2 class="section-title fw-bold" data-aos="fade-up"><span class="gradient-text">Android Development Projects</span></h2>
-        <div class="row">
-            <!-- Project 1 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/quoteApp/banner.png" class="card-img-top" alt="Quote App" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">Quote App</h5>
-                        <p class="card-text">Discover powerful quotes, daily inspiration, and motivational thoughts anytime.</p>
-                        <a href="quote.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Project 1 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/raksha1-img.jpg" class="card-img-top" alt="Raksha Kawatch App" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">Raksha Kawatch App</h5>
-                        <p class="card-text">A real-time safety app using Kotlin, XML & Room Database.</p>
-                        <a href="raksha.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">US</span>
+  <a href="index.html">Home</a>
+  <a href="project.html" class="active">Projects</a>
+  <a href="about.html">About</a>
+  <a href="contactUs.html">Contact</a>
+</nav>
 
-             <!-- Project 2 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="card project-card">
-                    <img src="images/apniDukaan/homeAD.jpg" class="card-img-top" alt="Raksha Kawatch App" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">Apni Dukaan</h5>
-                        <p class="card-text">A simple and smart stock & transaction management app for shop owners.</p>
-                        <a href="apniDukaan.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
+<!-- HERO -->
+<div class="page-hero">
+  <div style="position:relative;z-index:2">
+    <div class="page-hero-badge"><span style="width:5px;height:5px;background:var(--accent2);border-radius:50%;animation:pulse 1.5s infinite;display:inline-block;"></span>Portfolio</div>
+    <h1>My Projects</h1>
+    <p>A curated collection of Android &amp; Web applications — each built with craft, purpose, and real users in mind.</p>
+  </div>
+</div>
 
-            <!-- Project 3 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
-                <div class="card project-card">
-                    <img src="images/weather-img.jpg" class="card-img-top" alt="Weather App" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">Weather App</h5>
-                        <p class="card-text">An interactive weather app with OpenWeatherMap API.</p>
-                        <a href="maintainance.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
+<!-- FILTER TABS -->
+<div class="filter-bar" id="filterBar">
+  <button class="filter-btn active" data-filter="all">All Projects</button>
+  <button class="filter-btn" data-filter="android">Android</button>
+  <button class="filter-btn" data-filter="web">Web</button>
+</div>
 
-            <!-- Project 4 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/sc-cal-img.jpg" class="card-img-top" alt="Calculator App" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">Scientific Calculator</h5>
-                        <p class="card-text">A powerful calculator for solving complex mathematics calculation.</p>
-                        <a href="maintainance.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 5 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="card project-card">
-                    <img src="images/uniqueLoginSignup/homeLS.jpg" class="card-img-top" alt="Raksha Kawatch App" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">unique Login & Signup application</h5>
-                        <p class="card-text">A firebase connected fully working application using kotlin</p>
-                        <a href="uniqueLoginSignup.html" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
+<!-- ANDROID PROJECTS -->
+<div class="projects-section" id="androidSection">
+  <div class="fade-up">
+    <div class="section-label">Mobile Development</div>
+    <div class="section-heading">Android <span>Applications</span></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card scale-in" data-category="android">
+      <div class="card-img-wrap">
+        <img src="images/quoteApp/banner.png" alt="Quote App" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1547237711-8e9a3a37b85e?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-android">Android</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Quote App</h5>
+        <p class="card-text">Discover powerful quotes, daily inspiration, and motivational thoughts anytime with a beautiful card-based UI.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#3ddc84" title="Kotlin"></div>
+            <div class="tech-dot" style="background:#ff6b6b" title="XML"></div>
+          </div>
+          <a href="quote.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
         </div>
+      </div>
     </div>
 
-    <!-- Web Projects Section -->
-    <div class="container mt-4">
-        <h2 class="section-title fw-bold" data-aos="fade-up"><span class="gradient-text">Web Development Projects</span></h2>
-        <div class="row">
-            <!-- Project 1 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
-                <div class="card project-card">
-                    <img src="images/raksha-img.png" class="card-img-top" alt="Raksha Kawatch Website" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">Raksha Kawatch Website</h5>
-                        <p class="card-text">A real-time location tracking web application with Database and APIs.</p>
-                        <a href="maintainance.html" class="btn btn-primary">Visit</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/portfolio-img.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">UV InfoHub</h5>
-                        <p class="card-text">Portfolio showcasing Skils, Android and Web projects with a modern and responsive UI.</p>
-                        <a href="https://ujjaval01.github.io/my-website/" class="btn btn-primary">Visit</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="card project-card">
-                    <img src="images/port-img.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">My portfolio</h5>
-                        <p class="card-text">Portfolio showcasing my Skils,Educations and about me with a modern and responsive UI.</p>
-                        <a href="https://ujjaval01.github.io/Main-Portfolio/" class="btn btn-primary">Visit</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Project 4 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
-                <div class="card project-card">
-                    <img src="images/ytDownloader/image.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">Ultimate Video Downloader</h5>
-                        <p class="card-text">YouTube Video Downloader with Flask + Tailwind based web app</p>
-                        <a href="ytDownloader.html" class="btn btn-primary">Visit</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 5 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="card project-card">
-                    <img src="images/lms/image.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">LMS Platform</h5>
-                        <p class="card-text">A comprehensive Learning Management System with course tracking and certificates.</p>
-                        <a href="lms.html" class="btn btn-primary">Visit</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 6 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="card project-card">
-                    <img src="images/sms/sms.png" class="card-img-top" alt="E-commerce Website" loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title">SMS Platform</h5>
-                        <p class="card-text">A School Management System for staff, attendance, timetables, and more.</p>
-                        <a href="sms.html" class="btn btn-primary">Visit</a>
-                    </div>
-                </div>
-            </div>
+    <div class="project-card scale-in" data-category="android">
+      <div class="card-img-wrap">
+        <img src="images/raksha1-img.jpg" alt="Raksha Kawatch App" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-android">Android</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Raksha Kawatch App</h5>
+        <p class="card-text">A real-time safety tracking app using Kotlin, XML, and Room Database. Emergency alerts and live location sharing.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#3ddc84" title="Kotlin"></div>
+            <div class="tech-dot" style="background:#f97316" title="Room DB"></div>
+          </div>
+          <a href="raksha.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
         </div>
+      </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Ujjaval Saini | All Rights Reserved</p>
-            <p>Follow me on:</p>
-            <div class="social-icons mt-3">
-                <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
+    <div class="project-card scale-in" data-category="android">
+      <div class="card-img-wrap">
+        <img src="images/apniDukaan/homeAD.jpg" alt="Apni Dukaan" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-android">Android</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Apni Dukaan</h5>
+        <p class="card-text">A simple and smart stock &amp; transaction management app for shop owners. Track inventory and sales effortlessly.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#3ddc84" title="Kotlin"></div>
+            <div class="tech-dot" style="background:#06b6d4" title="Firebase"></div>
+          </div>
+          <a href="apniDukaan.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
         </div>
-    </footer>
+      </div>
+    </div>
 
-<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ujjaval" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting, Now you can buy me a coffee🤩." data-color="#FF5F5F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+    <div class="project-card scale-in" data-category="android">
+      <div class="card-img-wrap">
+        <img src="images/weather-img.jpg" alt="Weather App" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504608524841-42584120d693?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-android">Android</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Weather App</h5>
+        <p class="card-text">An interactive weather application powered by the OpenWeatherMap API with beautiful animated weather icons.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#3ddc84" title="Kotlin"></div>
+            <div class="tech-dot" style="background:#7c3aed" title="Retrofit"></div>
+          </div>
+          <a href="maintainance.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
+        </div>
+      </div>
+    </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Initialize Animate On Scroll
-        AOS.init({
-            once: true,
-            offset: 50,
-            duration: 800,
-        });
+    <div class="project-card scale-in" data-category="android">
+      <div class="card-img-wrap">
+        <img src="images/sc-cal-img.jpg" alt="Calculator App" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-android">Android</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Scientific Calculator</h5>
+        <p class="card-text">A powerful calculator for solving complex mathematical calculations with a clean, intuitive interface.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#3ddc84" title="Kotlin"></div>
+          </div>
+          <a href="maintainance.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
+        </div>
+      </div>
+    </div>
 
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+    <div class="project-card scale-in" data-category="android">
+      <div class="card-img-wrap">
+        <img src="images/uniqueLoginSignup/homeLS.jpg" alt="Login Signup App" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555421689-491a97ff2040?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-android">Android</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Unique Login &amp; Signup</h5>
+        <p class="card-text">A Firebase-connected fully working authentication app in Kotlin with modern animated UI components.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#3ddc84" title="Kotlin"></div>
+            <div class="tech-dot" style="background:#f59e0b" title="Firebase Auth"></div>
+          </div>
+          <a href="uniqueLoginSignup.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
+        </div>
+      </div>
+    </div>
 
-        // Theme Toggle Logic
-        document.addEventListener("DOMContentLoaded", () => {
-            const themeToggleBtn = document.getElementById("themeToggleBtn");
-            const savedTheme = localStorage.getItem("theme");
+  </div>
+</div>
 
-            if (savedTheme === "dark") {
-                document.body.classList.add("dark-mode");
-                if (themeToggleBtn) {
-                    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
-                    themeToggleBtn.classList.replace('btn-light', 'btn-dark');
-                }
-            }
+<!-- WEB PROJECTS -->
+<div class="projects-section" id="webSection" style="padding-top: 60px;">
+  <div class="fade-up">
+    <div class="section-label">Web Development</div>
+    <div class="section-heading">Web <span>Applications</span></div>
+  </div>
+  <div class="projects-grid">
 
-            if (themeToggleBtn) {
-                themeToggleBtn.addEventListener("click", () => {
-                    document.body.classList.toggle("dark-mode");
-                    const isDark = document.body.classList.contains("dark-mode");
-                    localStorage.setItem("theme", isDark ? "dark" : "light");
+    <div class="project-card scale-in" data-category="web">
+      <div class="card-img-wrap">
+        <img src="images/raksha-img.png" alt="Raksha Website" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-web">Web</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Raksha Kawatch Website</h5>
+        <p class="card-text">A real-time location tracking web application with Database, REST APIs, and WebSocket-powered live updates.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#e34f26" title="HTML5"></div>
+            <div class="tech-dot" style="background:#06b6d4" title="APIs"></div>
+          </div>
+          <a href="maintainance.html" class="card-action"><i class="fas fa-external-link-alt"></i> Visit</a>
+        </div>
+      </div>
+    </div>
 
-                    if (isDark) {
-                        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
-                        themeToggleBtn.classList.replace('btn-light', 'btn-dark');
-                    } else {
-                        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Theme';
-                        themeToggleBtn.classList.replace('btn-dark', 'btn-light');
-                    }
-                });
-            }
-        });
-    </script>
+    <div class="project-card scale-in" data-category="web">
+      <div class="card-img-wrap">
+        <img src="images/portfolio-img.png" alt="UV InfoHub" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-web">Web</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">UV InfoHub</h5>
+        <p class="card-text">Portfolio showcasing skills, Android and Web projects with a modern and fully responsive UI.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#38bdf8" title="TailwindCSS"></div>
+            <div class="tech-dot" style="background:#f59e0b" title="JS"></div>
+          </div>
+          <a href="https://ujjaval01.github.io/my-website/" class="card-action" target="_blank"><i class="fas fa-external-link-alt"></i> Visit</a>
+        </div>
+      </div>
+    </div>
 
-    <script src="script.js" defer></script>
+    <div class="project-card scale-in" data-category="web">
+      <div class="card-img-wrap">
+        <img src="images/port-img.png" alt="Portfolio" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-web">Web</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">My Portfolio</h5>
+        <p class="card-text">Portfolio showcasing skills, education, and background with a modern and responsive UI design.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#e34f26" title="HTML5"></div>
+            <div class="tech-dot" style="background:#264de4" title="CSS3"></div>
+          </div>
+          <a href="https://ujjaval01.github.io/Main-Portfolio/" class="card-action" target="_blank"><i class="fas fa-external-link-alt"></i> Visit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card scale-in" data-category="web">
+      <div class="card-img-wrap">
+        <img src="images/ytDownloader/image.png" alt="Video Downloader" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-web">Web</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Ultimate Video Downloader</h5>
+        <p class="card-text">YouTube Video Downloader built with Flask backend and TailwindCSS — supports multiple resolutions and formats.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#4ade80" title="Flask"></div>
+            <div class="tech-dot" style="background:#38bdf8" title="TailwindCSS"></div>
+          </div>
+          <a href="ytDownloader.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card scale-in" data-category="web">
+      <div class="card-img-wrap">
+        <img src="images/lms/image.png" alt="LMS Platform" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-web">Web</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">LMS Platform</h5>
+        <p class="card-text">A comprehensive Learning Management System with course tracking, quizzes, progress analytics, and certificates.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#7c3aed" title="Full Stack"></div>
+            <div class="tech-dot" style="background:#06b6d4" title="DB"></div>
+          </div>
+          <a href="lms.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card scale-in" data-category="web">
+      <div class="card-img-wrap">
+        <img src="images/sms/sms.png" alt="SMS Platform" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop'">
+        <div class="card-img-overlay"></div>
+        <span class="card-tag tag-web">Web</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">SMS Platform</h5>
+        <p class="card-text">A School Management System for managing staff, student attendance, timetables, grades, and communications.</p>
+        <div class="card-footer-row">
+          <div class="card-tech">
+            <div class="tech-dot" style="background:#e34f26" title="HTML5"></div>
+            <div class="tech-dot" style="background:#4ade80" title="PHP/MySQL"></div>
+          </div>
+          <a href="sms.html" class="card-action"><i class="fas fa-arrow-right"></i> View Project</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ujjaval Saini</div>
+  <p style="color:var(--text-muted);font-size:13px;">Building things that actually work.</p>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+  <p class="footer-copy">© 2025 Ujjaval Saini · All Rights Reserved</p>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ── PAGE ENTRY ──
+gsap.to('#pageTransition', { yPercent: -100, duration: 0.7, ease: 'power3.inOut', delay: 0.05 });
+gsap.from('.page-hero > div', { opacity: 0, y: 40, duration: 0.9, delay: 0.5, ease: 'power3.out' });
+gsap.from('.filter-bar', { opacity: 0, y: 20, duration: 0.7, delay: 0.8, ease: 'power3.out' });
+
+// ── SCROLL ANIMATIONS ──
+gsap.utils.toArray('.fade-up').forEach(el => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+    opacity: 1, y: 0, duration: 0.8, ease: 'power3.out'
+  });
+});
+
+gsap.utils.toArray('.scale-in').forEach((el, i) => {
+  gsap.to(el, {
+    scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
+    opacity: 1, scale: 1, duration: 0.6, delay: (i % 3) * 0.08, ease: 'power3.out'
+  });
+});
+
+// ── FILTER ──
+const filterBtns = document.querySelectorAll('.filter-btn');
+const allCards = document.querySelectorAll('.project-card');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    allCards.forEach(card => {
+      const match = filter === 'all' || card.dataset.category === filter;
+      gsap.to(card, {
+        opacity: match ? 1 : 0.15, scale: match ? 1 : 0.97, duration: 0.4, ease: 'power2.inOut',
+        pointerEvents: match ? 'auto' : 'none'
+      });
+    });
+    // Show/hide section headings
+    const androidSection = document.getElementById('androidSection');
+    const webSection = document.getElementById('webSection');
+    if (filter === 'android') { gsap.to(webSection, { opacity: 0.1, duration: 0.4 }); gsap.to(androidSection, { opacity: 1, duration: 0.4 }); }
+    else if (filter === 'web') { gsap.to(androidSection, { opacity: 0.1, duration: 0.4 }); gsap.to(webSection, { opacity: 1, duration: 0.4 }); }
+    else { gsap.to([androidSection, webSection], { opacity: 1, duration: 0.4 }); }
+  });
+});
+
+// ── CURSOR ──
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+  gsap.to(ring, { left: e.clientX, top: e.clientY, duration: 0.15, ease: 'power2.out' });
+});
+document.querySelectorAll('a, button, .project-card').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+});
+
+// ── PAGE TRANSITION ON LINK CLICK ──
+document.querySelectorAll('a[href]:not([href^="#"]):not([href^="mailto"]):not([target="_blank"])').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (!href || href.startsWith('#')) return;
+    e.preventDefault();
+    gsap.to('#pageTransition', {
+      yPercent: 0, duration: 0.5, ease: 'power3.inOut',
+      onComplete: () => { window.location.href = href; }
+    });
+  });
+});
+
+// ── KEYFRAME (pulse) fallback ──
+</script>
+<style>
+@keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.4; transform:scale(1.6); } }
+</style>
 </body>
 </html>

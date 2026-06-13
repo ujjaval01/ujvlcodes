@@ -1,174 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us</title>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="icon" type="image/jpg" href="images/myIcon.jpg">
-    <style>
-        
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Ujjaval Saini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="icon" type="image/jpg" href="images/myIcon.jpg">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+:root {
+  --bg: #060912;
+  --surface: #0c1220;
+  --glass: rgba(255,255,255,0.03);
+  --glass-border: rgba(255,255,255,0.07);
+  --accent1: #7c3aed;
+  --accent2: #06b6d4;
+  --accent3: #f59e0b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; cursor: none; min-height: 100vh; }
 
-                    
+.cursor-dot { position: fixed; width: 8px; height: 8px; background: var(--accent1); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); }
+.cursor-ring { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(124,58,237,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s; }
+.cursor-ring.hovering { width: 60px; height: 60px; border-color: var(--accent2); background: rgba(6,182,212,0.05); }
+.page-transition { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg, var(--accent1), var(--accent2)); transform: translateY(0); pointer-events: none; }
 
-        /* Body Dark Mode Background */
-        .dark-mode {
-            background-color: #121212;
-            color: #ffffff;
-        }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--accent1), var(--accent2)); border-radius: 4px; }
 
-        </style>
-    <link rel="stylesheet" href="style.css">
-    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
+/* ── NAV ── */
+nav {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;
+  display: flex; align-items: center; gap: 4px;
+  background: rgba(6,9,18,0.65); backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border); border-radius: 50px; padding: 8px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.nav-logo { font-family: var(--font-display); font-size: 14px; font-weight: 800; background: linear-gradient(90deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding-right: 12px; border-right: 1px solid var(--glass-border); margin-right: 6px; }
+nav a { font-size: 12px; font-weight: 600; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 30px; transition: all 0.25s; letter-spacing: 0.5px; text-transform: uppercase; }
+nav a:hover, nav a.active { color: var(--text); background: rgba(124,58,237,0.2); }
+
+/* ── HERO ── */
+.page-hero {
+  min-height: 50vh; display: flex; align-items: center; justify-content: center;
+  padding: 140px 24px 80px; text-align: center; position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(124,58,237,0.15), transparent);
+}
+.page-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 100%, black, transparent);
+}
+.hero-inner { position: relative; z-index: 2; }
+.page-hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--accent2); margin-bottom: 20px;
+  padding: 7px 18px; border: 1px solid rgba(6,182,212,0.25);
+  border-radius: 30px; background: rgba(6,182,212,0.06);
+}
+.page-hero h1 {
+  font-family: var(--font-display); font-size: clamp(40px, 8vw, 88px);
+  font-weight: 800; line-height: 1; letter-spacing: -2px; margin-bottom: 18px;
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 50%, var(--accent2) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.page-hero p { color: var(--text-muted); font-size: 16px; max-width: 460px; margin: 0 auto; line-height: 1.75; }
+
+/* ── MAIN CONTACT SECTION ── */
+.contact-section { max-width: 1160px; margin: 0 auto; padding: 0 24px 100px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 32px; align-items: start; }
+
+/* ── INFO COLUMN ── */
+.info-col {}
+.info-title { font-family: var(--font-display); font-size: clamp(22px,3vw,36px); font-weight: 800; margin-bottom: 16px; line-height: 1.1; }
+.info-title span { background: linear-gradient(135deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.info-desc { color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 36px; }
+
+.contact-methods { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.contact-method {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 18px 20px; backdrop-filter: blur(10px);
+  text-decoration: none; color: inherit;
+  transition: all 0.3s cubic-bezier(.175,.885,.32,1.275);
+}
+.contact-method:hover { transform: translateX(8px); border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.08); box-shadow: 0 8px 32px rgba(124,58,237,0.15); }
+.method-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.method-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+.method-value { font-size: 14px; font-weight: 600; color: var(--text); }
+
+.availability-badge {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 14px; padding: 14px 18px;
+}
+.avail-dot { width: 10px; height: 10px; background: #4ade80; border-radius: 50%; flex-shrink: 0; animation: glow 1.5s ease-in-out infinite; box-shadow: 0 0 8px #4ade80; }
+@keyframes glow { 0%,100%{box-shadow: 0 0 6px #4ade80;} 50%{box-shadow: 0 0 20px #4ade80;} }
+.avail-text { font-size: 13px; font-weight: 600; color: #4ade80; }
+.avail-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* ── FORM COLUMN ── */
+.form-col {
+  background: var(--surface); border: 1px solid var(--glass-border);
+  border-radius: 28px; padding: 44px;
+  position: relative; overflow: hidden;
+}
+.form-col::before {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.12), transparent);
+  pointer-events: none;
+}
+.form-col::after {
+  content: ''; position: absolute; bottom: -60px; left: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(6,182,212,0.08), transparent);
+  pointer-events: none;
+}
+.form-title { font-family: var(--font-display); font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.form-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { margin-bottom: 16px; position: relative; }
+label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; transition: color 0.25s; }
+.form-group:focus-within label { color: var(--accent2); }
+
+input[type="text"], input[type="email"], textarea {
+  width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 14px 18px; color: var(--text);
+  font-family: var(--font-body); font-size: 14px; outline: none;
+  transition: all 0.3s; appearance: none; -webkit-appearance: none;
+}
+input::placeholder, textarea::placeholder { color: rgba(148,163,184,0.4); }
+input:focus, textarea:focus {
+  border-color: rgba(124,58,237,0.5);
+  background: rgba(124,58,237,0.05);
+  box-shadow: 0 0 0 4px rgba(124,58,237,0.1);
+}
+textarea { resize: vertical; min-height: 130px; }
+
+/* ── SUBMIT BTN ── */
+.submit-btn {
+  width: 100%; padding: 16px 32px;
+  background: linear-gradient(135deg, var(--accent1), #9333ea);
+  border: none; border-radius: 14px;
+  color: #fff; font-family: var(--font-body); font-size: 14px; font-weight: 700;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: transform 0.25s cubic-bezier(.175,.885,.32,1.275), box-shadow 0.25s;
+  box-shadow: 0 4px 24px rgba(124,58,237,0.4), 0 1px 0 rgba(255,255,255,0.1) inset;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.submit-btn::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.5s;
+}
+.submit-btn:hover::before { left: 100%; }
+.submit-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(124,58,237,0.5); }
+.submit-btn:active { transform: translateY(-1px); }
+
+/* ── SOCIAL STRIP ── */
+.social-strip { display: flex; gap: 12px; margin-top: 24px; }
+.social-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 12px; color: var(--text-muted); font-size: 15px; text-decoration: none;
+  transition: all 0.3s; backdrop-filter: blur(10px);
+}
+.social-btn:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: var(--text); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(124,58,237,0.2); }
+
+/* ── SUCCESS MESSAGE ── */
+.success-msg {
+  display: none; text-align: center; padding: 32px 24px;
+  position: absolute; inset: 0; background: var(--surface);
+  border-radius: 28px; align-items: center; justify-content: center;
+  flex-direction: column; gap: 16px; z-index: 10;
+}
+.success-icon { font-size: 56px; }
+.success-title { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: #4ade80; }
+.success-sub { color: var(--text-muted); font-size: 14px; }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid var(--glass-border); padding: 70px 24px 44px; text-align: center; }
+.footer-logo { font-family: var(--font-display); font-size: 32px; font-weight: 800; background: linear-gradient(135deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px; }
+.footer-social { display: flex; justify-content: center; gap: 12px; margin: 24px 0; }
+.footer-social a { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-muted); font-size: 15px; text-decoration: none; transition: all 0.3s; }
+.footer-social a:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: var(--text); transform: translateY(-4px); }
+.footer-copy { font-size: 12px; color: rgba(148,163,184,0.4); }
+
+/* ── ANIMATIONS ── */
+.fade-up { opacity: 0; transform: translateY(40px); }
+.fade-left { opacity: 0; transform: translateX(-30px); }
+.fade-right { opacity: 0; transform: translateX(30px); }
+
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-col { padding: 28px 20px; }
+}
+@keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.4; transform:scale(1.6); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
 </head>
 <body>
 
-        <!-- Navbar -->
-    <nav class="custom-pill-nav">
-        <div class="nav-left">
-            <div class="nav-icon-circle">
-                <i class="fas fa-globe"></i>
-            </div>
-        </div>
-        <div class="nav-center">
-            <a href="index.html" class="pill-nav-link">Home</a>
-            <a href="project.html" class="pill-nav-link">Projects</a>
-            <a href="about.html" class="pill-nav-link">About</a>
-            <a href="contactUs.html" class="pill-nav-link">Contact</a>
-        </div>
-        <div class="nav-right">
-            <button id="themeToggleBtn" class="theme-btn btn btn-sm btn-light">
-                <i class="fas fa-moon"></i> Theme
-            </button>
-        <button class="mobile-menu-btn d-md-none" style="background: none; border: none; color: #fff; font-size: 20px; margin-left: 10px;"><i class="fas fa-bars"></i></button>
-        </div>
-    </nav>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="page-transition" id="pageTransition"></div>
 
-<!-- Hero Section -->
-  <section class="hero-section">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
-        <h1 class="hero-title">Get In Touch</h1>
-        <p class="hero-subtitle">If you have any feedback, questions, or business inquiries, I'd love to hear from you.</p>
-        
-        <div class="contact-info-card" data-aos="fade-up" data-aos-delay="200">
-            <i class="fas fa-envelope"></i>
-            <span>sainiujvl@gmail.com</span>
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">US</span>
+  <a href="index.html">Home</a>
+  <a href="project.html">Projects</a>
+  <a href="about.html">About</a>
+  <a href="contactUs.html" class="active">Contact</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="page-hero-badge"><span style="width:5px;height:5px;background:var(--accent2);border-radius:50%;animation:pulse 1.5s infinite;display:inline-block;"></span>Contact Me</div>
+    <h1>Let's Connect</h1>
+    <p>Have a project in mind or just want to say hi? I'd love to hear from you.</p>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<div class="contact-section">
+  <div class="contact-grid">
+
+    <!-- INFO COLUMN -->
+    <div class="info-col fade-left">
+      <div class="info-title">Got an idea? <br>Let's <span>make it real.</span></div>
+      <p class="info-desc">Whether you need a stunning Android app, a high-performance website, or just want to collaborate — reach out. I typically respond within 24 hours.</p>
+
+      <div class="contact-methods">
+        <a href="mailto:sainiujvl@gmail.com" class="contact-method">
+          <div class="method-icon" style="background:rgba(124,58,237,0.15);color:var(--accent1)"><i class="fas fa-envelope"></i></div>
+          <div>
+            <div class="method-label">Email</div>
+            <div class="method-value">sainiujvl@gmail.com</div>
+          </div>
+          <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--text-muted);font-size:12px"></i>
+        </a>
+        <a href="https://github.com/ujjaval01" target="_blank" class="contact-method">
+          <div class="method-icon" style="background:rgba(255,255,255,0.06);color:#fff"><i class="fab fa-github"></i></div>
+          <div>
+            <div class="method-label">GitHub</div>
+            <div class="method-value">@ujjaval01</div>
+          </div>
+          <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--text-muted);font-size:12px"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank" class="contact-method">
+          <div class="method-icon" style="background:rgba(10,102,194,0.15);color:#0a66c2"><i class="fab fa-linkedin-in"></i></div>
+          <div>
+            <div class="method-label">LinkedIn</div>
+            <div class="method-value">Ujjaval Saini</div>
+          </div>
+          <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--text-muted);font-size:12px"></i>
+        </a>
+        <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank" class="contact-method">
+          <div class="method-icon" style="background:rgba(228,64,95,0.15);color:#e4405f"><i class="fab fa-instagram"></i></div>
+          <div>
+            <div class="method-label">Instagram</div>
+            <div class="method-value">@ujvl.sa1n1</div>
+          </div>
+          <i class="fas fa-arrow-right" style="margin-left:auto;color:var(--text-muted);font-size:12px"></i>
+        </a>
+      </div>
+
+      <div class="availability-badge">
+        <div class="avail-dot"></div>
+        <div>
+          <div class="avail-text">Available for new projects</div>
+          <div class="avail-sub">Response within 24 hours</div>
         </div>
+      </div>
     </div>
-  </section>
 
-<!-- Contact Form -->
-<div class="container form-container mb-5" data-aos="fade-up" data-aos-delay="400">
-  <div class="row justify-content-center">
-    <div class="col-lg-8">
-      <div class="contact-form">
-        <h3 class="text-center mb-5 text-primary" style="font-size: 2rem;">Send a Message</h3>
-        <form action="https://formsubmit.co/sainiujvl@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New submission from your website portfolio!">
-          <input type="text" name="_honey" style="display:none">
-          <input type="hidden" name="_template" value="table">
-          <div class="row">
-              <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-delay="500">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
-              </div>
-              <div class="col-md-6 mb-4" data-aos="fade-left" data-aos-delay="600">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
-              </div>
+    <!-- FORM COLUMN -->
+    <div class="form-col fade-right" style="position:relative">
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">Message Sent!</div>
+        <div class="success-sub">Thanks for reaching out. I'll get back to you soon.</div>
+      </div>
+
+      <div class="form-title">Send a Message</div>
+      <div class="form-subtitle">Fill in the details below and I'll be in touch.</div>
+
+      <form action="https://formsubmit.co/sainiujvl@gmail.com" method="POST" id="contactForm">
+        <input type="hidden" name="_subject" value="New submission from your portfolio!">
+        <input type="text" name="_honey" style="display:none">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" required>
           </div>
-          <div class="mb-4" data-aos="fade-up" data-aos-delay="700">
-            <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required>
           </div>
-          <div class="text-center mt-5" data-aos="zoom-in" data-aos-delay="800">
-            <input type="submit" id="button" value="Send Message" class="btn btn-primary px-5 py-3" style="font-size: 1.1rem; border-radius: 30px;">
-          </div>
-        </form>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Project inquiry, collaboration...">
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me about your project or idea..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <i class="fas fa-paper-plane"></i>
+          <span id="btnText">Send Message</span>
+        </button>
+      </form>
+
+      <div class="social-strip">
+        <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/ujjaval01" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
   </div>
 </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Ujjaval Saini | All Rights Reserved</p>
-            <p>Follow me on:</p>
-            <div class="social-icons mt-3">
-                <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </footer>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ujjaval Saini</div>
+  <p style="color:var(--text-muted);font-size:13px">Building things that actually work.</p>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+  <p class="footer-copy">© 2025 Ujjaval Saini · All Rights Reserved</p>
+</footer>
 
-<!-- External Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Initialize Animate On Scroll
-        AOS.init({
-            once: true,
-            offset: 50,
-            duration: 800,
-        });
+<script>
+gsap.registerPlugin(ScrollTrigger);
 
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+// PAGE ENTRY
+gsap.to('#pageTransition', { yPercent: -100, duration: 0.7, ease: 'power3.inOut', delay: 0.05 });
+gsap.from('.hero-inner', { opacity: 0, y: 40, duration: 0.9, delay: 0.5, ease: 'power3.out' });
 
-        // Theme Toggle Logic
-        document.addEventListener("DOMContentLoaded", () => {
-            const themeToggleBtn = document.getElementById("themeToggleBtn");
-            const savedTheme = localStorage.getItem("theme");
+// SCROLL ANIMS
+gsap.utils.toArray('.fade-up').forEach(el => {
+  gsap.to(el, { scrollTrigger: { trigger: el, start: 'top 88%' }, opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+});
+gsap.utils.toArray('.fade-left').forEach(el => {
+  gsap.to(el, { scrollTrigger: { trigger: el, start: 'top 85%' }, opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' });
+});
+gsap.utils.toArray('.fade-right').forEach(el => {
+  gsap.to(el, { scrollTrigger: { trigger: el, start: 'top 85%' }, opacity: 1, x: 0, duration: 0.9, delay: 0.12, ease: 'power3.out' });
+});
 
-            if (savedTheme === "dark") {
-                document.body.classList.add("dark-mode");
-                if (themeToggleBtn) {
-                    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
-                    themeToggleBtn.classList.replace('btn-light', 'btn-dark');
-                }
-            }
+// CONTACT METHODS STAGGER
+gsap.from('.contact-method', {
+  scrollTrigger: { trigger: '.contact-methods', start: 'top 85%' },
+  opacity: 0, x: -20, stagger: 0.08, duration: 0.6, ease: 'power3.out'
+});
 
-            if (themeToggleBtn) {
-                themeToggleBtn.addEventListener("click", () => {
-                    document.body.classList.toggle("dark-mode");
-                    const isDark = document.body.classList.contains("dark-mode");
-                    localStorage.setItem("theme", isDark ? "dark" : "light");
+// FORM SUBMIT ANIMATION
+const form = document.getElementById('contactForm');
+const btn = document.getElementById('submitBtn');
+const btnText = document.getElementById('btnText');
 
-                    if (isDark) {
-                        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light';
-                        themeToggleBtn.classList.replace('btn-light', 'btn-dark');
-                    } else {
-                        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Theme';
-                        themeToggleBtn.classList.replace('btn-dark', 'btn-light');
-                    }
-                });
-            }
-        });
-    </script>
-<!-- Email form handling script removed. formsubmit.co handles the submission automatically. -->
+form.addEventListener('submit', function(e) {
+  // Animate button while submitting
+  btnText.textContent = 'Sending…';
+  btn.style.pointerEvents = 'none';
+  gsap.to(btn, { scale: 0.97, duration: 0.15, yoyo: true, repeat: 1 });
+  // Form submits normally to formsubmit.co
+});
 
-<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="ujjaval" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting, Now you can buy me a coffee🤩." data-color="#FF5F5F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+// INPUT FOCUS MICROINTERACTIONS
+document.querySelectorAll('input, textarea').forEach(el => {
+  el.addEventListener('focus', () => {
+    gsap.to(el, { scale: 1.01, duration: 0.2, ease: 'power2.out' });
+  });
+  el.addEventListener('blur', () => {
+    gsap.to(el, { scale: 1, duration: 0.2, ease: 'power2.out' });
+  });
+});
 
+// CURSOR
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px';
+  gsap.to(ring, { left: e.clientX, top: e.clientY, duration: 0.15, ease: 'power2.out' });
+});
+document.querySelectorAll('a, button, input, textarea, .contact-method').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+});
 
-    <script src="script.js" defer></script>
+// PAGE TRANSITION
+document.querySelectorAll('a[href]:not([href^="#"]):not([href^="mailto"]):not([target="_blank"])').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (!href || href.startsWith('#')) return;
+    e.preventDefault();
+    gsap.to('#pageTransition', {
+      yPercent: 0, duration: 0.5, ease: 'power3.inOut',
+      onComplete: () => { window.location.href = href; }
+    });
+  });
+});
+</script>
 </body>
 </html>
