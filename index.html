@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ujjaval Saini — Portfolio</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
   <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -633,58 +634,6 @@
 
     .modal-close-btn:hover { background: rgba(124,58,237,0.4); }
 
-    /* ── COOKIE ── */
-    .cookie-bar {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 999;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 13px;
-      color: var(--text-muted);
-      max-width: 500px;
-      width: 90%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      animation: slideUp 0.5s ease 1s both;
-    }
-
-    @keyframes slideUp { from { transform: translate(-50%, 100px); opacity:0; } to { transform: translate(-50%, 0); opacity:1; } }
-
-    .cookie-bar.hide { display: none; }
-
-    .cookie-btns { display: flex; gap: 8px; flex-shrink: 0; }
-
-    .cookie-accept {
-      padding: 7px 14px;
-      background: var(--accent1);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-
-    .cookie-accept:hover { opacity: 0.8; }
-
-    .cookie-decline {
-      padding: 7px 14px;
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
 
     /* ── DIVIDER WAVE ── */
     .wave-divider { width: 100%; overflow: hidden; line-height: 0; }
@@ -889,14 +838,6 @@
   <p class="footer-copy">© 2025 Ujjaval Saini · All Rights Reserved</p>
 </footer>
 
-<!-- Cookie Bar -->
-<div class="cookie-bar" id="cookieBar">
-  🍪 This site uses cookies to improve your experience.
-  <div class="cookie-btns">
-    <button class="cookie-accept" id="cookieAccept">Accept</button>
-    <button class="cookie-decline" id="cookieDecline">Decline</button>
-  </div>
-</div>
 
 <script>
 // ── CURSOR GLOW ──
@@ -961,11 +902,6 @@ const countObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 statNums.forEach(el => countObs.observe(el));
 
-// ── COOKIE ──
-const cb = document.getElementById('cookieBar');
-if (localStorage.getItem('cookie_consent')) cb.classList.add('hide');
-document.getElementById('cookieAccept').onclick = () => { localStorage.setItem('cookie_consent','1'); cb.classList.add('hide'); };
-document.getElementById('cookieDecline').onclick = () => cb.classList.add('hide');
 
 // ── MAINTENANCE MODAL ──
 const modal = document.getElementById('maintenanceModal');
