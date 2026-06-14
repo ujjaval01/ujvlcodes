@@ -126,29 +126,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     cursor: pointer;
                     transition: all 0.25s ease;
                 }
-                .cookie-consent-btn.accept {
+                .cookie-consent-btn.btn-accept-cookie {
                     background: linear-gradient(135deg, #7c3aed, #06b6d4);
                     color: #fff;
                     box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
                 }
-                .cookie-consent-btn.accept:hover {
+                .cookie-consent-btn.btn-accept-cookie:hover {
                     transform: translateY(-2px);
                     box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
                 }
-                .cookie-consent-btn.decline {
+                .cookie-consent-btn.btn-decline-cookie {
                     background: rgba(0, 0, 0, 0.05);
                     color: #555;
                     border: 1px solid rgba(0, 0, 0, 0.1);
                 }
-                .dark-mode .cookie-consent-btn.decline {
+                .dark-mode .cookie-consent-btn.btn-decline-cookie {
                     background: rgba(255, 255, 255, 0.05);
                     color: #ccc;
                     border-color: rgba(255, 255, 255, 0.1);
                 }
-                .cookie-consent-btn.decline:hover {
+                .cookie-consent-btn.btn-decline-cookie:hover {
                     background: rgba(0, 0, 0, 0.1);
                 }
-                .dark-mode .cookie-consent-btn.decline:hover {
+                .dark-mode .cookie-consent-btn.btn-decline-cookie:hover {
                     background: rgba(255, 255, 255, 0.1);
                 }
             `;
@@ -163,8 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="cookie-content">
                 <p>🍪 We use cookies to improve your experience on our site. By continuing, you accept our cookie policy.</p>
                 <div class="cookie-consent-btns">
-                    <button id="acceptCookie" class="cookie-consent-btn accept">Accept</button>
-                    <button id="declineCookie" class="cookie-consent-btn decline">Decline</button>
+                    <button id="acceptCookie" class="cookie-consent-btn btn-accept-cookie">Accept</button>
+                    <button id="declineCookie" class="cookie-consent-btn btn-decline-cookie">Decline</button>
                 </div>
             </div>
         `;
