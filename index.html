@@ -993,17 +993,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // lenis smooth scroll
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: true,
-    smoothTouch: false
-  });
-  function raf(time) {
-    lenis.raf(time);
+  if (typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      smoothTouch: false
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
     requestAnimationFrame(raf);
   }
-  requestAnimationFrame(raf);
 
 
   // card spotlight tracking
@@ -1157,8 +1159,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // End of theme toggle
 
   // Three.js Tag Sphere
-  const sphereCanvas = document.getElementById('sphere-canvas');
-  if (sphereCanvas) {
+  try {
+    const sphereCanvas = document.getElementById('sphere-canvas');
+    if (sphereCanvas && typeof THREE !== 'undefined') {
+
     const width = sphereCanvas.clientWidth || 640;
     const height = sphereCanvas.clientHeight || 440;
     
@@ -1306,8 +1310,9 @@ document.addEventListener('DOMContentLoaded', () => {
       renderer.setSize(w, h, false);
     });
   }
-
-
+  } catch(e) {
+    console.warn("Three.js failed to load:", e);
+  }
   const root = document.documentElement;
   const loader = document.getElementById('loader');
   const loaderFill = document.getElementById('loaderFill');
