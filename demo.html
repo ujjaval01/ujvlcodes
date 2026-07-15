@@ -1,146 +1,1165 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Project Unavailable</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1d4a98, #be52df);
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .shape {
-            position: absolute; filter: blur(60px); z-index: 0; animation: float 10s infinite alternate; border-radius: 50%; opacity: 0.5;
-        }
-        .shape-1 { width: 300px; height: 300px; background: rgba(255, 255, 255, 0.3); top: -10%; left: -5%; }
-        .shape-2 { width: 400px; height: 400px; background: rgba(0, 0, 0, 0.3); bottom: -10%; right: -5%; animation-duration: 15s; }
-        @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-50px) scale(1.1); } }
-
-        .maintenance-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 50px 40px;
-            border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            position: relative;
-            z-index: 1;
-        }
-
-        .maintenance-img {
-            width: 180px;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-            animation: bounce-img 3s infinite ease-in-out;
-        }
-
-        @keyframes bounce-img {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        h2 {
-            font-weight: 800;
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #ffffff;
-            text-shadow: 0 5px 10px rgba(0,0,0,0.2);
-        }
-
-        p {
-            font-size: 1.1rem;
-            font-weight: 300;
-            margin-bottom: 20px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .btn-custom {
-            background: #ffffff;
-            color: #1d4a98;
-            font-weight: 700;
-            padding: 12px 30px;
-            border-radius: 30px;
-            border: none;
-            transition: all 0.4s;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-        }
-        .btn-custom:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            background: #fce408;
-            color: #111;
-        }
-        .btn-outline-custom {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-            font-weight: 700;
-            padding: 10px 28px;
-            border-radius: 30px;
-            transition: all 0.4s;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-        }
-        .btn-outline-custom:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            background: white;
-            color: #1d4a98;
-        }
-    </style>
-    <link rel="stylesheet" href="style.css">
-    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
-</head>
-<body>
-
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-
-    <div class="maintenance-container" data-aos="zoom-in" data-aos-duration="1000">
-        <img src="https://cdn-icons-png.flaticon.com/512/8088/8088605.png" alt="Maintenance Image" class="maintenance-img" loading="lazy">
-        <h2 data-aos="fade-up" data-aos-delay="200">Project Under Maintenance</h2>
-        <p data-aos="fade-up" data-aos-delay="300">We are currently working on improvements and updates for this project. Stay tuned for the latest version!</p>
-        <p data-aos="fade-up" data-aos-delay="400">Meanwhile, check out my GitHub for more projects.</p>
-        
-        <div data-aos="fade-up" data-aos-delay="500">
-            <a href="project.html" class="btn-custom"><i class="fas fa-arrow-left me-2"></i>Return to Projects</a>
-            <a href="https://github.com/ujjaval01" target="_blank" class="btn-outline-custom"><i class="fab fa-github me-2"></i>Visit GitHub</a>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ once: true, offset: 50, duration: 800 });
-    </script>
-
-    <script src="script.js" defer></script>
-</body>
-</html>
+diff --git a/C:\Users\ujjav\Desktop\vsCode\Web\MyWebsite\project.html b/C:\Users\ujjav\Desktop\vsCode\Web\MyWebsite\project.html
+new file mode 100644
+--- /dev/null
++++ b/C:\Users\ujjav\Desktop\vsCode\Web\MyWebsite\project.html
+@@ -0,0 +1,1160 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++<meta charset="UTF-8">
++<meta name="viewport" content="width=device-width, initial-scale=1.0">
++<title>Projects — Ujjaval Saini</title>
++<meta name="description" content="Selected Android and web projects by Ujjaval Saini, presented with the same field-instrument portfolio system.">
++<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230C0F12'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%23F2A93B' text-anchor='middle'%3EUS%3C/text%3E%3C/svg%3E">
++<link rel="preconnect" href="https://fonts.googleapis.com">
++<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
++<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
++
++<style>
++:root{
++  --ink:#0C0F12;
++  --ink-2:#10141A;
++  --panel:#151A20;
++  --panel-2:#181D24;
++  --paper:#EEE8DB;
++  --paper-dim:#9BA3AC;
++  --paper-dim2:#6B7280;
++  --amber:#F2A93B;
++  --amber-dim:rgba(242,169,59,.14);
++  --teal:#5FADA6;
++  --teal-dim:rgba(95,173,166,.14);
++  --line:#232A32;
++  --line-2:#2E3640;
++  --shadow:0 20px 60px -20px rgba(0,0,0,.6);
++
++  --bg:var(--ink);
++  --bg-2:var(--ink-2);
++  --surface:var(--panel);
++  --surface-2:var(--panel-2);
++  --text:var(--paper);
++  --text-dim:var(--paper-dim);
++  --text-dim2:var(--paper-dim2);
++  --border:var(--line);
++  --border-2:var(--line-2);
++
++  --f-display:'Fraunces', serif;
++  --f-body:'Inter', sans-serif;
++  --f-mono:'IBM Plex Mono', monospace;
++
++  --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px;
++  --sp-5:48px; --sp-6:64px; --sp-7:96px; --sp-8:144px;
++
++  --ease:cubic-bezier(.16,1,.3,1);
++  --mx:50%; --my:50%;
++}
++
++html.light{
++  --bg:#E9E3D3;
++  --bg-2:#E0D9C6;
++  --surface:#F1ECDF;
++  --surface-2:#EFE9DA;
++  --text:#14181D;
++  --text-dim:#4B5259;
++  --text-dim2:#6E7680;
++  --border:#D3CAB2;
++  --border-2:#C2B89D;
++  --shadow:0 20px 60px -20px rgba(20,24,29,.18);
++}
++
++*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
++html{ scroll-behavior:auto; }
++html,body{ background:var(--bg); }
++body{
++  font-family:var(--f-body);
++  color:var(--text);
++  background:var(--bg);
++  overflow-x:hidden;
++  -webkit-font-smoothing:antialiased;
++  line-height:1.5;
++  transition:background .5s var(--ease), color .5s var(--ease);
++}
++img{ max-width:100%; display:block; }
++a{ color:inherit; text-decoration:none; }
++button{ font-family:inherit; background:none; border:none; color:inherit; cursor:pointer; }
++
++::selection{ background:var(--amber); color:var(--ink); }
++:focus-visible{ outline:2px solid var(--amber); outline-offset:3px; border-radius:2px; }
++::-webkit-scrollbar{ width:8px; height:8px; }
++::-webkit-scrollbar-track{ background:transparent; }
++::-webkit-scrollbar-thumb{ background:var(--border-2); border-radius:4px; }
++
++.wrap{ max-width:1280px; margin:0 auto; width:100%; }
++.eyebrow{
++  font-family:var(--f-mono);
++  font-size:11px;
++  font-weight:500;
++  letter-spacing:.18em;
++  text-transform:uppercase;
++  color:var(--amber);
++  display:inline-flex;
++  align-items:center;
++  gap:10px;
++}
++.eyebrow::before{
++  content:'';
++  width:16px;
++  height:1px;
++  background:var(--amber);
++}
++
++#grain{
++  position:fixed; inset:0; z-index:-1; pointer-events:none;
++  opacity:.05; mix-blend-mode:overlay;
++  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
++  background-size:160px 160px;
++}
++.spotlight{
++  position:fixed; inset:0; z-index:0; pointer-events:none;
++  background:radial-gradient(480px circle at var(--mx) var(--my), var(--amber-dim), transparent 70%);
++  opacity:0; transition:opacity .4s var(--ease);
++}
++.spotlight.active{ opacity:1; }
++
++.cursor-dot,.cursor-ring{
++  position:fixed; top:0; left:0; z-index:9999;
++  pointer-events:none; border-radius:50%;
++  transform:translate(-50%,-50%);
++  will-change:transform;
++}
++.cursor-dot{
++  width:6px; height:6px; background:var(--amber);
++}
++.cursor-ring{
++  width:38px; height:38px; border:1px solid var(--amber);
++  display:flex; align-items:center; justify-content:center;
++  opacity:0;
++  transition:width .3s var(--ease), height .3s var(--ease), opacity .2s, border-color .3s, background .3s;
++}
++.cursor-ring span{
++  font-family:var(--f-mono);
++  font-size:9px;
++  letter-spacing:.1em;
++  color:var(--amber);
++  text-transform:uppercase;
++  opacity:0;
++  transition:opacity .2s;
++}
++.cursor-ring.show{ opacity:1; }
++.cursor-ring.expand{ width:74px; height:74px; background:var(--amber-dim); }
++.cursor-ring.expand span{ opacity:1; }
++body.has-cursor, body.has-cursor *{ cursor:none !important; }
++@media (hover:none), (pointer:coarse){ .cursor-dot,.cursor-ring{ display:none; } }
++
++.top-progress{
++  position:fixed; top:0; left:0; height:2px; width:100%;
++  z-index:700; transform-origin:left; transform:scaleX(0);
++  background:linear-gradient(90deg, var(--amber), var(--teal));
++}
++
++.signal-rail{
++  position:fixed; left:22px; top:0; height:100vh;
++  z-index:500; display:flex; align-items:center; pointer-events:none;
++}
++.signal-track{ position:relative; width:1px; height:56vh; background:var(--border-2); }
++.signal-fill{
++  position:absolute; top:0; left:0; width:100%; height:0%;
++  background:linear-gradient(var(--amber), var(--teal));
++  box-shadow:0 0 12px var(--amber);
++}
++.signal-ticks{ position:absolute; left:0; top:0; width:1px; height:100%; }
++.signal-tick{
++  position:absolute; left:0; transform:translateY(-50%);
++  display:flex; align-items:center; gap:10px; pointer-events:all;
++}
++.signal-tick .dot{
++  width:7px; height:7px; border-radius:50%;
++  background:var(--bg); border:1px solid var(--border-2);
++  transition:background .3s, border-color .3s, transform .3s;
++}
++.signal-tick.active .dot{ background:var(--amber); border-color:var(--amber); transform:scale(1.3); }
++.signal-tick label{
++  font-family:var(--f-mono); font-size:10px; letter-spacing:.12em;
++  color:var(--text-dim2); text-transform:uppercase;
++  opacity:0; transform:translateX(-6px);
++  transition:opacity .3s, transform .3s, color .3s;
++  cursor:pointer;
++}
++.signal-tick.active label{ color:var(--amber); }
++.signal-rail:hover .signal-tick label{ opacity:1; transform:translateX(0); }
++@media (max-width:900px){ .signal-rail{ display:none; } }
++
++#loader{
++  position:fixed; inset:0; z-index:10000;
++  background:var(--ink);
++  display:flex; flex-direction:column; align-items:center; justify-content:center;
++  gap:var(--sp-3);
++  transition:opacity .7s var(--ease), visibility .7s;
++}
++#loader.done{ opacity:0; visibility:hidden; pointer-events:none; }
++.loader-mark{
++  font-family:var(--f-display);
++  font-size:15px;
++  font-weight:600;
++  letter-spacing:.05em;
++  color:var(--paper);
++}
++.loader-bar{ width:220px; height:1px; background:var(--line-2); position:relative; overflow:hidden; }
++.loader-fill{
++  position:absolute; inset:0 auto 0 0; width:0%;
++  background:var(--amber);
++  box-shadow:0 0 10px var(--amber);
++}
++.loader-status{
++  font-family:var(--f-mono);
++  font-size:10px;
++  letter-spacing:.15em;
++  color:var(--text-dim2);
++  text-transform:uppercase;
++  display:flex; gap:16px;
++}
++.loader-status .pct{ color:var(--amber); }
++
++#mainNav{
++  position:fixed; top:0; left:0; right:0; z-index:600;
++  display:flex; align-items:center; justify-content:space-between;
++  padding:20px clamp(20px,4vw,56px) 20px clamp(20px,4vw,64px);
++  background:rgba(12,15,18,.5);
++  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
++  border-bottom:1px solid transparent;
++  transition:background .4s, border-color .4s, padding .4s;
++}
++html.light #mainNav{ background:rgba(233,227,211,.55); }
++#mainNav.scrolled{ border-bottom-color:var(--border); padding-top:14px; padding-bottom:14px; }
++.nav-mark{
++  font-family:var(--f-display);
++  font-weight:600;
++  font-size:18px;
++  letter-spacing:-0.01em;
++  display:flex; align-items:baseline; gap:8px;
++}
++.nav-mark small{ font-family:var(--f-mono); font-size:9px; color:var(--amber); letter-spacing:.15em; }
++.nav-links{ display:flex; align-items:center; gap:var(--sp-5); }
++.nav-links a{
++  position:relative;
++  font-family:var(--f-mono);
++  font-size:12px;
++  letter-spacing:.08em;
++  text-transform:uppercase;
++  color:var(--text-dim);
++  padding:4px 2px;
++  transition:color .3s;
++}
++.nav-links a::after{
++  content:'';
++  position:absolute; left:0; bottom:-2px; width:0; height:1px;
++  background:var(--amber); transition:width .35s var(--ease);
++}
++.nav-links a:hover,.nav-links a.active{ color:var(--text); }
++.nav-links a:hover::after,.nav-links a.active::after{ width:100%; }
++.theme-btn{
++  width:34px; height:34px; border-radius:50%;
++  border:1px solid var(--border-2);
++  display:flex; align-items:center; justify-content:center;
++  font-size:13px;
++  transition:border-color .3s, transform .3s, background .3s;
++}
++.theme-btn:hover{ border-color:var(--amber); color:var(--amber); }
++@media (max-width:760px){ .nav-links{ display:none; } }
++
++.hero{
++  position:relative;
++  min-height:100vh;
++  display:flex;
++  align-items:flex-end;
++  padding:160px clamp(20px,4vw,64px) 80px;
++  overflow:hidden;
++}
++.hero::before{
++  content:'';
++  position:absolute; inset:0;
++  background:
++    radial-gradient(circle at 18% 24%, rgba(242,169,59,.18), transparent 28%),
++    radial-gradient(circle at 82% 18%, rgba(95,173,166,.16), transparent 30%),
++    linear-gradient(180deg, rgba(255,255,255,.02), transparent 42%);
++  pointer-events:none;
++}
++.hero-grid-lines{
++  position:absolute; inset:0; opacity:.35; pointer-events:none;
++  background-image:
++    linear-gradient(var(--border) 1px, transparent 1px),
++    linear-gradient(90deg, var(--border) 1px, transparent 1px);
++  background-size:64px 64px;
++  mask-image:radial-gradient(ellipse at 25% 20%, black, transparent 74%);
++}
++.hero-content{ position:relative; z-index:2; max-width:1280px; margin:0 auto; width:100%; }
++.hero-kicker{ margin-bottom:var(--sp-4); display:flex; align-items:center; gap:12px; }
++.hero-kicker .live{ width:6px; height:6px; border-radius:50%; background:var(--amber); animation:pulse 1.6s infinite; }
++@keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.4; transform:scale(1.5);} }
++.hero h1{
++  font-family:var(--f-display);
++  font-size:clamp(52px,8vw,122px);
++  font-weight:500;
++  line-height:.94;
++  letter-spacing:-0.02em;
++  max-width:10ch;
++}
++.hero h1 em{ font-style:italic; font-weight:400; color:var(--amber); }
++.hero-shell{
++  display:grid;
++  grid-template-columns:minmax(0, 1.05fr) minmax(320px, .95fr);
++  gap:var(--sp-6);
++  align-items:end;
++}
++.hero-copy p{
++  max-width:58ch;
++  margin-top:var(--sp-4);
++  color:var(--text-dim);
++  font-size:17px;
++  line-height:1.8;
++}
++.hero-meta{
++  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap;
++  gap:var(--sp-4); margin-top:var(--sp-5);
++  padding-top:var(--sp-4); border-top:1px solid var(--border);
++}
++.hero-role{
++  font-family:var(--f-mono);
++  font-size:15px;
++  color:var(--text-dim);
++  min-height:1.4em;
++}
++.typing-cursor{
++  display:inline-block; width:8px; height:14px; background:var(--amber);
++  vertical-align:middle; margin-left:4px; animation:blink .8s infinite;
++}
++@keyframes blink{ 50%{ opacity:0; } }
++.hero-cta{ display:flex; gap:14px; flex-wrap:wrap; }
++
++.hero-panel{
++  position:relative;
++  border:1px solid var(--border);
++  background:linear-gradient(180deg, rgba(255,255,255,.02), transparent), var(--surface);
++  border-radius:8px;
++  padding:var(--sp-4);
++  box-shadow:var(--shadow);
++  overflow:hidden;
++}
++.hero-panel::before{
++  content:'';
++  position:absolute; inset:0;
++  background-image:
++    linear-gradient(var(--border) 1px, transparent 1px),
++    linear-gradient(90deg, var(--border) 1px, transparent 1px);
++  background-size:28px 28px;
++  opacity:.32;
++  mask-image:radial-gradient(circle at 70% 30%, black, transparent 78%);
++}
++.hero-panel-header{
++  position:relative; z-index:1;
++  display:flex; justify-content:space-between; gap:16px; align-items:flex-start;
++  margin-bottom:var(--sp-4);
++}
++.panel-title{
++  font-family:var(--f-mono);
++  font-size:11px;
++  letter-spacing:.14em;
++  text-transform:uppercase;
++  color:var(--amber);
++}
++.panel-status{
++  font-family:var(--f-mono);
++  font-size:11px;
++  color:var(--text-dim2);
++  letter-spacing:.12em;
++  text-transform:uppercase;
++}
++.hero-stats{
++  position:relative; z-index:1;
++  display:grid;
++  grid-template-columns:repeat(2, minmax(0, 1fr));
++  gap:14px;
++}
++.hero-stat{
++  padding:18px;
++  border:1px solid var(--border);
++  background:rgba(255,255,255,.02);
++  border-radius:6px;
++}
++.hero-stat strong{
++  display:block;
++  font-family:var(--f-display);
++  font-size:32px;
++  font-weight:500;
++  letter-spacing:-0.02em;
++}
++.hero-stat span{
++  display:block;
++  margin-top:8px;
++  font-family:var(--f-mono);
++  font-size:10px;
++  letter-spacing:.12em;
++  text-transform:uppercase;
++  color:var(--text-dim2);
++}
++@media (max-width:980px){
++  .hero-shell{ grid-template-columns:1fr; }
++}
++
++.btn{
++  position:relative; display:inline-flex; align-items:center; gap:10px;
++  font-family:var(--f-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
++  padding:15px 28px; border-radius:2px; white-space:nowrap;
++}
++.btn-primary{ background:var(--amber); color:var(--ink); font-weight:600; }
++.btn-outline{ border:1px solid var(--border-2); color:var(--text); }
++.btn-outline:hover{ border-color:var(--amber); color:var(--amber); }
++
++.ticker-strip{
++  border-top:1px solid var(--border);
++  border-bottom:1px solid var(--border);
++  overflow:hidden;
++  padding:18px 0;
++  background:var(--surface);
++}
++.ticker-track{ display:flex; gap:56px; width:max-content; animation:tickerScroll 34s linear infinite; }
++@keyframes tickerScroll{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
++.ticker-track span{
++  font-family:var(--f-mono); font-size:13px; letter-spacing:.1em; text-transform:uppercase;
++  color:var(--text-dim); display:flex; align-items:center; gap:20px; white-space:nowrap;
++}
++.ticker-track span i{ color:var(--amber); font-size:6px; }
++
++.summary{
++  padding:var(--sp-7) clamp(20px,4vw,64px) var(--sp-5);
++}
++.summary-grid{
++  display:grid;
++  grid-template-columns:1.15fr .85fr;
++  gap:var(--sp-6);
++  align-items:start;
++}
++.summary h2{
++  margin-top:14px;
++  font-family:var(--f-display);
++  font-weight:500;
++  font-size:clamp(32px,4.8vw,56px);
++  line-height:1.04;
++  letter-spacing:-0.02em;
++  max-width:14ch;
++}
++.summary h2 em{ color:var(--amber); font-style:italic; }
++.summary-copy p{
++  margin-top:18px;
++  max-width:60ch;
++  color:var(--text-dim);
++  font-size:16px;
++  line-height:1.8;
++}
++.summary-board{
++  border:1px solid var(--border);
++  background:var(--surface);
++  border-radius:8px;
++  padding:var(--sp-4);
++}
++.summary-list{
++  display:grid;
++  grid-template-columns:repeat(2, minmax(0,1fr));
++  gap:16px;
++}
++.summary-list div{
++  padding:16px;
++  border:1px solid var(--border);
++  border-radius:6px;
++}
++.summary-list strong{
++  display:block;
++  font-family:var(--f-display);
++  font-size:28px;
++  font-weight:500;
++}
++.summary-list span{
++  display:block;
++  margin-top:8px;
++  font-family:var(--f-mono);
++  font-size:10px;
++  letter-spacing:.12em;
++  text-transform:uppercase;
++  color:var(--text-dim2);
++}
++@media (max-width:980px){
++  .summary-grid{ grid-template-columns:1fr; }
++}
++
++.filters{
++  padding:0 clamp(20px,4vw,64px) var(--sp-5);
++}
++.filter-shell{
++  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
++  max-width:1280px; margin:0 auto;
++}
++.filter-row{
++  display:flex; flex-wrap:wrap; gap:12px;
++}
++.filter-btn{
++  padding:12px 22px;
++  border:1px solid var(--border-2);
++  border-radius:999px;
++  background:var(--surface);
++  color:var(--text-dim);
++  font-family:var(--f-mono);
++  font-size:12px;
++  letter-spacing:.08em;
++  text-transform:uppercase;
++  transition:all .3s var(--ease);
++}
++.filter-btn:hover{
++  color:var(--text);
++  border-color:var(--amber);
++}
++.filter-btn.active{
++  color:var(--ink);
++  background:var(--amber);
++  border-color:var(--amber);
++  box-shadow:0 8px 20px var(--amber-dim);
++}
++.filter-note{
++  font-family:var(--f-mono);
++  font-size:11px;
++  letter-spacing:.1em;
++  text-transform:uppercase;
++  color:var(--text-dim2);
++}
++
++.project-section{
++  padding:0 clamp(20px,4vw,64px) var(--sp-7);
++}
++.section-head{
++  display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-3);
++  flex-wrap:wrap; margin-bottom:var(--sp-5);
++}
++.section-head h3{
++  margin-top:14px;
++  font-family:var(--f-display);
++  font-weight:500;
++  font-size:clamp(28px,4vw,46px);
++  letter-spacing:-0.02em;
++}
++.section-head p{
++  max-width:42ch;
++  color:var(--text-dim);
++  font-size:15px;
++  line-height:1.7;
++}
++.project-grid{
++  display:grid;
++  grid-template-columns:repeat(3, minmax(0,1fr));
++  gap:28px;
++}
++@media (max-width:1100px){ .project-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
++@media (max-width:700px){ .project-grid{ grid-template-columns:1fr; } }
++
++.project-card{
++  position:relative;
++  display:flex;
++  flex-direction:column;
++  min-height:100%;
++  border:1px solid var(--border);
++  border-radius:8px;
++  overflow:hidden;
++  background:var(--surface);
++  transform:translateY(28px);
++  opacity:0;
++  transition:border-color .3s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease), opacity .35s var(--ease), filter .35s var(--ease);
++}
++.project-card.visible{
++  opacity:1;
++  transform:translateY(0);
++}
++.project-card.hidden{
++  opacity:.12;
++  filter:saturate(.35);
++  transform:scale(.98);
++  pointer-events:none;
++}
++.project-card:hover{
++  border-color:var(--amber);
++  transform:translateY(-6px);
++  box-shadow:var(--shadow);
++}
++.project-media{
++  position:relative;
++  aspect-ratio:16 / 10;
++  overflow:hidden;
++  background:var(--bg-2);
++}
++.project-media img{
++  width:100%;
++  height:100%;
++  object-fit:cover;
++  transition:transform .7s var(--ease), filter .5s var(--ease);
++  filter:brightness(.88);
++}
++.project-card:hover .project-media img{
++  transform:scale(1.05);
++  filter:brightness(1);
++}
++.project-media::after{
++  content:'';
++  position:absolute; inset:0;
++  background:linear-gradient(to top, rgba(12,15,18,.7), transparent 60%);
++}
++.project-badges{
++  position:absolute; inset:16px 16px auto 16px; z-index:2;
++  display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
++}
++.project-type,.project-status{
++  padding:7px 12px;
++  border-radius:999px;
++  font-family:var(--f-mono);
++  font-size:10px;
++  letter-spacing:.1em;
++  text-transform:uppercase;
++  border:1px solid currentColor;
++  backdrop-filter:blur(10px);
++}
++.project-type.android{ color:#8DEA86; background:rgba(141,234,134,.1); }
++.project-type.web{ color:#8BD8D0; background:rgba(139,216,208,.1); }
++.project-status{ color:var(--amber); background:rgba(242,169,59,.1); }
++.project-index{
++  position:absolute; left:18px; bottom:16px; z-index:2;
++  font-family:var(--f-mono);
++  font-size:11px;
++  letter-spacing:.12em;
++  text-transform:uppercase;
++  color:var(--paper);
++}
++.project-body{
++  display:flex; flex-direction:column; gap:18px;
++  padding:26px;
++  flex:1;
++}
++.project-topline{
++  display:flex; align-items:center; justify-content:space-between; gap:16px;
++  font-family:var(--f-mono);
++  font-size:11px;
++  letter-spacing:.1em;
++  text-transform:uppercase;
++  color:var(--text-dim2);
++}
++.project-title{
++  font-family:var(--f-display);
++  font-size:28px;
++  font-weight:500;
++  letter-spacing:-0.02em;
++  line-height:1.05;
++}
++.project-desc{
++  color:var(--text-dim);
++  font-size:15px;
++  line-height:1.8;
++}
++.project-metrics{
++  display:grid;
++  grid-template-columns:repeat(2, minmax(0,1fr));
++  gap:12px;
++}
++.metric{
++  padding:14px;
++  border:1px solid var(--border);
++  border-radius:6px;
++}
++.metric strong{
++  display:block;
++  font-family:var(--f-display);
++  font-size:20px;
++  font-weight:500;
++}
++.metric span{
++  display:block;
++  margin-top:7px;
++  font-family:var(--f-mono);
++  font-size:10px;
++  letter-spacing:.12em;
++  text-transform:uppercase;
++  color:var(--text-dim2);
++}
++.project-stack{
++  display:flex; gap:8px; flex-wrap:wrap;
++}
++.project-stack span{
++  border:1px solid var(--border-2);
++  padding:5px 10px;
++  border-radius:999px;
++  font-family:var(--f-mono);
++  font-size:10px;
++  letter-spacing:.06em;
++  text-transform:uppercase;
++  color:var(--text-dim);
++}
++.project-footer{
++  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
++}
++.project-note{
++  font-family:var(--f-mono);
++  font-size:10px;
++  letter-spacing:.12em;
++  text-transform:uppercase;
++  color:var(--text-dim2);
++}
++
++.contact{
++  padding:0 clamp(20px,4vw,64px) var(--sp-8);
++}
++.contact-panel{
++  position:relative;
++  border:1px solid var(--border);
++  border-radius:8px;
++  padding:var(--sp-7) var(--sp-5);
++  text-align:center;
++  overflow:hidden;
++}
++.contact-panel::before{
++  content:'';
++  position:absolute; inset:0; opacity:.4; pointer-events:none;
++  background-image:
++    linear-gradient(var(--border) 1px,transparent 1px),
++    linear-gradient(90deg,var(--border) 1px,transparent 1px);
++  background-size:44px 44px;
++  mask-image:radial-gradient(ellipse at 50% 50%, black, transparent 75%);
++}
++.contact-panel h2{
++  position:relative; z-index:1;
++  font-family:var(--f-display);
++  font-weight:500;
++  font-size:clamp(34px,6vw,72px);
++  line-height:1.06;
++  letter-spacing:-0.02em;
++  max-width:14ch;
++  margin:0 auto var(--sp-4);
++}
++.contact-panel h2 em{ font-style:italic; color:var(--amber); }
++.contact-cta{
++  position:relative; z-index:1;
++  display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
++  margin-bottom:var(--sp-6);
++}
++.social-row{
++  position:relative; z-index:1;
++  display:flex; justify-content:center; gap:14px; flex-wrap:wrap;
++}
++.social-row a{
++  width:46px; height:46px; border:1px solid var(--border-2); border-radius:50%;
++  display:flex; align-items:center; justify-content:center; font-size:15px;
++  color:var(--text-dim);
++  transition:color .3s, border-color .3s, box-shadow .3s, transform .3s;
++}
++.social-row a:hover{ color:var(--amber); border-color:var(--amber); box-shadow:0 0 20px var(--amber-dim); transform:translateY(-3px); }
++
++footer{
++  padding:var(--sp-5) clamp(20px,4vw,64px);
++  border-top:1px solid var(--border);
++  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
++}
++footer .fmark{ font-family:var(--f-display); font-weight:500; font-size:15px; }
++footer .fcopy{ font-family:var(--f-mono); font-size:11px; color:var(--text-dim2); letter-spacing:.05em; }
++.back-top{
++  font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
++  color:var(--text-dim); display:flex; align-items:center; gap:8px; transition:color .3s;
++}
++.back-top:hover{ color:var(--amber); }
++
++@media (prefers-reduced-motion: reduce){
++  *{
++    animation-duration:.001ms !important;
++    animation-iteration-count:1 !important;
++    transition-duration:.001ms !important;
++    scroll-behavior:auto !important;
++  }
++}
++</style>
++</head>
++<body>
++
++<div id="grain"></div>
++<div class="spotlight" id="spotlight"></div>
++<div class="cursor-dot" id="cursorDot"></div>
++<div class="cursor-ring" id="cursorRing"><span id="cursorLabel"></span></div>
++
++<div id="loader">
++  <div class="loader-mark">Ujjaval Saini</div>
++  <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
++  <div class="loader-status"><span>Loading project ledger</span><span class="pct" id="loaderPct">0%</span></div>
++</div>
++
++<div class="top-progress" id="topProgress"></div>
++
++<div class="signal-rail" id="signalRail">
++  <div class="signal-track">
++    <div class="signal-fill" id="signalFill"></div>
++    <div class="signal-ticks" id="signalTicks"></div>
++  </div>
++</div>
++
++<nav id="mainNav">
++  <a href="index.html" class="nav-mark">Ujjaval Saini <small>US—02</small></a>
++  <div class="nav-links">
++    <a href="index.html">Home</a>
++    <a href="#overview" class="active">Projects</a>
++    <a href="about.html">About</a>
++    <a href="contactUs.html">Contact</a>
++  </div>
++  <button class="theme-btn" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
++</nav>
++
++<main>
++  <section class="hero" id="overview" data-signal="Overview">
++    <div class="hero-grid-lines"></div>
++    <div class="hero-content">
++      <div class="hero-shell">
++        <div class="hero-copy">
++          <div class="hero-kicker">
++            <span class="live"></span>
++            <span class="eyebrow">Selected Work — Android and Web</span>
++          </div>
++          <h1>Projects with <em>signal</em>, polish, and purpose.</h1>
++          <p>Each build below represents more than a screenshot. They are products shaped by native Android thinking, full-stack delivery, and a bias toward work that actually survives real use.</p>
++          <div class="hero-meta">
++            <div class="hero-role">
++              <span id="typingEl"></span><span class="typing-cursor"></span>
++            </div>
++            <div class="hero-cta">
++              <a href="#catalog" class="btn btn-primary" data-cursor="Browse"><i class="fas fa-arrow-down"></i> Browse Projects</a>
++              <a href="contactUs.html" class="btn btn-outline" data-cursor="Talk"><i class="fas fa-paper-plane"></i> Start a Project</a>
++            </div>
++          </div>
++        </div>
++        <aside class="hero-panel">
++          <div class="hero-panel-header">
++            <div>
++              <div class="panel-title">Project ledger</div>
++              <div style="margin-top:10px;font-family:var(--f-display);font-size:28px;font-weight:500;letter-spacing:-0.02em;">Built across mobile, backend, and web delivery.</div>
++            </div>
++            <div class="panel-status">Live archive</div>
++          </div>
++          <div class="hero-stats">
++            <div class="hero-stat"><strong>14</strong><span>Featured builds</span></div>
++            <div class="hero-stat"><strong>8</strong><span>Android releases</span></div>
++            <div class="hero-stat"><strong>6</strong><span>Web systems</span></div>
++            <div class="hero-stat"><strong>3</strong><span>Delivery modes</span></div>
++          </div>
++        </aside>
++      </div>
++    </div>
++  </section>
++
++  <div class="ticker-strip" aria-hidden="true">
++    <div class="ticker-track" id="tickerTrack"></div>
++  </div>
++
++  <section class="summary" id="summary" data-signal="Summary">
++    <div class="wrap summary-grid">
++      <div class="summary-copy">
++        <div class="eyebrow">Project view</div>
++        <h2>A sharper look at the <em>systems</em> behind the screens.</h2>
++        <p>This page now follows the same field-instrument design system as the homepage: warm paper text, amber signal cues, modular cards, loader flow, scroll rail, and restrained motion. The catalog is grouped to show what was built, what it solved, and what stack it leaned on.</p>
++      </div>
++      <div class="summary-board">
++        <div class="summary-list">
++          <div><strong>Realtime</strong><span>Safety and tracking</span></div>
++          <div><strong>Native</strong><span>Compose and Kotlin</span></div>
++          <div><strong>Growth</strong><span>Analytics and iteration</span></div>
++          <div><strong>Utility</strong><span>Tools with daily use</span></div>
++        </div>
++      </div>
++    </div>
++  </section>
++
++  <section class="filters" id="filters" data-signal="Filters">
++    <div class="filter-shell">
++      <div class="filter-row" id="filterBar">
++        <button class="filter-btn active" data-filter="all">All Projects</button>
++        <button class="filter-btn" data-filter="android">Android</button>
++        <button class="filter-btn" data-filter="web">Web</button>
++      </div>
++      <div class="filter-note" id="filterNote">Showing 14 projects</div>
++    </div>
++  </section>
++
++  <section class="project-section" id="catalog" data-signal="Catalog">
++    <div class="section-head">
++      <div>
++        <div class="eyebrow">Android systems</div>
++        <h3>Apps designed to feel native.</h3>
++      </div>
++      <p>These builds focus on platform-fit UX, clean flows, reliability, and practical utility for people using them on-device.</p>
++    </div>
++    <div class="project-grid">
++      <article class="project-card" data-category="android">
++        <div class="project-media">
++          <img src="images/quoteApp/banner.png" alt="Quote App" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1547237711-8e9a3a37b85e?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type android">Android</span>
++            <span class="project-status">Shipped</span>
++          </div>
++          <div class="project-index">P-01</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Daily engagement</span><span>Utility app</span></div>
++          <h4 class="project-title">Quote App</h4>
++          <p class="project-desc">A motivational quote experience with a strong visual rhythm, easy browsing, and a card-based reading flow built for repeat visits.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Daily</strong><span>Content utility</span></div>
++            <div class="metric"><strong>Clean</strong><span>Card interaction</span></div>
++          </div>
++          <div class="project-stack"><span>Kotlin</span><span>XML</span><span>UI State</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: retention through simple repeat use</div>
++            <a href="quote.html" class="btn btn-outline" data-cursor="Open"><i class="fas fa-arrow-right"></i> View Project</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="android">
++        <div class="project-media">
++          <img src="images/raksha1-img.jpg" alt="Raksha Kawatch App" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type android">Android</span>
++            <span class="project-status">Realtime</span>
++          </div>
++          <div class="project-index">P-02</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Safety tech</span><span>Location + alerts</span></div>
++          <h4 class="project-title">Raksha Kawatch App</h4>
++          <p class="project-desc">A women’s safety companion with live tracking, emergency actions, and dependable on-device flows around urgent use moments.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Live</strong><span>Location signal</span></div>
++            <div class="metric"><strong>Fast</strong><span>Alert workflow</span></div>
++          </div>
++          <div class="project-stack"><span>Kotlin</span><span>Room DB</span><span>Location</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: urgent action without friction</div>
++            <a href="raksha.html" class="btn btn-outline" data-cursor="Open"><i class="fas fa-arrow-right"></i> View Project</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="android">
++        <div class="project-media">
++          <img src="images/apniDukaan/homeAD.jpg" alt="Apni Dukaan" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type android">Android</span>
++            <span class="project-status">Business</span>
++          </div>
++          <div class="project-index">P-03</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Shop operations</span><span>Inventory flow</span></div>
++          <h4 class="project-title">Apni Dukaan</h4>
++          <p class="project-desc">Stock and transaction management for small business owners who need a practical system without overhead or complexity.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Simple</strong><span>Merchant UX</span></div>
++            <div class="metric"><strong>Tracked</strong><span>Inventory events</span></div>
++          </div>
++          <div class="project-stack"><span>Kotlin</span><span>Firebase</span><span>CRUD</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: operational clarity for small stores</div>
++            <a href="apniDukaan.html" class="btn btn-outline" data-cursor="Open"><i class="fas fa-arrow-right"></i> View Project</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="android">
++        <div class="project-media">
++          <img src="images/weather-img.jpg" alt="Weather App" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504608524841-42584120d693?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type android">Android</span>
++            <span class="project-status">API</span>
++          </div>
++          <div class="project-index">P-04</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Forecasting</span><span>External API</span></div>
++          <h4 class="project-title">Weather App</h4>
++          <p class="project-desc">An interactive forecast tool built around fast reads, animated icons, and clear weather visibility powered by remote data.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Live</strong><span>API weather feed</span></div>
++            <div class="metric"><strong>Visual</strong><span>Icon states</span></div>
++          </div>
++          <div class="project-stack"><span>Kotlin</span><span>Retrofit</span><span>API UI</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: fast information at a glance</div>
++            <a href="maintainance.html" class="btn btn-outline" data-cursor="Open"><i class="fas fa-arrow-right"></i> View Project</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="android">
++        <div class="project-media">
++          <img src="images/sc-cal-img.jpg" alt="Scientific Calculator" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type android">Android</span>
++            <span class="project-status">Tool</span>
++          </div>
++          <div class="project-index">P-05</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Math utility</span><span>Fast input</span></div>
++          <h4 class="project-title">Scientific Calculator</h4>
++          <p class="project-desc">A calculator interface built around precision, compact control layout, and dependable handling for common scientific operations.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Compact</strong><span>Dense controls</span></div>
++            <div class="metric"><strong>Reliable</strong><span>Expression flow</span></div>
++          </div>
++          <div class="project-stack"><span>Kotlin</span><span>Math Logic</span><span>Android UI</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: accuracy and quick access</div>
++            <a href="maintainance.html" class="btn btn-outline" data-cursor="Open"><i class="fas fa-arrow-right"></i> View Project</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="android">
++        <div class="project-media">
++          <img src="images/uniqueLoginSignup/homeLS.jpg" alt="Unique Login Signup" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555421689-491a97ff2040?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type android">Android</span>
++            <span class="project-status">Auth</span>
++          </div>
++          <div class="project-index">P-06</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>User onboarding</span><span>Connected flow</span></div>
++          <h4 class="project-title">Unique Login & Signup</h4>
++          <p class="project-desc">A polished authentication app using Firebase with modern motion, clear input states, and practical signup/login behavior.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Connected</strong><span>Firebase auth</span></div>
++            <div class="metric"><strong>Modern</strong><span>Animated UI</span></div>
++          </div>
++          <div class="project-stack"><span>Kotlin</span><span>Firebase Auth</span><span>Validation</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: reducing friction at entry</div>
++            <a href="uniqueLoginSignup.html" class="btn btn-outline" data-cursor="Open"><i class="fas fa-arrow-right"></i> View Project</a>
++          </div>
++        </div>
++      </article>
++    </div>
++  </section>
++
++  <section class="project-section" id="systems" data-signal="Systems">
++    <div class="section-head">
++      <div>
++        <div class="eyebrow">Web systems</div>
++        <h3>Web products built to explain, manage, or deliver.</h3>
++      </div>
++      <p>These projects range from portfolio experiences to backend-connected platforms, where clarity and delivery mechanics matter as much as visuals.</p>
++    </div>
++    <div class="project-grid">
++      <article class="project-card" data-category="web">
++        <div class="project-media">
++          <img src="images/raksha-img.png" alt="Raksha Kawatch Website" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type web">Web</span>
++            <span class="project-status">Realtime</span>
++          </div>
++          <div class="project-index">P-07</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Safety platform</span><span>Realtime updates</span></div>
++          <h4 class="project-title">Raksha Kawatch Website</h4>
++          <p class="project-desc">A live web companion for location-aware tracking and monitoring, shaped around urgent visibility and responsive status feedback.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Realtime</strong><span>State movement</span></div>
++            <div class="metric"><strong>Connected</strong><span>APIs + database</span></div>
++          </div>
++          <div class="project-stack"><span>HTML</span><span>APIs</span><span>WebSocket</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: monitoring with low latency feedback</div>
++            <a href="maintainance.html" class="btn btn-outline" data-cursor="Open"><i class="fas fa-arrow-right"></i> View Project</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="web">
++        <div class="project-media">
++          <img src="images/portfolio-img.png" alt="UV InfoHub" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type web">Web</span>
++            <span class="project-status">Live</span>
++          </div>
++          <div class="project-index">P-08</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Portfolio system</span><span>Responsive UI</span></div>
++          <h4 class="project-title">UV InfoHub</h4>
++          <p class="project-desc">A portfolio site focused on showcasing Android and web capability with a modern layout and a clear project-first browsing structure.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Responsive</strong><span>Cross-device layout</span></div>
++            <div class="metric"><strong>Visual</strong><span>Presentation quality</span></div>
++          </div>
++          <div class="project-stack"><span>Tailwind</span><span>JavaScript</span><span>Portfolio UX</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: presenting work with clarity</div>
++            <a href="https://ujjaval01.github.io/my-website/" target="_blank" rel="noopener" class="btn btn-outline" data-cursor="Visit"><i class="fas fa-arrow-up-right-from-square"></i> Visit</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="web">
++        <div class="project-media">
++          <img src="images/port-img.png" alt="My Portfolio" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1547658719-da2b51169166?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type web">Web</span>
++            <span class="project-status">Brand</span>
++          </div>
++          <div class="project-index">P-09</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Personal brand</span><span>Responsive system</span></div>
++          <h4 class="project-title">My Portfolio</h4>
++          <p class="project-desc">A personal site designed to introduce background, skills, and project work through a lighter, approachable presentation layer.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Clear</strong><span>Storytelling</span></div>
++            <div class="metric"><strong>Adapted</strong><span>Responsive UI</span></div>
++          </div>
++          <div class="project-stack"><span>HTML</span><span>CSS</span><span>JS</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: concise professional introduction</div>
++            <a href="https://ujjaval01.github.io/Main-Portfolio/" target="_blank" rel="noopener" class="btn btn-outline" data-cursor="Visit"><i class="fas fa-arrow-up-right-from-square"></i> Visit</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="web">
++        <div class="project-media">
++          <img src="images/ytDownloader/image.png" alt="Ultimate Video Downloader" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type web">Web</span>
++            <span class="project-status">Tool</span>
++          </div>
++          <div class="project-index">P-10</div>
++        </div>
++        <div class="project-body">
++          <div class="project-topline"><span>Media utility</span><span>Backend flow</span></div>
++          <h4 class="project-title">Ultimate Video Downloader</h4>
++          <p class="project-desc">A downloader experience combining a lightweight interface with Flask backend handling, format options, and multiple resolution paths.</p>
++          <div class="project-metrics">
++            <div class="metric"><strong>Multi</strong><span>Format options</span></div>
++            <div class="metric"><strong>Handled</strong><span>Backend processing</span></div>
++          </div>
++          <div class="project-stack"><span>Flask</span><span>Tailwind</span><span>Media Flow</span></div>
++          <div class="project-footer">
++            <div class="project-note">Focus: simple front-end for useful backend work</div>
++            <a href="ytDownloader.html" class="btn btn-outline" data-cursor="Open"><i class="fas fa-arrow-right"></i> View Project</a>
++          </div>
++        </div>
++      </article>
++
++      <article class="project-card" data-category="web">
++        <div class="project-media">
++          <img src="images/lms/image.png" alt="LMS Platform" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=900&h=560&fit=crop'">
++          <div class="project-badges">
++            <span class="project-type web">Web</span>
++            <span class="project-status">Platform</span>
++          </div>

@@ -13,75 +13,131 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/favicon.png">
-  <style>
-
-    
-
-                
-    
-    #themeToggleBtn { border-radius: 20px; padding: 5px 15px; font-weight: 500; transition: all 0.3s; }
-    #themeToggleBtn:hover { transform: scale(1.05); }
-
-    /* Hero Section */
+<link rel="stylesheet" href="style.css">
+<style>
     .hero-section {
-        background: linear-gradient(135deg, #be52df, #1d4a98);
-        color: white;
-        padding: 150px 20px 80px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
+      padding: 180px 20px 100px;
+      text-align: center;
+      position: relative;
     }
-    .dark-mode .hero-section { background: linear-gradient(135deg, #2a2a4a, #4a2a6a); }
-
-    .shape {
-        position: absolute; filter: blur(60px); z-index: 0; animation: float 10s infinite alternate; border-radius: 50%; opacity: 0.6;
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(32px, 6vw, 64px);
+      margin-bottom: 20px;
     }
-    .shape-1 { width: 300px; height: 300px; background: rgba(255, 255, 255, 0.2); top: -10%; left: -5%; }
-    .shape-2 { width: 400px; height: 400px; background: rgba(0, 0, 0, 0.2); bottom: -10%; right: -5%; animation-duration: 15s; }
-    @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-50px) scale(1.1); } }
-
-    .hero-content { position: relative; z-index: 1; }
-    .hero-title { font-weight: 800; font-size: 3rem; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-    .hero-subtitle { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; }
-
-    .btn-custom {
-        background: white; color: #1d4a98; font-weight: 700; padding: 12px 30px; border-radius: 30px; border: none; transition: all 0.4s;
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .btn-custom:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: #fce408; color: #111; }
-
-    /* Features Section */
-    .section-title { text-align: center; font-weight: 800; margin-bottom: 40px; font-size: 36px; }
     .gradient-text {
-        background: linear-gradient(45deg, #1d4a98, #be52df); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
     }
-    .dark-mode .gradient-text { background: linear-gradient(45deg, #8c52ff, #e540dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-    .feature-card {
-        background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px;
-        transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; justify-content: center;
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 48px;
     }
-    .dark-mode .feature-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
-    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15); }
-    .feature-card h3 { font-weight: 700; font-size: 20px; margin-bottom: 15px; color: #333; }
-    .dark-mode .feature-card h3 { color: #fff; }
-    .feature-card p { color: #666; font-size: 15px; margin: 0; }
-    .dark-mode .feature-card p { color: #aaa; }
+    .feature-card, .screenshot-card, .review-card {
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      height: 100%;
+    }
+    .feature-card:hover, .screenshot-card:hover, .review-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent1);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .review-card {
+      max-width: 650px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #review-author {
+      color: var(--accent2);
+      font-weight: 700;
+      margin-top: 16px;
+    }
 
-    /* Slider Styling */
-    .image-slider { overflow: hidden; position: relative; width: 100%; padding: 20px 0; }
-    .slider-track { display: flex; animation: scroll-left 15s linear infinite; }
-    .slider-track img { width: 220px; height: 450px; object-fit: cover; margin: 0 15px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: transform 0.3s; }
-    .slider-track img:hover { transform: scale(1.05); }
-    @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    /* Image Slider Track */
+    .image-slider {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding: 20px 0;
+    }
+    .slider-track {
+      display: flex;
+      animation: scroll-left 25s linear infinite;
+    }
+    .slider-track img {
+      width: 220px;
+      height: 450px;
+      object-fit: cover;
+      margin: 0 15px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slider-track img:hover {
+      transform: scale(1.05);
+      border-color: var(--accent1);
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
-    /* Testimonials */
-    .testimonial-section { background: #111; color: white; padding: 80px 20px; text-align: center; }
-    #review-slider { min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    #review-text { font-size: 1.2rem; font-style: italic; font-weight: 300; transition: opacity 0.5s; }
-    #review-author { font-weight: 700; color: #be52df; transition: opacity 0.5s; margin-top: 15px; }
-
-    </style>
-    <link rel="stylesheet" href="style.css">
+    /* Testimonial Section */
+    .testimonial-section {
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+    }
+    #review-slider {
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #review-text {
+      font-size: 1.35rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      transition: opacity 0.5s;
+      max-width: 600px;
+    }
+    .fade-out {
+      opacity: 0;
+    }
+</style>
     <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
 </head>
 <body>
@@ -90,18 +146,15 @@
       <a href="project.html">Projects</a>
       <a href="about.html">About</a>
       <a href="contactUs.html">Contact</a>
-      <button id="themeToggleBtn" class="theme-btn btn-light"><i class="fas fa-moon"></i> Theme</button>
+      <button id="themeToggleBtn" class="theme-btn"><i class="fas fa-moon"></i> Theme</button>
     </nav>
-
 
     <!-- Hero Section -->
   <section class="hero-section">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
     <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
-        <h1 class="hero-title">Women Safety & Security System</h1>
-        <p class="hero-subtitle">An advanced safety app with real-time tracking, emergency alerts, and security features.</p>
-        <button class="btn-custom">Download Now</button>
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">Raksha Kawatch</h1>
+      <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">A Women Safety & Security System app designed to offer immediate assistance in times of danger.</p>
+      <a href="maintainance.html" class="btn-premium btn-premium-primary btn-magnetic" data-aos="fade-up" data-aos-delay="300" style="text-decoration:none;">Download App</a>
     </div>
   </section>
 

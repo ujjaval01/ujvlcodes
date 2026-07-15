@@ -1,547 +1,284 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LMS - Learning Management System</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    
-    <!-- GSAP for advanced animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            /* Light mode variables matching current theme but modernized */
-            --bg: #f5f7fa;
-            --surface: rgba(255, 255, 255, 0.45);
-            --surface2: rgba(255, 255, 255, 0.7);
-            --glass: rgba(255, 255, 255, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --accent1: #1d4a98;
-            --accent2: #be52df;
-            --accent3: #f59e0b;
-            --text: #333333;
-            --text-muted: #666666;
-            --border: rgba(29, 74, 152, 0.15);
-            --glow1: rgba(190, 82, 223, 0.2);
-            --glow2: rgba(29, 74, 152, 0.1);
-            --font-display: 'Syne', sans-serif;
-            --font-body: 'Space Grotesk', sans-serif;
-        }
-
-        .dark-mode :root {
-            /* Dark mode variables matching project.html and portfolio */
-            --bg: #060912;
-            --surface: rgba(12, 18, 32, 0.45);
-            --surface2: rgba(17, 28, 46, 0.65);
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.07);
-            --accent1: #7c3aed;
-            --accent2: #06b6d4;
-            --accent3: #f59e0b;
-            --text: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border: rgba(124, 58, 237, 0.2);
-            --glow1: rgba(124, 58, 237, 0.4);
-            --glow2: rgba(6, 182, 212, 0.3);
-        }
-
-        body {
-            font-family: var(--font-body);
-            background: var(--bg);
-            color: var(--text);
-            position: relative;
-            overflow-x: hidden;
-            cursor: none;
-            transition: background 0.5s ease, color 0.5s ease;
-        }
-
-        /* Ambient glowing background */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 10% 20%, var(--glow1) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, var(--glow2) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: -2;
-        }
-
-        /* Custom Cursor */
-        .cursor-dot {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background: var(--accent1);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99999;
-            transform: translate(-50%, -50%);
-        }
-        .cursor-ring {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99998;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, border-color 0.3s;
-        }
-        .cursor-ring.hovering {
-            width: 60px;
-            height: 60px;
-            border-color: var(--accent2);
-            background: rgba(6, 182, 212, 0.05);
-        }
-
-        /* Page Transition Overlay */
-        .page-transition {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            transform: translateY(0);
-            pointer-events: none;
-        }
-
-        /* Main Content Section */
-        .feature-container {
-            padding-top: 140px;
-            padding-bottom: 50px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: var(--font-display);
-            font-weight: 800;
-            margin-bottom: 50px;
-            font-size: clamp(28px, 5vw, 42px);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        /* Hero glass card */
-        .hero-section {
-            background: var(--surface);
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 48px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
-            margin-bottom: 50px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-        .dark-mode .hero-section {
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-        }
-
-        /* Floating Badge styling */
-        .floating-badge {
-            background: var(--surface2) !important;
-            backdrop-filter: blur(12px) saturate(160%) !important;
-            -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
-            border: 1px solid var(--glass-border) !important;
-            color: var(--text) !important;
-            border-radius: 16px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
-            z-index: 10;
-        }
-        .dark-mode .floating-badge {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3) !important;
-        }
-
-        /* Features Cards with Glassmorphism */
-        .feature-card {
-            margin-bottom: 30px;
-            background: var(--surface);
-            backdrop-filter: blur(16px) saturate(160%);
-            -webkit-backdrop-filter: blur(16px) saturate(160%);
-            border: 1px solid var(--glass-border) !important;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-                        box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-                        border-color 0.3s ease !important;
-            padding: 36px 24px;
-            text-align: center;
-            height: 100%;
-        }
-        .dark-mode .feature-card {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent2) !important;
-            box-shadow: 0 20px 45px var(--glow1) !important;
-        }
-
-        .feature-icon {
-            font-size: 44px;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--accent1), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        .feature-title {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-
-        .feature-text {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* Premium Buttons */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent1), var(--accent2)) !important;
-            border: none !important;
-            border-radius: 30px !important;
-            padding: 12px 28px !important;
-            font-weight: 700 !important;
-            color: #ffffff !important;
-            box-shadow: 0 8px 20px var(--glow1) !important;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1) !important;
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.03) !important;
-            box-shadow: 0 12px 28px var(--glow1) !important;
-        }
-
-        .btn-dark {
-            background: var(--surface2) !important;
-            border: 1px solid var(--glass-border) !important;
-            color: var(--text) !important;
-            border-radius: 30px !important;
-            padding: 12px 28px !important;
-            font-weight: 700 !important;
-            transition: all 0.3s ease !important;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05) !important;
-        }
-        .btn-dark:hover {
-            background: var(--accent1) !important;
-            color: #ffffff !important;
-            transform: translateY(-3px) !important;
-            box-shadow: 0 12px 28px var(--glow1) !important;
-            border-color: transparent !important;
-        }
-
-        /* Glassmorphic Navbar overrides */
-        .custom-pill-nav {
-            background: var(--glass) !important;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid var(--glass-border) !important;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
-        }
-        .dark-mode .custom-pill-nav {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
-        }
-        
-        .pill-nav-link {
-            color: var(--text-muted) !important;
-            transition: all 0.3s !important;
-        }
-        .pill-nav-link:hover, .pill-nav-link.active {
-            color: var(--text) !important;
-            background: transparent !important;
-        }
-        .pill-nav-link::after {
-            background: linear-gradient(45deg, var(--accent2), var(--accent1)) !important;
-        }
-        
-        .nav-right .theme-btn {
-            background: var(--text) !important;
-            color: var(--bg) !important;
-            border: 1px solid var(--glass-border) !important;
-            transition: all 0.3s !important;
-        }
-        .nav-right .theme-btn:hover {
-            box-shadow: 0 5px 15px var(--glow1) !important;
-        }
-        
-        .nav-left .nav-icon-circle {
-            background: var(--text) !important;
-            color: var(--bg) !important;
-            transition: all 0.3s !important;
-        }
-
-        /* Footer styling alignment */
-        footer {
-            background: transparent !important;
-            border-top: 1px solid var(--glass-border) !important;
-            padding: 60px 0 40px !important;
-            position: relative;
-            z-index: 2;
-        }
-        footer::before {
-            display: none !important;
-        }
-        .footer-social a {
-            background: var(--glass) !important;
-            border: 1px solid var(--glass-border) !important;
-            color: var(--text-muted) !important;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-        }
-        .footer-social a:hover {
-            background: linear-gradient(135deg, var(--accent1), var(--accent2)) !important;
-            color: #ffffff !important;
-            transform: translateY(-8px) rotate(360deg) !important;
-            border-color: transparent !important;
-            box-shadow: 0 10px 20px var(--glow1) !important;
-        }
-        </style>
-    <link rel="stylesheet" href="style.css">
-    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
-</head>
-<body>
-
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="page-transition" id="pageTransition"></div>
-
-<!-- Cursor Glow -->
-<div class="cursor-glow" id="cursorGlow"></div>
-
-        <!-- Navbar -->
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="project.html">Projects</a>
-      <a href="about.html">About</a>
-      <a href="contactUs.html">Contact</a>
-      <button id="themeToggleBtn" class="theme-btn btn-light"><i class="fas fa-moon"></i> Theme</button>
-    </nav>
-
-    <!-- Content Section -->
-    <div class="container feature-container">
-        
-        <div class="hero-section" data-aos="fade-up">
-            <div class="row align-items-center">
-                <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
-                    <h1 class="fw-bold mb-4"><span class="gradient-text">Learning Management System (LMS)</span></h1>
-                    <p class="lead mb-4">A comprehensive platform for modern education, enabling educators to create and manage courses, and students to learn efficiently from anywhere.</p>
-                    
-                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-2 mb-4">
-                        <a href="project.html" class="btn btn-dark" style="border-radius: 30px; padding: 10px 25px; font-weight: 600; transition: all 0.3s ease;"><i class="fas fa-arrow-left"></i> Back to Projects</a>
-                        <a href="https://readify-green.vercel.app" class="btn btn-primary"><i class="fas fa-tachometer-alt"></i> Go to Website</a>
-                    </div>
-                    
-                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mt-4 gap-4">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="fas fa-check-circle text-success fs-5"></i>
-                            <span class="fw-medium">Easy Setup</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="fas fa-check-circle text-success fs-5"></i>
-                            <span class="fw-medium">Secure Platform</span>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="fas fa-check-circle text-success fs-5"></i>
-                            <span class="fw-medium">Detailed Analytics</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6">
-                    <!-- Dashboard Image Preview with Floating Badges -->
-                    <div class="position-relative tilt-3d" data-aos="zoom-in" data-aos-delay="200">
-                        <!-- Glowing Background Effect -->
-                        <div class="position-absolute w-100 h-100 rounded-4" style="background: linear-gradient(45deg, rgba(190, 82, 223, 0.3), rgba(29, 74, 152, 0.3)); filter: blur(25px); transform: scale(0.9); z-index: -1;"></div>
-                        
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="LMS Dashboard Preview" class="img-fluid rounded-4 shadow-lg position-relative" style="width: 100%; object-fit: cover; border: 2px solid rgba(190, 82, 223, 0.2);" loading="lazy">
-                        
-                        <!-- Floating Badge 1 -->
-                        <div class="floating-badge pop-out-3d position-absolute p-3 rounded-3 shadow-lg animate__animated animate__pulse animate__infinite animate__slower" style="top: 15%; left: -20px;">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="bg-primary bg-opacity-10 p-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                    <i class="fas fa-user-graduate text-primary fs-5"></i>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0 fw-bold">10k+</h6>
-                                    <small class="text-muted" style="font-size: 12px;">Active Students</small>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Floating Badge 2 -->
-                        <div class="floating-badge pop-out-3d position-absolute p-3 rounded-3 shadow-lg animate__animated animate__pulse animate__infinite animate__slower animate__delay-1s" style="bottom: 15%; right: -20px;">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="bg-warning bg-opacity-10 p-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                                    <i class="fas fa-star text-warning fs-5"></i>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0 fw-bold">4.9/5</h6>
-                                    <small class="text-muted" style="font-size: 12px;">User Ratings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="section-title fw-bold mt-5" data-aos="fade-up"><span class="gradient-text">Core Functionalities</span></h2>
-        
-        <div class="row">
-            <!-- Feature 1 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="feature-card tilt-3d">
-                    <i class="fas fa-book-open feature-icon pop-out-3d"></i>
-                    <h5 class="feature-title pop-out-3d">Course Creation & Management</h5>
-                    <p class="feature-text">Easily create interactive courses with multimedia support, structured modules, and detailed lesson plans.</p>
-                </div>
-            </div>
-            
-            <!-- Feature 2 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="feature-card tilt-3d">
-                    <i class="fas fa-users feature-icon pop-out-3d"></i>
-                    <h5 class="feature-title pop-out-3d">Student Enrollment</h5>
-                    <p class="feature-text">Seamless onboarding and enrollment processes, allowing students to browse and join courses instantly.</p>
-                </div>
-            </div>
-
-            <!-- Feature 3 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
-                <div class="feature-card tilt-3d">
-                    <i class="fas fa-chart-line feature-icon pop-out-3d"></i>
-                    <h5 class="feature-title pop-out-3d">Progress Tracking</h5>
-                    <p class="feature-text">Detailed analytics and dashboards for both students and instructors to track learning progress over time.</p>
-                </div>
-            </div>
-
-            <!-- Feature 4 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
-                <div class="feature-card tilt-3d">
-                    <i class="fas fa-clipboard-list feature-icon pop-out-3d"></i>
-                    <h5 class="feature-title pop-out-3d">Assignments & Quizzes</h5>
-                    <p class="feature-text">Evaluate knowledge through interactive quizzes and assignment submissions with automated grading features.</p>
-                </div>
-            </div>
-
-            <!-- Feature 5 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
-                <div class="feature-card tilt-3d">
-                    <i class="fas fa-certificate feature-icon pop-out-3d"></i>
-                    <h5 class="feature-title pop-out-3d">Certifications</h5>
-                    <p class="feature-text">Automatically generate and award customized certificates upon successful completion of a course.</p>
-                </div>
-            </div>
-
-            <!-- Feature 6 -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
-                <div class="feature-card tilt-3d">
-                    <i class="fas fa-credit-card feature-icon pop-out-3d"></i>
-                    <h5 class="feature-title pop-out-3d">Payment Integration</h5>
-                    <p class="feature-text">Secure gateway integrations to handle course purchases, subscriptions, and financial reporting.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <div class="footer-logo">Ujjaval Saini</div>
-      <p style="color:var(--text-muted);font-size:13px;">Building things that actually work.</p>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
-      </div>
-      <p class="footer-copy">© 2025 Ujjaval Saini · All Rights Reserved</p>
-    </footer>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Initialize Animate On Scroll
-        AOS.init({
-            once: true,
-            offset: 50,
-            duration: 800,
-        });
-
-        // Register ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Smooth page transition entrance
-        gsap.to('#pageTransition', { yPercent: -100, duration: 0.7, ease: 'power3.inOut', delay: 0.05 });
-
-        // Hero section entrance animation
-        gsap.from('.hero-section', { opacity: 0, y: 50, duration: 1, ease: 'power3.out', delay: 0.2 });
-
-        // Key feature cards stagger entrance
-        gsap.from('.feature-card', {
-            scrollTrigger: {
-                trigger: '.feature-card',
-                start: 'top 85%',
-                toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            y: 30,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: 'power3.out'
-        });
-
-        // Custom cursor tracking script matching project.html
-        const dot = document.getElementById('cursorDot');
-        const ring = document.getElementById('cursorRing');
-        if (dot && ring) {
-            document.addEventListener('mousemove', e => {
-                dot.style.left = e.clientX + 'px';
-                dot.style.top = e.clientY + 'px';
-                gsap.to(ring, { left: e.clientX, top: e.clientY, duration: 0.15, ease: 'power2.out' });
-            });
-            document.querySelectorAll('a, button, .feature-card, .social-icons a').forEach(el => {
-                el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
-            });
-        }
-
-        // Intercept links for smooth transition exit
-        document.querySelectorAll('a[href]:not([href^="#"]):not([href^="mailto"]):not([target="_blank"])').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (!href || href.startsWith('#')) return;
-                e.preventDefault();
-                gsap.to('#pageTransition', {
-                    yPercent: 0,
-                    duration: 0.5,
-                    ease: 'power3.inOut',
-                    onComplete: () => { window.location.href = href; }
-                });
-            });
-        });
-    </script>
-
-    <script src="script.js" defer></script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LMS - Learning Management System</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+    .feature-container {
+      padding: 180px 24px 100px;
+    }
+    .hero-section {
+      margin-bottom: 80px;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      height: 100%;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent1);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-icon {
+      font-size: 32px;
+      color: var(--accent1);
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .feature-text {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
+    }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
+</head>
+<body>
+
+
+
+
+
+<!-- Cursor Glow -->
+
+
+        <!-- Navbar -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="project.html">Projects</a>
+      <a href="about.html">About</a>
+      <a href="contactUs.html">Contact</a>
+      <button id="themeToggleBtn" class="theme-btn"><i class="fas fa-moon"></i> Theme</button>
+    </nav>
+
+    <!-- Content Section -->
+    <div class="container feature-container">
+        
+        <div class="hero-section" data-aos="fade-up">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+                    <h1 class="fw-bold mb-4"><span class="gradient-text">Learning Management System (LMS)</span></h1>
+                    <p class="lead mb-4">A comprehensive platform for modern education, enabling educators to create and manage courses, and students to learn efficiently from anywhere.</p>
+                    
+                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-2 mb-4">
+                        <a href="project.html" class="btn btn-dark" style="border-radius: 30px; padding: 10px 25px; font-weight: 600; transition: all 0.3s ease;"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                        <a href="https://readify-green.vercel.app" class="btn btn-primary"><i class="fas fa-tachometer-alt"></i> Go to Website</a>
+                    </div>
+                    
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mt-4 gap-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-check-circle text-success fs-5"></i>
+                            <span class="fw-medium">Easy Setup</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-check-circle text-success fs-5"></i>
+                            <span class="fw-medium">Secure Platform</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-check-circle text-success fs-5"></i>
+                            <span class="fw-medium">Detailed Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <!-- Dashboard Image Preview with Floating Badges -->
+                    <div class="position-relative tilt-3d" data-aos="zoom-in" data-aos-delay="200">
+                        <!-- Glowing Background Effect -->
+                        <div class="position-absolute w-100 h-100 rounded-4" style="background: linear-gradient(45deg, rgba(190, 82, 223, 0.3), rgba(29, 74, 152, 0.3)); filter: blur(25px); transform: scale(0.9); z-index: -1;"></div>
+                        
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="LMS Dashboard Preview" class="img-fluid rounded-4 shadow-lg position-relative" style="width: 100%; object-fit: cover; border: 2px solid rgba(190, 82, 223, 0.2);" loading="lazy">
+                        
+                        <!-- Floating Badge 1 -->
+                        <div class="floating-badge pop-out-3d position-absolute p-3 rounded-3 shadow-lg animate__animated animate__pulse animate__infinite animate__slower" style="top: 15%; left: -20px;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-primary bg-opacity-10 p-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-user-graduate text-primary fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">10k+</h6>
+                                    <small class="text-muted" style="font-size: 12px;">Active Students</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Badge 2 -->
+                        <div class="floating-badge pop-out-3d position-absolute p-3 rounded-3 shadow-lg animate__animated animate__pulse animate__infinite animate__slower animate__delay-1s" style="bottom: 15%; right: -20px;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-warning bg-opacity-10 p-2 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="fas fa-star text-warning fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">4.9/5</h6>
+                                    <small class="text-muted" style="font-size: 12px;">User Ratings</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title fw-bold mt-5" data-aos="fade-up"><span class="gradient-text">Core Functionalities</span></h2>
+        
+        <div class="row">
+            <!-- Feature 1 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
+                <div class="feature-card tilt-3d">
+                    <i class="fas fa-book-open feature-icon pop-out-3d"></i>
+                    <h5 class="feature-title pop-out-3d">Course Creation & Management</h5>
+                    <p class="feature-text">Easily create interactive courses with multimedia support, structured modules, and detailed lesson plans.</p>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
+                <div class="feature-card tilt-3d">
+                    <i class="fas fa-users feature-icon pop-out-3d"></i>
+                    <h5 class="feature-title pop-out-3d">Student Enrollment</h5>
+                    <p class="feature-text">Seamless onboarding and enrollment processes, allowing students to browse and join courses instantly.</p>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="feature-card tilt-3d">
+                    <i class="fas fa-chart-line feature-icon pop-out-3d"></i>
+                    <h5 class="feature-title pop-out-3d">Progress Tracking</h5>
+                    <p class="feature-text">Detailed analytics and dashboards for both students and instructors to track learning progress over time.</p>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="100">
+                <div class="feature-card tilt-3d">
+                    <i class="fas fa-clipboard-list feature-icon pop-out-3d"></i>
+                    <h5 class="feature-title pop-out-3d">Assignments & Quizzes</h5>
+                    <p class="feature-text">Evaluate knowledge through interactive quizzes and assignment submissions with automated grading features.</p>
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="200">
+                <div class="feature-card tilt-3d">
+                    <i class="fas fa-certificate feature-icon pop-out-3d"></i>
+                    <h5 class="feature-title pop-out-3d">Certifications</h5>
+                    <p class="feature-text">Automatically generate and award customized certificates upon successful completion of a course.</p>
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="feature-card tilt-3d">
+                    <i class="fas fa-credit-card feature-icon pop-out-3d"></i>
+                    <h5 class="feature-title pop-out-3d">Payment Integration</h5>
+                    <p class="feature-text">Secure gateway integrations to handle course purchases, subscriptions, and financial reporting.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-logo">Ujjaval Saini</div>
+      <p style="color:var(--text-muted);font-size:13px;">Building things that actually work.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/ujjaval.saini.96" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/ujvl.sa1n1/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/ujjaval01" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:sainiujvl@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="footer-copy">© 2025 Ujjaval Saini · All Rights Reserved</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize Animate On Scroll
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+        });
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Smooth page transition entrance
+        gsap.to('#pageTransition', { yPercent: -100, duration: 0.7, ease: 'power3.inOut', delay: 0.05 });
+
+        // Hero section entrance animation
+        gsap.from('.hero-section', { opacity: 0, y: 50, duration: 1, ease: 'power3.out', delay: 0.2 });
+
+        // Key feature cards stagger entrance
+                // Intercept links for smooth transition exit
+        document.querySelectorAll('a[href]:not([href^="#"]):not([href^="mailto"]):not([target="_blank"])').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (!href || href.startsWith('#')) return;
+                e.preventDefault();
+                const transOverlay = document.querySelector('.page-transition');
+                if (transOverlay) {
+                    transOverlay.style.transform = 'translateY(0)';
+                    setTimeout(() => { window.location.href = href; }, 500);
+                } else {
+                    window.location.href = href;
+                }
+            });
+        });
+
+        gsap.from('.feature-card', {
+            scrollTrigger: {
+                trigger: '.feature-card',
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: 'power3.out'
+        });
+
+
+    </script>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

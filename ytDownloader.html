@@ -14,79 +14,120 @@
 
   
 
-  <style>
-    
-
-                
-    
-    #themeToggleBtn { border-radius: 20px; padding: 5px 15px; font-weight: 500; transition: all 0.3s; }
-    #themeToggleBtn:hover { transform: scale(1.05); }
-
-    /* Hero Section */
+<link rel="stylesheet" href="style.css">
+<style>
     .hero-section {
-        background: linear-gradient(135deg, #be52df, #1d4a98);
-        color: white;
-        padding: 150px 20px 80px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
+      padding: 180px 20px 100px;
+      text-align: center;
+      position: relative;
     }
-    .dark-mode .hero-section { background: linear-gradient(135deg, #2a2a4a, #4a2a6a); }
-
-    .shape {
-        position: absolute; filter: blur(60px); z-index: 0; animation: float 10s infinite alternate; border-radius: 50%; opacity: 0.6;
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(32px, 6vw, 64px);
+      margin-bottom: 20px;
     }
-    .shape-1 { width: 300px; height: 300px; background: rgba(255, 255, 255, 0.2); top: -10%; left: -5%; }
-    .shape-2 { width: 400px; height: 400px; background: rgba(0, 0, 0, 0.2); bottom: -10%; right: -5%; animation-duration: 15s; }
-    @keyframes float { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-50px) scale(1.1); } }
-
-    .hero-content { position: relative; z-index: 1; }
-    .hero-title { font-weight: 800; font-size: 3.5rem; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-    .hero-subtitle { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; max-width: 600px; margin-left: auto; margin-right: auto;}
-
-    .btn-custom {
-        background: white; color: #1d4a98; font-weight: 700; padding: 12px 30px; border-radius: 30px; border: none; transition: all 0.4s; text-decoration: none; display: inline-block; margin: 5px;
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .btn-custom:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: #fce408; color: #111; }
-    .btn-outline-custom {
-        background: transparent; border: 2px solid white; color: white; font-weight: 700; padding: 10px 28px; border-radius: 30px; transition: all 0.4s; text-decoration: none; display: inline-block; margin: 5px;
-    }
-    .btn-outline-custom:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: white; color: #1d4a98; }
-
-    /* Sections */
-    .section-title { text-align: center; font-weight: 800; margin-bottom: 40px; font-size: 36px; }
     .gradient-text {
-        background: linear-gradient(45deg, #1d4a98, #be52df); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
     }
-    .dark-mode .gradient-text { background: linear-gradient(45deg, #8c52ff, #e540dd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-    .feature-card {
-        background: #ffffff; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px;
-        transition: all 0.4s; border: 1px solid rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; align-items: center; text-align: center;
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 48px;
     }
-    .dark-mode .feature-card { background: #1e1e1e; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); color: #fff; }
-    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(190, 82, 223, 0.15); }
-    .feature-card h3 { font-weight: 700; font-size: 22px; margin-bottom: 15px; color: #333; margin-top: 20px;}
-    .dark-mode .feature-card h3 { color: #fff; }
-    .feature-card p { color: #666; font-size: 15px; margin: 0; }
-    .dark-mode .feature-card p { color: #aaa; }
+    .feature-card, .screenshot-card, .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      height: 100%;
+    }
+    .feature-card:hover, .screenshot-card:hover, .testimonial-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent1);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
+    }
+    
+    /* Step List overrides */
+    .step-list {
+      list-style: none;
+      padding: 0;
+    }
+    .step-list li {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border-left: 5px solid var(--accent2);
+    }
+    .step-list li:hover {
+      transform: translateX(8px);
+      background: var(--surface2);
+      border-color: var(--accent1);
+    }
 
-    /* Slider Styling */
-    .image-slider { overflow: hidden; position: relative; width: 100%; padding: 20px 0; }
-    .slider-track { display: flex; animation: scroll-left 15s linear infinite; }
-    .slider-track img { width: 350px; height: 250px; object-fit: cover; margin: 0 15px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: transform 0.3s; opacity: 0.6;}
-    .slider-track img:hover { transform: scale(1.05); opacity: 1;}
-    @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* Steps */
-    .step-list { list-style: none; padding: 0; }
-    .step-list li { font-size: 1.2rem; margin-bottom: 20px; padding: 15px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; border-left: 5px solid #be52df;}
-    .dark-mode .step-list li { background: #1e1e1e; color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-    .step-list li:hover { transform: translateX(10px); }
-
-    </style>
-
-    <link rel="stylesheet" href="style.css">
+    /* Image Slider Track */
+    .image-slider {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding: 20px 0;
+    }
+    .slider-track {
+      display: flex;
+      animation: scroll-left 25s linear infinite;
+    }
+    .slider-track img {
+      width: 350px;
+      height: 250px;
+      object-fit: cover;
+      margin: 0 15px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0.85;
+    }
+    .slider-track img:hover {
+      transform: scale(1.05);
+      border-color: var(--accent1);
+      opacity: 1;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+</style>
     <script>if(localStorage.getItem("theme")==="dark") document.documentElement.classList.add("dark-mode");</script>
 </head>
 <body>
@@ -95,21 +136,18 @@
       <a href="project.html">Projects</a>
       <a href="about.html">About</a>
       <a href="contactUs.html">Contact</a>
-      <button id="themeToggleBtn" class="theme-btn btn-light"><i class="fas fa-moon"></i> Theme</button>
+      <button id="themeToggleBtn" class="theme-btn"><i class="fas fa-moon"></i> Theme</button>
     </nav>
-
 
     <!-- Hero Section -->
   <section class="hero-section">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
     <div class="container hero-content" data-aos="zoom-in" data-aos-duration="1000">
-        <i class="fab fa-youtube mb-3" style="font-size: 6rem; color: white;"></i>
+        <i class="fab fa-youtube mb-3" style="font-size: 6rem; color: #EF4444;"></i>
         <h1 class="hero-title mt-3">MediaDrop</h1>
         <p class="hero-subtitle">Download your favorite videos in Full HD or MP3 instantly. Fast, secure, and easy to use — built with Flask.</p>
         <div class="mt-4">
-            <a href="#features" class="btn-custom">Explore Features</a>
-            <a href="https://media-drop-red.vercel.app" class="btn-outline-custom">Try Now</a>
+            <a href="#features" class="btn-premium btn-premium-primary btn-magnetic">Explore Features</a>
+            <a href="https://media-drop-red.vercel.app" class="btn-premium btn-premium-outline btn-magnetic" target="_blank">Try Now</a>
         </div>
         <img src="images/ytDownloader/image.png" alt="App Preview" class="img-fluid mt-5 rounded-4 shadow-lg" style="max-height: 400px;" data-aos="fade-up" data-aos-delay="300" loading="lazy">
     </div>
