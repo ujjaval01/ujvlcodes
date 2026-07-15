@@ -24,13 +24,139 @@
     footer{border-top:1px solid var(--border);padding:34px clamp(24px,4vw,64px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.fmark{font:500 16px var(--f-display)}.fcopy{font:10px var(--f-mono);letter-spacing:.08em;color:var(--text-dim2)}.social{display:flex;gap:10px}.social a{width:34px;height:34px;border:1px solid var(--border-2);border-radius:50%;display:grid;place-items:center;color:var(--text-dim);font-size:13px}.social a:hover{border-color:var(--amber);color:var(--amber)}.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s var(--ease),transform .75s var(--ease)}.reveal.visible{opacity:1;transform:none}
     @media(max-width:800px){.nav-links{display:none}.signal-rail{display:none}.hero{min-height:60vh;padding-top:135px}.orb{opacity:.55;right:-80px;top:18%}.contact-grid{grid-template-columns:1fr;gap:48px}.contact-section{padding:76px 0}.form-panel{padding:28px}.top-progress{display:block}}@media(max-width:520px){.wrap{width:min(100% - 36px,1180px)}.hero h1{font-size:54px}.form-row{grid-template-columns:1fr}.cursor-dot,.cursor-ring{display:none}body.has-cursor,body.has-cursor *{cursor:auto!important}footer{justify-content:center;text-align:center}.social{order:-1}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
-  </style>
+  
+/* --- PREMIUM UX OVERRIDES --- */
+.project-card, .feature-card, .value-card, .fact-card {
+  position: relative;
+  overflow: hidden;
+}
+.project-card::before, .feature-card::before, .value-card::before, .fact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(130px circle at var(--tcx, 50%) var(--tcy, 50%), rgba(242,169,59,0.12), transparent 80%);
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+}
+.project-card:hover::before, .feature-card:hover::before, .value-card:hover::before, .fact-card:hover::before {
+  opacity: 1;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+.light::view-transition-old(root) {
+  z-index: 9999;
+}
+.light::view-transition-new(root) {
+  z-index: 1;
+}
+
+
+
+/* --- MODERN NAV DROPDOWN OVERRIDES --- */
+#mainNav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.mobile-nav-links {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s var(--ease), opacity 0.3s ease, margin-top 0.4s var(--ease), padding-top 0.4s var(--ease);
+}
+.mobile-nav-links.active {
+  display: flex;
+  max-height: 240px;
+  opacity: 1;
+  padding-top: 20px;
+  margin-top: 14px;
+  border-top: 1px solid var(--border-2);
+}
+.mobile-nav-links a {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 8px 0;
+  transition: color .3s;
+}
+.mobile-nav-links a:hover {
+  color: var(--text);
+}
+.mobile-menu-toggle {
+  display: none;
+  font-size: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-2);
+  align-items: center;
+  justify-content: center;
+  transition: border-color .3s, color .3s;
+}
+.mobile-menu-toggle:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+@media (max-width: 760px) {
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+}
+
+</style>
 </head>
 <body>
+
+
+
   <div id="grain"></div><div class="spotlight" id="spotlight"></div><div class="cursor-dot" id="cursorDot"></div><div class="cursor-ring" id="cursorRing"></div>
   <div id="loader"><div class="loader-mark">Ujjaval Saini</div><div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div><div class="loader-status">Opening channel <b id="loaderPct">0%</b></div></div>
   <div class="top-progress" id="topProgress"></div><div class="signal-rail"><div class="signal-track"><div class="signal-fill" id="signalFill"></div><div class="signal-ticks" id="signalTicks"></div></div></div>
-  <nav id="mainNav"><a href="index.html" class="nav-mark">Ujjaval Saini <small>US-01</small></a><div class="nav-links"><a href="index.html">Home</a><a href="project.html">Projects</a><a href="about.html">About</a><a href="contactUs.html" class="active">Contact</a></div><div class="nav-right"><button class="theme-btn" id="themeToggleBtn" aria-label="Toggle colour theme"><i class="fas fa-moon"></i></button></div></nav>
+  <nav id="mainNav">
+  <div class="nav-row">
+    <a href="index.html" class="nav-mark">Ujjaval Saini <small>US—02</small></a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="project.html" id="projectsLink">Projects</a>
+      <a href="about.html">About</a>
+      <a href="contactUs.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="mobile-nav-links" id="mobileNavLinks">
+    <a href="index.html">Home</a>
+    <a href="project.html">Projects</a>
+    <a href="about.html">About</a>
+    <a href="contactUs.html">Contact</a>
+  </div>
+</nav>
   <main>
     <section class="hero" id="contact" data-signal="Contact"><div class="orb" aria-hidden="true"></div><div class="wrap hero-inner"><div class="eyebrow">Open channel / Sambhal, IN</div><h1>Let's make it <em>real.</em></h1><p class="hero-copy">Have a useful problem, a product idea, or an Android build in mind? Send the first signal. I will reply within one working day.</p></div></section>
     <div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
@@ -50,5 +176,6 @@
       const dot=$('#cursorDot'),ring=$('#cursorRing'),spot=$('#spotlight');if(matchMedia('(hover:hover)').matches){document.body.classList.add('has-cursor');addEventListener('mousemove',e=>{dot.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;ring.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px');ring.classList.add('show');spot.classList.add('active')});$$('a,button,input,textarea').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('expand'));el.addEventListener('mouseleave',()=>ring.classList.remove('expand'))})}
     });
   </script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 </body>
 </html>

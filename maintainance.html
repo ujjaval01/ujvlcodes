@@ -139,6 +139,44 @@ p {
   font-size:13px; transition:border-color .3s, transform .3s, background .3s;
 }
 .theme-btn:hover{ border-color:var(--amber); color:var(--amber); }
+
+/* --- PREMIUM UX OVERRIDES --- */
+.project-card, .feature-card, .value-card, .fact-card {
+  position: relative;
+  overflow: hidden;
+}
+.project-card::before, .feature-card::before, .value-card::before, .fact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(130px circle at var(--tcx, 50%) var(--tcy, 50%), rgba(242,169,59,0.12), transparent 80%);
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+}
+.project-card:hover::before, .feature-card:hover::before, .value-card:hover::before, .fact-card:hover::before {
+  opacity: 1;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+.light::view-transition-old(root) {
+  z-index: 9999;
+}
+.light::view-transition-new(root) {
+  z-index: 1;
+}
+
 </style>
 </head>
 <body>
@@ -162,6 +200,149 @@ p {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+  // lenis smooth scroll
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smooth: true,
+    smoothTouch: false
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+
+  // card spotlight tracking
+  document.querySelectorAll('.project-card, .feature-card, .value-card, .fact-card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--tcx', `${x}px`);
+      card.style.setProperty('--tcy', `${y}px`);
+    });
+  });
+
+
+  // drag-scroll for screenshots
+  document.querySelectorAll('.image-slider').forEach((slider) => {
+    const track = slider.querySelector('.slider-track');
+    if (!track) return;
+    
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    
+    slider.addEventListener('mouseenter', () => {
+      const ring = document.getElementById('cursorRing');
+      const label = document.getElementById('cursorLabel');
+      if (ring && label) {
+        ring.classList.add('show', 'expand');
+        label.textContent = 'Drag';
+      }
+    });
+    slider.addEventListener('mouseleave', () => {
+      const ring = document.getElementById('cursorRing');
+      const label = document.getElementById('cursorLabel');
+      if (ring && label) {
+        ring.classList.remove('expand');
+        label.textContent = '';
+      }
+    });
+
+    slider.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      track.style.animationPlayState = 'paused';
+      const style = window.getComputedStyle(track);
+      const matrix = new DOMMatrixReadOnly(style.transform);
+      prevTranslate = matrix.m41;
+      slider.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.animationPlayState = 'running';
+      slider.style.cursor = 'grab';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const currentX = e.clientX;
+      const deltaX = currentX - startX;
+      currentTranslate = prevTranslate + deltaX;
+      track.style.transform = `translateX(${currentTranslate}px)`;
+    });
+  });
+
+
+  // liquid wave view transition theme toggle
+  const localRoot = document.documentElement;
+  const localThemeToggleBtn = document.getElementById('themeToggleBtn');
+  if (localThemeToggleBtn) {
+    const newBtn = localThemeToggleBtn.cloneNode(true);
+    localThemeToggleBtn.parentNode.replaceChild(newBtn, localThemeToggleBtn);
+    
+    const syncThemeIcon = () => {
+      const isLight = localRoot.classList.contains('light');
+      newBtn.innerHTML = isLight
+        ? '<i class="fas fa-sun"></i>'
+        : '<i class="fas fa-moon"></i>';
+    };
+
+    syncThemeIcon();
+    
+    newBtn.addEventListener('click', (e) => {
+      const isLight = localRoot.classList.contains('light');
+      
+      if (!document.startViewTransition) {
+        localRoot.classList.toggle('light');
+        localStorage.setItem('portfolio-theme', localRoot.classList.contains('light') ? 'light' : 'dark');
+        syncThemeIcon();
+        return;
+      }
+      
+      const x = e.clientX;
+      const y = e.clientY;
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+      
+      const transition = document.startViewTransition(() => {
+        localRoot.classList.toggle('light');
+        localStorage.setItem('portfolio-theme', localRoot.classList.contains('light') ? 'light' : 'dark');
+        syncThemeIcon();
+      });
+      
+      transition.ready.then(() => {
+        const clipPath = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`
+        ];
+        document.documentElement.animate(
+          {
+            clipPath: isLight ? clipPath.reverse() : clipPath,
+          },
+          {
+            duration: 520,
+            easing: 'cubic-bezier(0.86, 0, 0.07, 1)',
+            pseudoElement: isLight
+              ? '::view-transition-old(root)'
+              : '::view-transition-new(root)',
+          }
+        );
+      });
+    });
+  }
+  // End of theme toggle
+
+
   const root = document.documentElement;
   const spotlight = document.getElementById('spotlight');
   const themeToggleBtn = document.getElementById('themeToggleBtn');
@@ -171,20 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
     root.classList.add('light');
   }
 
-  if (themeToggleBtn) {
-    const syncThemeIcon = () => {
-      const isLight = root.classList.contains('light');
-      themeToggleBtn.innerHTML = isLight
-        ? '<i class="fas fa-sun"></i>'
-        : '<i class="fas fa-moon"></i>';
-    };
-    syncThemeIcon();
-    themeToggleBtn.addEventListener('click', () => {
-      root.classList.toggle('light');
-      localStorage.setItem('portfolio-theme', root.classList.contains('light') ? 'light' : 'dark');
-      syncThemeIcon();
-    });
-  }
+
 
   document.addEventListener('mousemove', (event) => {
     root.style.setProperty('--mx', `${event.clientX}px`);
@@ -193,5 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 </body>
 </html>

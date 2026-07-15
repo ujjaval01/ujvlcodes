@@ -538,9 +538,115 @@ footer .fcopy{ font-family:var(--f-mono); font-size:11px; color:var(--text-dim2)
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
 }
+
+/* --- PREMIUM UX OVERRIDES --- */
+.project-card, .feature-card, .value-card, .fact-card {
+  position: relative;
+  overflow: hidden;
+}
+.project-card::before, .feature-card::before, .value-card::before, .fact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(130px circle at var(--tcx, 50%) var(--tcy, 50%), rgba(242,169,59,0.12), transparent 80%);
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+}
+.project-card:hover::before, .feature-card:hover::before, .value-card:hover::before, .fact-card:hover::before {
+  opacity: 1;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+.light::view-transition-old(root) {
+  z-index: 9999;
+}
+.light::view-transition-new(root) {
+  z-index: 1;
+}
+
+
+
+/* --- MODERN NAV DROPDOWN OVERRIDES --- */
+#mainNav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.mobile-nav-links {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s var(--ease), opacity 0.3s ease, margin-top 0.4s var(--ease), padding-top 0.4s var(--ease);
+}
+.mobile-nav-links.active {
+  display: flex;
+  max-height: 240px;
+  opacity: 1;
+  padding-top: 20px;
+  margin-top: 14px;
+  border-top: 1px solid var(--border-2);
+}
+.mobile-nav-links a {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 8px 0;
+  transition: color .3s;
+}
+.mobile-nav-links a:hover {
+  color: var(--text);
+}
+.mobile-menu-toggle {
+  display: none;
+  font-size: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-2);
+  align-items: center;
+  justify-content: center;
+  transition: border-color .3s, color .3s;
+}
+.mobile-menu-toggle:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+@media (max-width: 760px) {
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+}
+
 </style>
 </head>
 <body>
+
+
+
 
 <div id="grain"></div>
 <div class="spotlight" id="spotlight"></div>
@@ -563,14 +669,25 @@ footer .fcopy{ font-family:var(--f-mono); font-size:11px; color:var(--text-dim2)
 </div>
 
 <nav id="mainNav">
-  <a href="index.html" class="nav-mark">Ujjaval Saini <small>US—03</small></a>
-  <div class="nav-links">
+  <div class="nav-row">
+    <a href="index.html" class="nav-mark">Ujjaval Saini <small>US—02</small></a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="project.html" id="projectsLink">Projects</a>
+      <a href="about.html">About</a>
+      <a href="contactUs.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="mobile-nav-links" id="mobileNavLinks">
     <a href="index.html">Home</a>
     <a href="project.html">Projects</a>
-    <a href="#story" class="active">About</a>
+    <a href="about.html">About</a>
     <a href="contactUs.html">Contact</a>
   </div>
-  <button class="theme-btn" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
 </nav>
 
 <main>
@@ -813,6 +930,193 @@ footer .fcopy{ font-family:var(--f-mono); font-size:11px; color:var(--text-dim2)
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+
+  // Dropdown Mobile Menu Interaction
+  const mobToggle = document.getElementById('mobileMenuToggle');
+  const mobLinks = document.getElementById('mobileNavLinks');
+  if (mobToggle && mobLinks) {
+    mobToggle.addEventListener('click', () => {
+      mobLinks.classList.toggle('active');
+      const isActive = mobLinks.classList.contains('active');
+      mobToggle.innerHTML = isActive 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    mobLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobLinks.classList.remove('active');
+        mobToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+  }
+
+
+
+  // lenis smooth scroll
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smooth: true,
+    smoothTouch: false
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+
+  // card spotlight tracking
+  document.querySelectorAll('.project-card, .feature-card, .value-card, .fact-card').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--tcx', `${x}px`);
+      card.style.setProperty('--tcy', `${y}px`);
+    });
+  });
+
+
+  // drag-scroll for screenshots
+  document.querySelectorAll('.image-slider').forEach((slider) => {
+    const track = slider.querySelector('.slider-track');
+    if (!track) return;
+    
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    
+    slider.addEventListener('mouseenter', () => {
+      const ring = document.getElementById('cursorRing');
+      const label = document.getElementById('cursorLabel');
+      if (ring && label) {
+        ring.classList.add('show', 'expand');
+        label.textContent = 'Drag';
+      }
+    });
+    slider.addEventListener('mouseleave', () => {
+      const ring = document.getElementById('cursorRing');
+      const label = document.getElementById('cursorLabel');
+      if (ring && label) {
+        ring.classList.remove('expand');
+        label.textContent = '';
+      }
+    });
+
+    slider.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      track.style.animationPlayState = 'paused';
+      const style = window.getComputedStyle(track);
+      const matrix = new DOMMatrixReadOnly(style.transform);
+      prevTranslate = matrix.m41;
+      slider.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.animationPlayState = 'running';
+      slider.style.cursor = 'grab';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const currentX = e.clientX;
+      const deltaX = currentX - startX;
+      currentTranslate = prevTranslate + deltaX;
+      track.style.transform = `translateX(${currentTranslate}px)`;
+    });
+  });
+
+
+  // liquid wave view transition theme toggle
+  const localRoot = document.documentElement;
+  const localThemeToggleBtn = document.getElementById('themeToggleBtn');
+  const mobThemeBtn = document.getElementById('mobileThemeToggleBtn');
+  if (localThemeToggleBtn) {
+    const newBtn = localThemeToggleBtn.cloneNode(true);
+    localThemeToggleBtn.parentNode.replaceChild(newBtn, localThemeToggleBtn);
+    
+    const syncThemeIcon = () => {
+      const isLight = localRoot.classList.contains('light');
+      newBtn.innerHTML = isLight
+        ? '<i class="fas fa-sun"></i>'
+        : '<i class="fas fa-moon"></i>';
+      if (mobThemeBtn) {
+        mobThemeBtn.innerHTML = isLight
+          ? '<i class="fas fa-sun"></i>'
+          : '<i class="fas fa-moon"></i>';
+      }
+    };
+
+    syncThemeIcon();
+    
+    newBtn.addEventListener('click', (e) => {
+      const isLight = localRoot.classList.contains('light');
+      
+      if (!document.startViewTransition) {
+        localRoot.classList.toggle('light');
+        localStorage.setItem('portfolio-theme', localRoot.classList.contains('light') ? 'light' : 'dark');
+        syncThemeIcon();
+        if (typeof window.updateSphereTextures === 'function') {
+          window.updateSphereTextures();
+        }
+        return;
+      }
+      
+      const x = e.clientX;
+      const y = e.clientY;
+      const endRadius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      );
+      
+      const transition = document.startViewTransition(() => {
+        localRoot.classList.toggle('light');
+        localStorage.setItem('portfolio-theme', localRoot.classList.contains('light') ? 'light' : 'dark');
+        syncThemeIcon();
+        if (typeof window.updateSphereTextures === 'function') {
+          window.updateSphereTextures();
+        }
+      });
+      
+      transition.ready.then(() => {
+        const clipPath = [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`
+        ];
+        document.documentElement.animate(
+          {
+            clipPath: isLight ? clipPath.reverse() : clipPath,
+          },
+          {
+            duration: 520,
+            easing: 'cubic-bezier(0.86, 0, 0.07, 1)',
+            pseudoElement: isLight
+              ? '::view-transition-old(root)'
+              : '::view-transition-new(root)',
+          }
+        );
+      });
+    });
+
+    if (mobThemeBtn) {
+      mobThemeBtn.addEventListener('click', (e) => {
+        // Propagate click to the main newBtn to run same animations & transitions
+        newBtn.dispatchEvent(new MouseEvent('click', {
+          clientX: e.clientX,
+          clientY: e.clientY,
+          bubbles: true
+        }));
+      });
+    }
+  }
+  // End of theme toggle
+
   const root = document.documentElement;
   const loader = document.getElementById('loader');
   const loaderFill = document.getElementById('loaderFill');
@@ -1033,5 +1337,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', updateScrollState);
 });
 </script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 </body>
 </html>
