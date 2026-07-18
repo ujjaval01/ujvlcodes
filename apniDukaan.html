@@ -103,8 +103,11 @@ button{ font:inherit; color:inherit; background:none; border:none; cursor:pointe
   position:fixed; top:0; left:0; z-index:9999;
   pointer-events:none; border-radius:50%;
   transform:translate(-50%,-50%);
+  will-change:transform;
 }
-.cursor-dot{ width:6px; height:6px; background:var(--amber); }
+.cursor-dot{
+  width:6px; height:6px; background:var(--amber);
+}
 .cursor-ring{
   width:38px; height:38px; opacity:0;
   border:1px solid var(--amber);
@@ -664,9 +667,9 @@ footer .fcopy{ font-family:var(--f-mono); font-size:11px; color:var(--text-dim2)
 <!-- NAVBAR -->
 <nav id="mainNav">
   <div class="nav-row">
-    <a href="index.html" class="nav-mark">Ujjaval Saini <small>US—02</small></a>
+    <a href="index.html" class="nav-mark">Ujjaval Saini</a>
     <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
+      <a href="index.html">Home</a>
       <a href="project.html" id="projectsLink">Projects</a>
       <a href="about.html">About</a>
       <a href="contactUs.html">Contact</a>
@@ -1149,9 +1152,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (event) => {
       mouseX = event.clientX;
       mouseY = event.clientY;
-      root.style.setProperty('--mx', `${mouseX}px`);
-      root.style.setProperty('--my', `${mouseY}px`);
-      spotlight?.classList.add('active');
+      if (typeof root !== 'undefined') {
+          root.style.setProperty('--mx', `${mouseX}px`);
+          root.style.setProperty('--my', `${mouseY}px`);
+      }
+      if (typeof spotlight !== 'undefined') spotlight?.classList.add('active');
+      const cursorDot = document.getElementById('cursorDot');
       if (cursorDot) {
         cursorDot.style.left = `${mouseX}px`;
         cursorDot.style.top = `${mouseY}px`;
@@ -1161,6 +1167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderCursor = () => {
       ringX += (mouseX - ringX) * 0.14;
       ringY += (mouseY - ringY) * 0.14;
+      const cursorRing = document.getElementById('cursorRing');
       if (cursorRing) {
         cursorRing.style.left = `${ringX}px`;
         cursorRing.style.top = `${ringY}px`;
@@ -1169,8 +1176,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     renderCursor();
 
-    document.querySelectorAll('a, button, .feature-card, .slider-track img, .film-panel, .accordion-button').forEach((el) => {
+    document.querySelectorAll('a, button, .project-card, .feature-card, .slider-track img, .film-panel, .accordion-button').forEach((el) => {
       el.addEventListener('mouseenter', () => {
+        const cursorRing = document.getElementById('cursorRing');
+        const cursorLabel = document.getElementById('cursorLabel');
         cursorRing?.classList.add('show');
         if (el.dataset.cursor && cursorLabel) {
           cursorLabel.textContent = el.dataset.cursor;
@@ -1178,11 +1187,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       el.addEventListener('mouseleave', () => {
+        const cursorRing = document.getElementById('cursorRing');
+        const cursorLabel = document.getElementById('cursorLabel');
         cursorRing?.classList.remove('expand');
         if (cursorLabel) cursorLabel.textContent = '';
       });
     });
   }
+
+
+
+
+
+
 
   // Loader Timer
   const finishLoader = () => {
