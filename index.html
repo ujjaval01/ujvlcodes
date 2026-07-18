@@ -1586,8 +1586,31 @@ if (window.matchMedia('(hover: hover)').matches) {
     });
   }
 
-
-
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const workTrack = document.getElementById('workTrack');
+    const workSection = document.getElementById('work');
+    
+    if (workTrack && workSection) {
+      const getScrollAmount = () => -(workTrack.scrollWidth - window.innerWidth);
+      
+      const tween = gsap.to(workTrack, {
+        x: getScrollAmount,
+        ease: 'none'
+      });
+      
+      ScrollTrigger.create({
+        trigger: workSection,
+        start: 'top top',
+        end: () => `+=${workTrack.scrollWidth - window.innerWidth}`,
+        pin: true,
+        animation: tween,
+        scrub: 1,
+        invalidateOnRefresh: true
+      });
+    }
+  }
 
   });
 </script>
