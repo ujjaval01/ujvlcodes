@@ -14,7 +14,32 @@
     :root{--ink:#0C0F12;--ink-2:#10141A;--panel:#151A20;--panel-2:#181D24;--paper:#EEE8DB;--paper-dim:#9BA3AC;--paper-dim2:#6B7280;--amber:#F2A93B;--amber-dim:rgba(242,169,59,.14);--teal:#5FADA6;--teal-dim:rgba(95,173,166,.14);--line:#232A32;--line-2:#2E3640;--bg:var(--ink);--surface:var(--panel);--surface-2:var(--panel-2);--text:var(--paper);--text-dim:var(--paper-dim);--text-dim2:var(--paper-dim2);--border:var(--line);--border-2:var(--line-2);--f-display:'Fraunces',serif;--f-body:'Inter',sans-serif;--f-mono:'IBM Plex Mono',monospace;--ease:cubic-bezier(.16,1,.3,1);--mx:50%;--my:50%}
     html.light{--bg:#E9E3D3;--surface:#F1ECDF;--surface-2:#EFE9DA;--text:#14181D;--text-dim:#4B5259;--text-dim2:#6E7680;--border:#D3CAB2;--border-2:#C2B89D}
     *{box-sizing:border-box;margin:0;padding:0}html,body{background:var(--bg)}body{font-family:var(--f-body);color:var(--text);line-height:1.5;overflow-x:hidden;transition:background .5s var(--ease),color .5s var(--ease)}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{border:0;background:none;color:inherit;cursor:pointer}::selection{background:var(--amber);color:var(--ink)}:focus-visible{outline:2px solid var(--amber);outline-offset:3px}.wrap{width:min(1180px,calc(100% - 48px));margin:auto}.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:10px}.eyebrow:before{content:'';width:16px;height:1px;background:var(--amber)}
-    #grain{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}.spotlight{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(480px circle at var(--mx) var(--my),var(--amber-dim),transparent 70%);opacity:0;transition:opacity .4s var(--ease)}.spotlight.active{opacity:1}.cursor-dot,.cursor-ring{position:fixed;z-index:9999;left:0;top:0;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%)}.cursor-dot{width:6px;height:6px;background:var(--amber)}.cursor-ring{width:36px;height:36px;border:1px solid var(--amber);opacity:0;transition:width .25s var(--ease),height .25s var(--ease),opacity .2s}.cursor-ring.show{opacity:1}.cursor-ring.expand{width:70px;height:70px;background:var(--amber-dim)}body.has-cursor,body.has-cursor *{cursor:none!important}
+    #grain{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}.spotlight{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(480px circle at var(--mx) var(--my),var(--amber-dim),transparent 70%);opacity:0;transition:opacity .4s var(--ease)}.spotlight.active{opacity:1}.cursor-dot,.cursor-ring{
+  position:fixed; top:0; left:0; z-index:9999;
+  pointer-events:none; border-radius:50%;
+  transform:translate(-50%,-50%);
+  will-change:transform;
+}
+.cursor-dot{
+  width:6px; height:6px; background:var(--amber);
+}
+.cursor-ring{
+  width:38px; height:38px; opacity:0;
+  border:1px solid var(--amber);
+  display:flex; align-items:center; justify-content:center;
+  transition:width .3s var(--ease), height .3s var(--ease), opacity .2s, border-color .3s;
+}
+.cursor-ring span{
+  font-family:var(--f-mono); font-size:9px; letter-spacing:.1em;
+  color:var(--amber); text-transform:uppercase; opacity:0;
+}
+.cursor-ring.show{ opacity:1; }
+.cursor-ring.expand{ width:74px; height:74px; background:var(--amber-dim); }
+.cursor-ring.expand span{ opacity:1; }
+body.has-cursor, body.has-cursor *{ cursor:none !important; }
+@media (hover:none), (pointer:coarse){
+  .cursor-dot,.cursor-ring{ display:none; }
+}
     #loader{position:fixed;inset:0;z-index:10000;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:opacity .65s var(--ease),visibility .65s}.loader-mark{font-family:var(--f-display);font-size:17px}.loader-bar{width:220px;height:1px;background:#2E3640}.loader-fill{height:100%;width:0;background:var(--amber);box-shadow:0 0 12px var(--amber);transition:width .12s}.loader-status{font:10px var(--f-mono);letter-spacing:.15em;text-transform:uppercase;color:#8B96A3}.loader-status b{color:var(--amber);font-weight:500}.done{opacity:0;visibility:hidden;pointer-events:none}
     #mainNav{position:fixed;inset:0 0 auto;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,4vw,64px);background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:.35s}.scrolled{padding-top:14px!important;padding-bottom:14px!important;border-bottom-color:var(--border)!important}.nav-mark{font:600 18px var(--f-display)}.nav-mark small{font:9px var(--f-mono);color:var(--amber);letter-spacing:.14em;margin-left:7px}.nav-links,.nav-right{display:flex;align-items:center;gap:32px}.nav-links a{font:11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);position:relative}.nav-links a:after{content:'';position:absolute;left:0;bottom:-7px;width:0;height:1px;background:var(--amber);transition:width .3s}.nav-links a:hover,.nav-links a.active{color:var(--text)}.nav-links a:hover:after,.nav-links a.active:after{width:100%}.theme-btn{width:34px;height:34px;border:1px solid var(--border-2);border-radius:50%;display:grid;place-items:center}.theme-btn:hover{color:var(--amber);border-color:var(--amber)}
     .signal-rail{position:fixed;left:22px;top:0;height:100vh;z-index:500;display:flex;align-items:center;pointer-events:none}.signal-track{position:relative;width:1px;height:52vh;background:var(--border-2)}.signal-fill{position:absolute;width:100%;top:0;background:linear-gradient(var(--amber),var(--teal));height:0;box-shadow:0 0 10px var(--amber)}.signal-ticks{position:absolute;inset:0}.signal-tick{position:absolute;left:-3px;transform:translateY(-50%);width:7px;height:7px;border:1px solid var(--border-2);border-radius:50%;background:var(--bg);pointer-events:auto}.signal-tick.active{background:var(--amber);border-color:var(--amber);box-shadow:0 0 10px var(--amber)}.top-progress{position:fixed;z-index:600;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--amber),var(--teal));transform:scaleX(0);transform-origin:left}
@@ -138,12 +163,12 @@
   <div class="top-progress" id="topProgress"></div><div class="signal-rail"><div class="signal-track"><div class="signal-fill" id="signalFill"></div><div class="signal-ticks" id="signalTicks"></div></div></div>
   <nav id="mainNav">
   <div class="nav-row">
-    <a href="index.html" class="nav-mark">Ujjaval Saini <small>US—02</small></a>
+    <a href="index.html" class="nav-mark">Ujjaval Saini</a>
     <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
+      <a href="index.html">Home</a>
       <a href="project.html" id="projectsLink">Projects</a>
       <a href="about.html">About</a>
-      <a href="contactUs.html">Contact</a>
+      <a href="contactUs.html" class="active">Contact</a>
     </div>
     <div class="nav-right">
       <button class="theme-btn" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
@@ -154,11 +179,11 @@
     <a href="index.html">Home</a>
     <a href="project.html">Projects</a>
     <a href="about.html">About</a>
-    <a href="contactUs.html">Contact</a>
+    <a href="contactUs.html" class="active">Contact</a>
   </div>
 </nav>
   <main>
-    <section class="hero" id="contact" data-signal="Contact"><div class="orb" aria-hidden="true"></div><div class="wrap hero-inner"><div class="eyebrow">Open channel / Sambhal, IN</div><h1>Let's make it <em>real.</em></h1><p class="hero-copy">Have a useful problem, a product idea, or an Android build in mind? Send the first signal. I will reply within one working day.</p></div></section>
+    <section class="hero" id="contact" data-signal="Contact"><div class="orb" aria-hidden="true"></div><div class="wrap hero-inner"><div class="eyebrow">Open channel / Noida, IN</div><h1>Let's make it <em>real.</em></h1><p class="hero-copy">Have a useful problem, a product idea, or an Android build in mind? Send the first signal. I will reply within one working day.</p></div></section>
     <div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
     <section class="contact-section" id="message" data-signal="Message"><div class="wrap contact-grid"><div class="intro reveal"><div class="eyebrow">Direct line</div><h2>Good work starts with a <em>clear signal.</em></h2><p>Share the goal, the audience, and what is getting in the way. A rough idea is enough to start a useful conversation.</p><div class="method-list"><a class="method" href="mailto:sainiujvl@gmail.com"><span class="method-icon"><i class="fas fa-envelope"></i></span><span><small>Email</small><strong>sainiujvl@gmail.com</strong></span><i class="fas fa-arrow-up-right-from-square"></i></a><a class="method" href="https://github.com/ujjaval01" target="_blank" rel="noopener"><span class="method-icon"><i class="fab fa-github"></i></span><span><small>GitHub</small><strong>@ujjaval01</strong></span><i class="fas fa-arrow-up-right-from-square"></i></a><a class="method" href="https://www.linkedin.com/in/ujjavalsaini/" target="_blank" rel="noopener"><span class="method-icon"><i class="fab fa-linkedin-in"></i></span><span><small>LinkedIn</small><strong>/in/ujjavalsaini</strong></span><i class="fas fa-arrow-up-right-from-square"></i></a></div><div class="availability"><i class="fas fa-circle"></i><div><b>Available for select projects</b><span>Android apps, product experiments, and web experiences.</span></div></div></div>
       <div class="form-panel reveal"><div class="form-content"><div id="formBody"><h2 class="form-title">Send a message</h2><p class="form-note">Tell me a little about the work. Every field helps me respond with context.</p><form action="https://formsubmit.co/sainiujvl@gmail.com" method="POST" id="contactForm"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://ujjaval01.github.io/my-website/contactUs.html?status=success"><div class="form-row"><div class="form-group"><label for="name">Your name</label><input id="name" name="name" required placeholder="Jane Smith"></div><div class="form-group"><label for="email">Your email</label><input id="email" type="email" name="email" required placeholder="jane@example.com"></div></div><div class="form-group"><label for="subject">What are we building?</label><input id="subject" name="_subject" required placeholder="A better Android experience"></div><div class="form-group"><label for="message">Project details</label><textarea id="message" name="message" required placeholder="A short brief, timeline, or the problem you want to solve..."></textarea></div><button class="btn btn-primary magnetic" id="submitBtn" type="submit"><i class="fas fa-paper-plane"></i><span id="btnText">Transmit message</span></button></form></div><div class="form-status" id="successMsg"><i class="fas fa-circle-check"></i><h3>Signal received.</h3><p>Thank you for reaching out. I will get back to you soon.</p></div></div></div>
@@ -173,7 +198,59 @@
       const update=()=>{const range=Math.max(document.documentElement.scrollHeight-innerHeight,1),p=Math.min(scrollY/range,1);$('#signalFill').style.height=`${p*100}%`;$('#topProgress').style.transform=`scaleX(${p})`;nav.classList.toggle('scrolled',scrollY>20);let active=sections[0];sections.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.42)active=s});$$('.signal-tick').forEach(t=>t.classList.toggle('active',t.dataset.target===active?.id));$$('.reveal').forEach(e=>{if(e.getBoundingClientRect().top<innerHeight*.88)e.classList.add('visible')})};update();addEventListener('scroll',update,{passive:true});addEventListener('resize',update);
       let n=0;const timer=setInterval(()=>{n+=10;fill.style.width=n+'%';pct.textContent=n+'%';if(n>=100){clearInterval(timer);setTimeout(()=>loader.classList.add('done'),220)}},55);
       if(new URLSearchParams(location.search).get('status')==='success'){$('#formBody').style.display='none';$('#successMsg').style.display='flex'}const form=$('#contactForm');form?.addEventListener('submit',()=>{$('#btnText').textContent='Transmitting...';$('#submitBtn').style.pointerEvents='none'});
-      const dot=$('#cursorDot'),ring=$('#cursorRing'),spot=$('#spotlight');if(matchMedia('(hover:hover)').matches){document.body.classList.add('has-cursor');addEventListener('mousemove',e=>{dot.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;ring.style.transform=`translate(${e.clientX}px,${e.clientY}px)`;root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px');ring.classList.add('show');spot.classList.add('active')});$$('a,button,input,textarea').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('expand'));el.addEventListener('mouseleave',()=>ring.classList.remove('expand'))})}
+      const spot=$('#spotlight');
+    if (window.matchMedia('(hover: hover)').matches) {
+    document.body.classList.add('has-cursor');
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+
+    document.addEventListener('mousemove', (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      if (typeof root !== 'undefined') {
+          root.style.setProperty('--mx', `${mouseX}px`);
+          root.style.setProperty('--my', `${mouseY}px`);
+      }
+      if (typeof spotlight !== 'undefined') spotlight?.classList.add('active');
+      const cursorDot = document.getElementById('cursorDot');
+      if (cursorDot) {
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+      }
+    });
+
+    const renderCursor = () => {
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
+      const cursorRing = document.getElementById('cursorRing');
+      if (cursorRing) {
+        cursorRing.style.left = `${ringX}px`;
+        cursorRing.style.top = `${ringY}px`;
+      }
+      requestAnimationFrame(renderCursor);
+    };
+    renderCursor();
+
+    document.querySelectorAll('a, button, .project-card, .feature-card, .slider-track img, .film-panel, .accordion-button').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        const cursorRing = document.getElementById('cursorRing');
+        const cursorLabel = document.getElementById('cursorLabel');
+        cursorRing?.classList.add('show');
+        if (el.dataset.cursor && cursorLabel) {
+          cursorLabel.textContent = el.dataset.cursor;
+          cursorRing.classList.add('expand');
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        const cursorRing = document.getElementById('cursorRing');
+        const cursorLabel = document.getElementById('cursorLabel');
+        cursorRing?.classList.remove('expand');
+        if (cursorLabel) cursorLabel.textContent = '';
+      });
+    });
+  }
     });
   </script>
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
