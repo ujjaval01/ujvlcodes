@@ -152,6 +152,29 @@ body.has-cursor, body.has-cursor *{ cursor:none !important; }
   }
 }
 
+
+/* --- MOBILE NAV FIX --- */
+@media (max-width: 760px) {
+  .nav-right {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 12px !important;
+    width: auto !important;
+    flex-wrap: nowrap !important;
+  }
+  .theme-btn, .mobile-menu-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+  }
+}
+
 </style>
 </head>
 <body>
