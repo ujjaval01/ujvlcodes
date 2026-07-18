@@ -361,7 +361,64 @@ document.addEventListener('DOMContentLoaded', () => {
     root.style.setProperty('--my', `${event.clientY}px`);
     spotlight?.classList.add('active');
   });
-});
+
+if (window.matchMedia('(hover: hover)').matches) {
+    document.body.classList.add('has-cursor');
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+
+    document.addEventListener('mousemove', (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      if (typeof root !== 'undefined') {
+          root.style.setProperty('--mx', `${mouseX}px`);
+          root.style.setProperty('--my', `${mouseY}px`);
+      }
+      if (typeof spotlight !== 'undefined') spotlight?.classList.add('active');
+      const cursorDot = document.getElementById('cursorDot');
+      if (cursorDot) {
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+      }
+    });
+
+    const renderCursor = () => {
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
+      const cursorRing = document.getElementById('cursorRing');
+      if (cursorRing) {
+        cursorRing.style.left = `${ringX}px`;
+        cursorRing.style.top = `${ringY}px`;
+      }
+      requestAnimationFrame(renderCursor);
+    };
+    renderCursor();
+
+    document.querySelectorAll('a, button, .project-card, .feature-card, .slider-track img, .film-panel, .accordion-button').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        const cursorRing = document.getElementById('cursorRing');
+        const cursorLabel = document.getElementById('cursorLabel');
+        cursorRing?.classList.add('show');
+        if (el.dataset.cursor && cursorLabel) {
+          cursorLabel.textContent = el.dataset.cursor;
+          cursorRing.classList.add('expand');
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        const cursorRing = document.getElementById('cursorRing');
+        const cursorLabel = document.getElementById('cursorLabel');
+        cursorRing?.classList.remove('expand');
+        if (cursorLabel) cursorLabel.textContent = '';
+      });
+    });
+  }
+
+
+
+
+  });
 </script>
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 </body>
