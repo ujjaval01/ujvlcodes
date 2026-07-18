@@ -122,34 +122,31 @@ new file mode 100644
 +.spotlight.active{ opacity:1; }
 +
 +.cursor-dot,.cursor-ring{
-+  position:fixed; top:0; left:0; z-index:9999;
-+  pointer-events:none; border-radius:50%;
-+  transform:translate(-50%,-50%);
-+  will-change:transform;
-+}
-+.cursor-dot{
-+  width:6px; height:6px; background:var(--amber);
-+}
-+.cursor-ring{
-+  width:38px; height:38px; border:1px solid var(--amber);
-+  display:flex; align-items:center; justify-content:center;
-+  opacity:0;
-+  transition:width .3s var(--ease), height .3s var(--ease), opacity .2s, border-color .3s, background .3s;
-+}
-+.cursor-ring span{
-+  font-family:var(--f-mono);
-+  font-size:9px;
-+  letter-spacing:.1em;
-+  color:var(--amber);
-+  text-transform:uppercase;
-+  opacity:0;
-+  transition:opacity .2s;
-+}
-+.cursor-ring.show{ opacity:1; }
-+.cursor-ring.expand{ width:74px; height:74px; background:var(--amber-dim); }
-+.cursor-ring.expand span{ opacity:1; }
-+body.has-cursor, body.has-cursor *{ cursor:none !important; }
-+@media (hover:none), (pointer:coarse){ .cursor-dot,.cursor-ring{ display:none; } }
+  position:fixed; top:0; left:0; z-index:9999;
+  pointer-events:none; border-radius:50%;
+  transform:translate(-50%,-50%);
+  will-change:transform;
+}
+.cursor-dot{
+  width:6px; height:6px; background:var(--amber);
+}
+.cursor-ring{
+  width:38px; height:38px; opacity:0;
+  border:1px solid var(--amber);
+  display:flex; align-items:center; justify-content:center;
+  transition:width .3s var(--ease), height .3s var(--ease), opacity .2s, border-color .3s;
+}
+.cursor-ring span{
+  font-family:var(--f-mono); font-size:9px; letter-spacing:.1em;
+  color:var(--amber); text-transform:uppercase; opacity:0;
+}
+.cursor-ring.show{ opacity:1; }
+.cursor-ring.expand{ width:74px; height:74px; background:var(--amber-dim); }
+.cursor-ring.expand span{ opacity:1; }
+body.has-cursor, body.has-cursor *{ cursor:none !important; }
+@media (hover:none), (pointer:coarse){
+  .cursor-dot,.cursor-ring{ display:none; }
+}
 +
 +.top-progress{
 +  position:fixed; top:0; left:0; height:2px; width:100%;
@@ -802,10 +799,10 @@ new file mode 100644
 +</div>
 +
 +<nav id="mainNav">
-+  <a href="index.html" class="nav-mark">Ujjaval Saini <small>US—02</small></a>
++  <a href="index.html" class="nav-mark">Ujjaval Saini</a>
 +  <div class="nav-links">
 +    <a href="index.html">Home</a>
-+    <a href="#overview" class="active">Projects</a>
++    <a href="#overview">Projects</a>
 +    <a href="about.html">About</a>
 +    <a href="contactUs.html">Contact</a>
 +  </div>
