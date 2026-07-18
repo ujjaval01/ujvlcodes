@@ -156,20 +156,16 @@ html.light #grain{ opacity:.035; }
 }
 .cursor-dot{
   width:6px; height:6px; background:var(--amber);
-  transition:opacity .2s, transform .15s;
 }
 .cursor-ring{
-  width:38px; height:38px;
+  width:38px; height:38px; opacity:0;
   border:1px solid var(--amber);
   display:flex; align-items:center; justify-content:center;
   transition:width .3s var(--ease), height .3s var(--ease), opacity .2s, border-color .3s;
-  opacity:0;
 }
 .cursor-ring span{
   font-family:var(--f-mono); font-size:9px; letter-spacing:.1em;
   color:var(--amber); text-transform:uppercase; opacity:0;
-  transition:opacity .2s;
-  white-space:nowrap;
 }
 .cursor-ring.show{ opacity:1; }
 .cursor-ring.expand{ width:74px; height:74px; background:var(--amber-dim); }
@@ -748,7 +744,7 @@ footer .fcopy{ font-family:var(--f-mono); font-size:11px; color:var(--text-dim2)
 
 <nav id="mainNav">
   <div class="nav-row">
-    <a href="#home" class="nav-mark">Ujjaval Saini <small>US—02</small></a>
+    <a href="#home" class="nav-mark">Ujjaval Saini</a>
     <div class="nav-links">
       <a href="#home" class="active">Home</a>
       <a href="project.html" id="projectsLink">Projects</a>
@@ -761,7 +757,7 @@ footer .fcopy{ font-family:var(--f-mono); font-size:11px; color:var(--text-dim2)
     </div>
   </div>
   <div class="mobile-nav-links" id="mobileNavLinks">
-    <a href="#home">Home</a>
+    <a href="#home" class="active">Home</a>
     <a href="project.html">Projects</a>
     <a href="about.html">About</a>
     <a href="contactUs.html">Contact</a>
@@ -1536,7 +1532,64 @@ document.addEventListener('DOMContentLoaded', () => {
   updateScrollState();
   window.addEventListener('scroll', updateScrollState, { passive: true });
   window.addEventListener('resize', updateScrollState);
-});
+
+if (window.matchMedia('(hover: hover)').matches) {
+    document.body.classList.add('has-cursor');
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+
+    document.addEventListener('mousemove', (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      if (typeof root !== 'undefined') {
+          root.style.setProperty('--mx', `${mouseX}px`);
+          root.style.setProperty('--my', `${mouseY}px`);
+      }
+      if (typeof spotlight !== 'undefined') spotlight?.classList.add('active');
+      const cursorDot = document.getElementById('cursorDot');
+      if (cursorDot) {
+        cursorDot.style.left = `${mouseX}px`;
+        cursorDot.style.top = `${mouseY}px`;
+      }
+    });
+
+    const renderCursor = () => {
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
+      const cursorRing = document.getElementById('cursorRing');
+      if (cursorRing) {
+        cursorRing.style.left = `${ringX}px`;
+        cursorRing.style.top = `${ringY}px`;
+      }
+      requestAnimationFrame(renderCursor);
+    };
+    renderCursor();
+
+    document.querySelectorAll('a, button, .project-card, .feature-card, .slider-track img, .film-panel, .accordion-button').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        const cursorRing = document.getElementById('cursorRing');
+        const cursorLabel = document.getElementById('cursorLabel');
+        cursorRing?.classList.add('show');
+        if (el.dataset.cursor && cursorLabel) {
+          cursorLabel.textContent = el.dataset.cursor;
+          cursorRing.classList.add('expand');
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        const cursorRing = document.getElementById('cursorRing');
+        const cursorLabel = document.getElementById('cursorLabel');
+        cursorRing?.classList.remove('expand');
+        if (cursorLabel) cursorLabel.textContent = '';
+      });
+    });
+  }
+
+
+
+
+  });
 </script>
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 </body>
